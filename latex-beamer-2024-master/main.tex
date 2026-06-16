@@ -248,6 +248,31 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : estimation}
+    \vspace{1.0cm}
+    \begin{center}
+        \begin{tikzpicture}[xscale=1.2, yscale=1.2]
+            \useasboundingbox (-1,-3) rectangle (8,2);
+            
+            \node (unknown) at (0, 0) [align=center] {\huge $f$ inconnue};
+            
+            % Thick gray arrow
+            \draw[-{Latex[length=8pt, width=8pt]}, line width=4.5pt, color=gray!30] (1.8, 0) -- (3.6, 0);
+            
+            \node (estimation) at (5.8, 0) [align=center] {\huge \textbf{Estimation} $\widehat{f}$};
+            
+            \node (expensive) at (5.8, -1.8) [align=center] {
+                \normalsize Méthodes naïves coûteuses\\
+                \small (discrétisation de $\mathbb{R}^d$)
+            };
+            
+            % Draw light blue arrow pointing up-right
+            \draw[->, >=stealth, line width=2.5pt, inria-bleu!60] (4.2, -1.3) -- (5.0, -0.4);
+            
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \section{HDBSCAN \& quelques applications en 3D}
 \frame{\sectionpage}
 
