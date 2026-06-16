@@ -1381,21 +1381,38 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \begin{tikzpicture}[scale=1.1, >=latex]
-                    \coordinate (A) at (0, 1.2);
-                    \coordinate (B) at (-1.1, -0.6);
-                    \coordinate (C) at (1.1, -0.6);
+                \begin{tikzpicture}[scale=0.8, >=latex]
+                    % Top: Obtuse Gabriel triangle (empty miniball)
+                    \begin{scope}[shift={(0,1.4)}, scale=0.5]
+                        \coordinate (C) at (0,0);
+                        \coordinate (S) at (-2,0);
+                        \coordinate (T) at (2,0);
+                        \coordinate (U) at (0,1);
+                        \fill[inria-bleu!10] (C) circle (2);
+                        \draw[inria-bleu, thick] (C) circle (2);
+                        \fill[inria-rouge!15, draw=inria-rouge, thick] (S) -- (T) -- (U) -- cycle;
+                        \fill[black] (S) circle (3pt) node[left] {$x_1$};
+                        \fill[black] (T) circle (3pt) node[right] {$x_2$};
+                        \fill[black] (U) circle (3pt) node[above] {$x_3$};
+                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{Triangle de \textsc{Gabriel}} (vide)};
+                    \end{scope}
                     
-                    % Circumcircle of ABC
-                    \draw[fill=inria-bleu!10, draw=inria-bleu, thick] (0,0) circle (1.2);
-                    
-                    \draw[line width=1.2pt, inria-rouge, fill=inria-rouge!15] (A) -- (B) -- (C) -- cycle;
-                    
-                    \fill[black] (A) circle (2pt) node[above] {$x_1$};
-                    \fill[black] (B) circle (2pt) node[below left] {$x_2$};
-                    \fill[black] (C) circle (2pt) node[below right] {$x_3$};
-                    
-                    \node[below, font=\scriptsize] at (0,-1.0) {\textbf{Triangle de \textsc{Gabriel} ($K=2$)}};
+                    % Bottom: Obtuse Non-Gabriel triangle (non-empty miniball with intruder z)
+                    \begin{scope}[shift={(0,-1.9)}, scale=0.5]
+                        \coordinate (C) at (0,0);
+                        \coordinate (S) at (-2,0);
+                        \coordinate (T) at (2,0);
+                        \coordinate (U) at (0,1);
+                        \coordinate (Z) at (-0.4,-0.8);
+                        \fill[inria-rouge!10] (C) circle (2);
+                        \draw[inria-rouge, thick, dashed] (C) circle (2);
+                        \draw[gray!50, dashed] (S) -- (T) -- (U) -- cycle;
+                        \fill[black] (S) circle (3pt) node[left] {$x_1$};
+                        \fill[black] (T) circle (3pt) node[right] {$x_2$};
+                        \fill[black] (U) circle (3pt) node[above] {$x_3$};
+                        \fill[inria-rouge] (Z) circle (3.5pt) node[below right] {$z$ (intrus)};
+                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{Non-\textsc{Gabriel}} (non vide)};
+                    \end{scope}
                 \end{tikzpicture}
             \end{center}
         \end{column}
