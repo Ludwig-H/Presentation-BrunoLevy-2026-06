@@ -1365,23 +1365,16 @@
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.54\textwidth}
             \begin{itemize}
-                \setlength{\itemsep}{6pt}
+                \setlength{\itemsep}{10pt}
                 \item \textbf{Simplexe $K$-séparant} :
                 \begin{itemize}
-                    \item Soit $\sigma$ un $K$-simplexe de rayon $r_\sigma = \rho(\sigma)$.
-                    \item $\sigma$ est \textbf{$K$-séparant} si la connectivité des $K$-polyèdres change à l'échelle $r_\sigma$ :
-                    \[ \Gamma_K(\mathcal{X})_{< r_\sigma} \ \neq \ \Gamma_K(\mathcal{X})_{\le r_\sigma} \]
-                    \item En pratique : il provoque une fusion dans la hiérarchie.
+                    \item C'est un $K$-simplexe qui a une \textbf{influence réelle} (provoque une fusion de clusters) sur la hiérarchie $K$-NN.
+                    \item \textbf{Cas $K=1$} : les simplexes $1$-séparants sont précisément les \textbf{arêtes du MST}.
                 \end{itemize}
                 \item \textbf{Condition de \textsc{Gabriel}} :
                 \begin{itemize}
-                    \item $\sigma$ est de \textbf{\textsc{Gabriel}} si l'intérieur de sa plus petite boule englobante $\mathring{B}_\sigma$ est vide :
-                    \[ \mathring{B}_\sigma \cap (\mathcal{X} \setminus \sigma) = \varnothing \]
-                \end{itemize}
-                \item \textbf{Théorème (Condition nécessaire)} :
-                \begin{itemize}
-                    \item \textbf{Tout simplexe $K$-séparant est de \textsc{Gabriel}}.
-                    \item Support de recherche optimal : la \textbf{mosaïque de \textsc{Delaunay} d'ordre $K$}.
+                    \item \textbf{Théorème} : tout simplexe $K$-séparant est nécessairement un \textbf{simplexe de \textsc{Gabriel}} ($\mathring{B}_\sigma \cap (\mathcal{X} \setminus \sigma) = \varnothing$).
+                    \item \textbf{Support de calcul} : la mosaïque de \textbf{\textsc{Delaunay} d'ordre $K$}.
                 \end{itemize}
             \end{itemize}
         \end{column}
