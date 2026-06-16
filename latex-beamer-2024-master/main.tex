@@ -405,6 +405,117 @@
 
 
 
+\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : le cas $K=2$}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \begin{tikzpicture}[scale=0.55]
+                    \useasboundingbox (-5.5, -3.2) rectangle (5.5, 3.2);
+                    
+                    % r est le rayon de base
+                    \def\r{1.3}
+                    % r' est le rayon critique (2r / sqrt(3))
+                    \pgfmathsetmacro{\rprime}{\r * 2 / sqrt(3)}
+                    \pgfmathsetmacro{\h}{\r*sqrt(3)}
+                    
+                    % Coordonnées mathématiques des 6 points
+                    \coordinate (C) at (-\r, 0);
+                    \coordinate (D) at (\r, 0);
+                    \coordinate (A) at (-\r-\h, \r);
+                    \coordinate (B) at (-\r-\h, -\r);
+                    \coordinate (E) at (\r+\h, \r);
+                    \coordinate (F) at (\r+\h, -\r);
+                    
+                    % Remplissage bleu des 2-intersections (lentilles) et cercles r' (arrière-plan)
+                    \only<2-3>{
+                        \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
+                            \begin{scope}
+                                \clip (\p) circle (\rprime);
+                                \fill[inria-bleu!45, opacity=0.7] (\q) circle (\rprime);
+                            \end{scope}
+                        }
+                        % Tracé des 6 cercles de rayon r' (en pointillés gris)
+                        \foreach \P in {A,B,C,D,E,F} {
+                            \draw[dashed, line width=0.8pt, inria-2024-gris-bleu!60] (\P) circle (\rprime);
+                        }
+                    }
+                    
+                    % Tracé des segments reliant les points
+                    \draw[line width=1.2pt, black!40] (A) -- (B) -- (C) -- cycle;
+                    \draw[line width=1.2pt, black!40] (D) -- (E) -- (F) -- cycle;
+                    \draw[line width=1.2pt, black!40] (C) -- (D);
+                    
+                    % Tracé des 6 sommets avec étiquettes
+                    \fill[inria-2024-bleu-canard] (A) circle (3pt) node[left=4pt] {A};
+                    \fill[inria-2024-bleu-canard] (B) circle (3pt) node[left=4pt] {B};
+                    \fill[inria-2024-bleu-canard] (C) circle (3pt) node[left=5pt] {C};
+                    \fill[inria-2024-bleu-canard] (D) circle (3pt) node[right=5pt] {D};
+                    \fill[inria-2024-bleu-canard] (E) circle (3pt) node[right=4pt] {E};
+                    \fill[inria-2024-bleu-canard] (F) circle (3pt) node[right=4pt] {F};
+                    
+                    % Flèche de rayon r' sur overlay 2 et 3
+                    \only<2-3>{
+                        \draw[->, >=latex, line width=0.8pt, black] (A) -- ++(135:\rprime) node[midway, above left] {\small r'};
+                    }
+                    
+                    % Points de contact (3-intersections) sur l'overlay 3
+                    \only<3>{
+                        \fill[inria-rouge] (barycentric cs:A=1,B=1,C=1) circle (4.5pt);
+                        \fill[inria-rouge] (barycentric cs:D=1,E=1,F=1) circle (4.5pt);
+                        
+                        % Label et flèche pour la 3-intersection gauche
+                        \node[inria-rouge, scale=0.85, above=22pt] (lblL) at (barycentric cs:A=1,B=1,C=1) {\textbf{3-intersection}};
+                        \draw[->, >=stealth, line width=0.6pt, inria-rouge] (lblL.south) -- (barycentric cs:A=1,B=1,C=1);
+                        
+                        % Label et flèche pour la 3-intersection droite
+                        \node[inria-rouge, scale=0.85, above=22pt] (lblR) at (barycentric cs:D=1,E=1,F=1) {\textbf{3-intersection}};
+                        \draw[->, >=stealth, line width=0.6pt, inria-rouge] (lblR.south) -- (barycentric cs:D=1,E=1,F=1);
+                    }
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \only<1>{
+                \textbf{Nuage de six points $\mathcal{X}$ :}
+                \begin{itemize}
+                    \setlength{\itemsep}{8pt}
+                    \item Deux triangles équilatéraux de côté $2r$ ($A\text{-}B\text{-}C$ et $D\text{-}E\text{-}F$) reliés par un segment $C\text{-}D$ de longueur $2r$.
+                    \item Chaque point a son plus proche voisin à distance $2r$.
+                \end{itemize}
+                
+                \vspace{0.4cm}
+                
+                Pour $K=2$, les premiers composants connexes de $\Gamma_2(\mathcal{X}, r)$ apparaissent au niveau $r$ sous forme de \textbf{sept segments isolés}.
+            }
+            \only<2>{
+                \textbf{Lentilles bleues (2-intersections) :}
+                \begin{itemize}
+                    \setlength{\itemsep}{8pt}
+                    \item Lorsque le rayon augmente ($r' > r$), les intersections de paires de boules $\overline{B}(x, r') \cap \overline{B}(y, r')$ forment des lentilles.
+                    \item Ces lentilles correspondent aux sommets du graphe auxiliaire $\Gamma_2(\mathcal{X}, r')$.
+                \end{itemize}
+            }
+            \only<3>{
+                \textbf{Points rouges (3-intersections) :}
+                \begin{itemize}
+                    \setlength{\itemsep}{6pt}
+                    \item Au niveau critique $r' = \frac{2\sqrt{3}}{3}r \approx 1.15r$ :
+                    \item Les trois boules de chaque triangle s'intersectent en un point unique (le circumcentre).
+                    \item Cette \textbf{3-intersection} relie les trois 2-intersections correspondantes.
+                    \item La lentille $C \cap D$ reste isolée (pas de triangle).
+                \end{itemize}
+                
+                \vspace{0.4cm}
+                
+                La connexité par triangles ($K=2$) prévient le chaînage parasite en évitant la fusion des deux amas.
+            }
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+
 \begin{frame}{L'arbre minimum couvrant et la triangulation de \textnormal{\textsc{Delaunay}}}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.58\textwidth}
