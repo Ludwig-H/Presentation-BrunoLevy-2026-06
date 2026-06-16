@@ -53,39 +53,42 @@
 \frame{\sectionpage}
 
 \begin{frame}{Clustering sur données euclidiennes $X \subset \mathbb{R}^d$}
-    \begin{columns}
-        \begin{column}{0.50\textwidth}
-            \begin{block}{Modèle de Hartigan \cite{hartigan81}}
-                \begin{itemize}
-                    \item Estimation de la densité $f$ par $K$-NN.
-                    \item Définition des \textbf{amas de forte densité} (\emph{high-density clusters}) comme composantes connexes des ensembles de niveau de $f$ \cite{HDBSCAN, HDBSCAN2017}.
-                    \item Seuil de percolation et graphes géométriques aléatoires \cite{penrose2003}.
-                \end{itemize}
-            \end{block}
+    \begin{center}
+        \small
+        Modèle de Hartigan \cite{hartigan81} : les \textbf{amas de forte densité} (\emph{high-density clusters}) correspondent aux composantes connexes des ensembles de niveau de la densité.
+    \end{center}
+    
+    \vspace{0.1cm}
+    
+    \begin{center}
+        \begin{tikzpicture}[node distance=0.4cm, every node/.style={inner sep=0}]
+            % Nuage de points brut
+            \node (raw) [label=below:\footnotesize Données brutes $X$] {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
             
-            \vspace{0.1cm}
+            % Flèche avec roues dentées au-dessus
+            \node (arrow) [right=of raw, xshift=0.3cm] {\Large $\longrightarrow$};
+            \node (gears) [above=of arrow, yshift=-0.25cm] {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
+            \node (algo) [right=of arrow, xshift=-0.1cm, text width=3cm, align=center] {\footnotesize \textbf{Algorithme (H)DBSCAN}\\[2pt]\tiny \cite{HDBSCAN, HDBSCAN2017}};
+            
+            % Nuage coloré par HDBSCAN
+            \node (clustered) [right=of algo, xshift=0.1cm, label=below:\footnotesize Amas de forte densité] {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.1cm}
+    
+    \begin{columns}[onlytextwidth]
+        \begin{column}{0.48\textwidth}
             \begin{center}
-                \begin{tikzpicture}[node distance=0.1cm, every node/.style={inner sep=0}]
-                    \node (raw) {\includegraphics[width=0.43\linewidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
-                    \node [right=of raw] (arrow) {\small $\xrightarrow{\text{HDBSCAN}}$};
-                    \node [right=of arrow] (clustered) {\includegraphics[width=0.43\linewidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
-                \end{tikzpicture}
+                \includegraphics[height=1.8cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}\\[3pt]
+                \tiny Classification d'huiles d'olive italiennes \cite{tourr} (vérité terrain géographique)
             \end{center}
         \end{column}
         
-        \begin{column}{0.46\textwidth}
-            \begin{exampleblock}{Exemples d'applications}
-                \begin{itemize}
-                    \item \textbf{Données réelles} : classification des huiles d'olive italiennes ($\mathbb{R}^8$) \cite{tourr}, où la géographie forme la vérité terrain.
-                    \item \textbf{Cosmologie} : extraction des filaments galactiques en 3D.
-                \end{itemize}
-            \end{exampleblock}
-            
-            \vspace{0.1cm}
+        \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[width=0.47\linewidth]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}
-                \hfill
-                \includegraphics[width=0.47\linewidth]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}
+                \includegraphics[height=1.8cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}\\[3pt]
+                \tiny Extraction de filaments cosmiques en 3D (modèle géométrique \cite{penrose2003})
             \end{center}
         \end{column}
     \end{columns}
