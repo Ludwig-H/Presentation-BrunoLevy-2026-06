@@ -270,6 +270,48 @@
     \end{center}
 \end{frame}
 
+\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : estimateur de densité}
+    \vspace{0.4cm}
+    \begin{center}
+        \begin{tikzpicture}[xscale=1.2, yscale=1.1]
+            \useasboundingbox (-1,-3) rectangle (9,2.5);
+            
+            % Top Title / Equation
+            \node (estimateur) at (4, 2.2) [align=center] {\Large $\widehat{f} \leftarrow \widehat{f}_{K-\text{NN}}$};
+            
+            % Subtitle
+            \node (estimator_text) at (4, 1.4) [align=center] {\large \textbf{Estimateur} : $K$ plus proches voisins ($K$-NN)};
+            
+            % Main Formula split into parts for precise arrow targeting
+            \node (lhs) at (4.5, 0.2) [anchor=east] {\huge $\forall x \in \mathbb{R}^d, \quad \widehat{f}_{K-\text{NN}}(x) =$};
+            \node (frac1) at (4.6, 0.2) [anchor=west] {\huge $\frac{K}{n}$};
+            \node (frac2) at (5.4, 0.2) [anchor=west] {\huge $\frac{1}{\omega_d r_K(x)^d}$};
+            
+            % Explanations and Arrows
+            % 1. Number of points (pointing to n)
+            \node (num_pts) at (2.2, -1.4) [align=center, font=\normalsize] {Nombre de points};
+            \draw[->, >=stealth, line width=1.8pt, inria-bleu!60] (3.2, -1.3) -- (4.9, -0.4);
+            
+            % 2. Volume of unit ball (pointing to \omega_d)
+            \node (vol_unit) at (6.0, -1.4) [align=center, font=\normalsize] {Volume de la boule unité};
+            \draw[->, >=stealth, line width=1.8pt, inria-bleu!60] (6.0, -1.2) -- (5.9, -0.4);
+            
+            % 3. Volume of miniball (pointing to r_K(x)^d)
+            \node (vol_mini) at (7.6, 0.6) [anchor=west, align=left, font=\small] {
+                Volume de la miniboule\\
+                contenant les $K$ voisins de $x$
+            };
+            \draw[->, >=stealth, line width=1.8pt, inria-bleu!60] (7.6, 0.2) -- (7.0, -0.2);
+            
+            % Bottom Formula
+            \node (radius) at (4, -2.2) [align=center] {
+                \large $r_K(x) = \min \left\{ r \ge 0 \;\middle|\; |B(x,r) \cap \mathcal{X}| \ge K \right\}$
+            };
+            
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \section{HDBSCAN \& quelques applications en 3D}
 \frame{\sectionpage}
 
