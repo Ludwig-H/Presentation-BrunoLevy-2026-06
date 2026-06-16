@@ -1189,18 +1189,17 @@
         \begin{column}{0.60\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item Si \textbf{$\widehat{f} = \widehat{f}_{K\text{-NN}}$} ($K \ge 2$) : estimateur de densité par $K$ plus proches voisins.
-                \item Passage aux \textbf{hypergraphes} (\textbf{complexe de \v Cech} $\check{C}(\mathcal{X}, r)$) :
+                \item Si \textbf{$\widehat{f} = \widehat{f}_{K-\text{NN}}$} ($K \ge 2$) : estimateur de densité par $K$ plus proches voisins.
+                \item Passage aux \textbf{hypergraphes} (complexes géométriques) :
                 \begin{itemize}
                     \setlength{\itemsep}{6pt}
-                    \item Les interactions d'ordre supérieur (arêtes, triangles...) apparaissent aux intersections de boules de rayon $r$.
+                    \item Les arêtes et triangles apparaissent aux intersections de boules de rayon $r$.
                 \end{itemize}
-                \item \textbf{Généralisation de la connexité} :
+                \item Algorithmes de clustering d'ordre supérieur :
                 \begin{itemize}
                     \setlength{\itemsep}{6pt}
-                    \item Les composantes connexes sont remplacées par les \textbf{$K$-polyèdres} (composantes de $\Gamma_K(\mathcal{X}, r)$).
-                    \item Pour $K \ge 2$, les polyèdres peuvent se recouvrir.
-                    \item \textbf{Consistance exacte} avec les amas de densité de $\widehat{f}_{K\text{-NN}}$ (thèse Louis Hauseux).
+                    \item Les composantes connexes sont remplacées par les \textbf{$K$-polyèdres}.
+                    \item Pour $K \ge 2$, les clusters (polyèdres) peuvent se recouvrir.
                 \end{itemize}
             \end{itemize}
         \end{column}
