@@ -1464,6 +1464,23 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}{Bilan : Un chaînon manquant pour le \emph{geometry processing}}
+    \begin{itemize}
+        \setlength{\itemsep}{12pt}
+        \item \textbf{Mosaïque de \textsc{Delaunay} d'ordre supérieur} :
+        \begin{itemize}
+            \item Contient \textbf{l'intégralité} de l'information hiérarchique $K$-NN.
+            \item Représente le support optimal et parcimonieux pour le clustering d'ordre supérieur.
+        \end{itemize}
+        
+        \item \textbf{Absence dans les bibliothèques existantes} :
+        \begin{itemize}
+            \item \textbf{Constat} : Il n'existe à ce jour \textbf{aucune bibliothèque} de \emph{geometry processing} (telle que CGAL ou Geogram) n'intégrant cet objet.
+            \item \textbf{Conséquence} : Nécessité de développer des codes ad-hoc complexes pour construire et manipuler ces complexes cellulaires.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \section{Quelques exemples en 3D}
 \frame{\sectionpage}
 
