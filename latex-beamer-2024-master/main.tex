@@ -565,63 +565,26 @@
 \end{frame}
 
 \begin{frame}{Du Robust Single-Linkage à (H)DBSCAN}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
-                    % Seuil r
-                    \draw[<->, black!50, thick] (-1.5, 2.5) -- (0, 2.5) node[midway, above] {$r$};
-                    
-                    % Core point A
-                    \coordinate (A) at (0,0);
-                    \draw[dashed, inria-bleu, thick] (A) circle (1.5);
-                    \fill[inria-bleu] (A) circle (3.5pt) node[below left] {$A$};
-                    
-                    % Neighbors inside A's circle
-                    \coordinate (N1) at (-0.6, 0.8);
-                    \coordinate (N2) at (0.8, 0.5);
-                    \coordinate (N3) at (-0.4, -0.7);
-                    \coordinate (B) at (1.2, -0.3); % Border point B
-                    \fill[black!70] (N1) circle (2.5pt);
-                    \fill[black!70] (N2) circle (2.5pt);
-                    \fill[black!70] (N3) circle (2.5pt);
-                    
-                    % Border point B
-                    \draw[dashed, inria-2024-bleu-canard, thick] (B) circle (1.5);
-                    \fill[inria-2024-bleu-canard] (B) circle (3.5pt) node[right=4pt] {$B$};
-                    
-                    % Neighbors inside B's circle
-                    \coordinate (N4) at (2.2, -0.9);
-                    \fill[black!70] (N4) circle (2.5pt);
-                    
-                    % Noise point C
-                    \coordinate (C) at (4.0, 1.8);
-                    \draw[dashed, gray!50, thick] (C) circle (1.5);
-                    \fill[gray] (C) circle (3.5pt) node[above left] {$C$};
-                    \coordinate (N5) at (4.6, 2.3);
-                    \fill[black!70] (N5) circle (2.5pt);
-                    
-                    % Connection
-                    \draw[->, very thick, inria-rouge] (A) -- (B);
-                \end{tikzpicture}
-            \end{center}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \textbf{DBSCAN} (Ester \emph{et al.}, 1996) à un seuil $r$ :
-            \begin{itemize}
-                \setlength{\itemsep}{6pt}
-                \item \textbf{Point cœur} (\textcolor{inria-bleu}{$A$}) : possède $\ge K$ voisins dans son rayon $r$ ($r_K(x) \le r$).
-                \item \textbf{Point frontière} (\textcolor{inria-2024-bleu-canard}{$B$}) : proche de $A$, mais possède $< K$ voisins.
-                \item \textbf{Bruit} (\textcolor{gray}{$C$}) : ni cœur, ni frontière.
-            \end{itemize}
-            
-            \vspace{0.3cm}
-            \begin{block}{De DBSCAN à HDBSCAN}
-                DBSCAN requiert un seuil global $r$ unique. 
-                \textbf{HDBSCAN} fait varier ce seuil continûment pour construire une hiérarchie complète sans paramètre d'échelle.
-            \end{block}
-        \end{column}
-    \end{columns}
+    \textbf{Limitation du Robust Single-Linkage} :
+    \begin{itemize}
+        \setlength{\itemsep}{6pt}
+        \item Trop exigeant pour les points situés en périphérie des amas.
+        \item Exclut les points frontières qui ne possèdent pas $K$ voisins, ce qui nuit au rappel des clusters en les rejetant indûment dans le bruit.
+    \end{itemize}
+    
+    \vspace{0.4cm}
+    \textbf{DBSCAN} (Ester \emph{et al.}, 1996) :
+    \begin{itemize}
+        \setlength{\itemsep}{6pt}
+        \item Introduit une distinction entre \textbf{points cœurs} ($r_K(x) \le r$) et \textbf{points frontières} (accessibles depuis un cœur, mais sans avoir eux-mêmes $K$ voisins).
+        \item Permet de bien mieux classifier les frontières de clusters, d'où le nom (\emph{Applications with Noise}).
+    \end{itemize}
+    
+    \vspace{0.4cm}
+    \begin{block}{De DBSCAN à HDBSCAN}
+        DBSCAN requiert un seuil global $r$ unique. 
+        \textbf{HDBSCAN} (Campello \emph{et al.}, 2013) fait varier ce seuil continûment afin de s'affranchir de ce paramètre et de construire une hiérarchie complète.
+    \end{block}
 \end{frame}
 
 \begin{frame}{De DBSCAN à HDBSCAN : l'excès de masse}
