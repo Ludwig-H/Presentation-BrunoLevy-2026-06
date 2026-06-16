@@ -1,0 +1,418 @@
+% !TEX program = lualatex
+\documentclass[A4,svgnames,9pt,aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, arrows.meta, calc}
+
+\hypersetup{
+   allcolors=rouge_inria,
+   pdfauthor   = {Louis Hauseux},
+   pdftitle    = {Structuration géométrique de données complexes},
+   pdfsubject  = {Présentation pour Bruno Lévy},
+   pdfkeywords = {Louis Hauseux, clustering, Delaunay, percolation, optimal transport}
+}
+
+\title[Structuration de données]{Structuration géométrique de données complexes : \\[4pt] Des graphes aux hypergraphes et au transport optimal}
+\subtitle{Soutenance de thèse --- Présentation pour Bruno Lévy}
+\date[16/06/2026]{16 Juin 2026}
+\author[L. Hauseux]{Louis Hauseux}
+\institute{Centre Inria d'Université Côte d'Azur}
+
+\usetheme{inria}
+
+\begin{document}
+
+% Page de titre
+\frame{\titlepage}
+
+\renewcommand{\contentsname}{Sommaire}
+\frame{\tocpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{De la statistique aux graphes}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Le modèle statistique de Hartigan et le cas $K=1$}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{Le modèle de Hartigan (1981)}
+                Les \textbf{clusters de forte densité} d'une distribution de densité $f$ sont définis comme les composantes connexes des ensembles de niveau :
+                \[ L_f(\lambda) = \{ x \in \mathbb{R}^p \mid f(x) \ge \lambda \} \]
+            \end{block}
+            \begin{block}{Le cas élémentaire $K=1$}
+                \begin{itemize}
+                    \item Estimateur de densité du plus proche voisin ($1$-NN) :
+                    \[ L_1(r) = \bigcup_{x \in \mathcal{X}} \overline{B}(x, r) \]
+                    \item Composantes connexes de $L_1(r) \equiv$ composantes connexes du \textbf{graphe géométrique} $G(\mathcal{X}, r)$ où $\|x-x'\| \le 2r$.
+                    \item La hiérarchie complète est encodée par l'\textbf{Arbre Minimum Couvrant} (MST).
+                    \item Algorithmes canoniques : \textbf{Single-Linkage} et \textbf{HDBSCAN}.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=0.85\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}
+                \captionof{figure}{Nuage de points 2D}
+                \vspace{0.3cm}
+                \includegraphics[width=0.85\textwidth]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}
+                \captionof{figure}{Application aux filaments galactiques}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Limites de l'ordre $1$ : le Chaining et la Percolation}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{L'effet de chaînage (Chaining Effect)}
+                \begin{itemize}
+                    \item Quelques points de bruit isolés suffisent à connecter de manière parasite deux clusters denses distincts.
+                    \item En dimension $p \ge 2$, le Single-Linkage is statistiquement \textbf{inconsistent}.
+                \end{itemize}
+            \end{block}
+            \begin{block}{Limites des robustifications actuelles (HDBSCAN)}
+                \begin{itemize}
+                    \item Robust Single-Linkage et HDBSCAN évaluent la densité locale via les $K$ plus proches voisins ($K$-NN) pour filtrer les points.
+                    \item \textbf{L'asymétrie fondamentale :} la densité est filtrée à l'ordre $K$, mais la connectivité reste d'ordre 1 (par de simples arêtes).
+                    \item En dimension $p \ge 2$, le bruit résiduel continue de percoler trop tôt à travers ces arêtes d'ordre 1.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}
+                \captionof{figure}{Limites d'HDBSCAN face au bruit}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Généralisation par l'ordre supérieur}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{HGP-Clusterer (Hypergraph-Percolation)}
+    \begin{block}{Le Complexe de Čech $\check{C}(\mathcal{X}, r)$}
+        Pour corriger l'asymétrie, on remplace le graphe par le complexe simplicial de Čech :
+        \[ \check{C}(\mathcal{X}, r) = \left\{ \sigma \subset \mathcal{X} \;\middle|\; \bigcap_{x \in \sigma} B(x, r) \ne \varnothing \right\} \]
+        Les objets élémentaires d'ordre $K$ ne sont plus des arêtes, mais des $(K-1)$-simplexes (intersection de $K$ boules).
+    \end{block}
+    
+    \begin{block}{Définition des $K$-polyèdres}
+        On définit le graphe auxiliaire $\Gamma_K(\mathcal{X}, r)$ :
+        \begin{itemize}
+            \item \textbf{Sommets} : les $(K-1)$-simplexes de $\check{C}(\mathcal{X}, r)$.
+            \item \textbf{Arêtes} : deux simplexes $\tau, \tau'$ sont reliés si leur union $\tau \cup \tau'$ est un simplexe de $\check{C}(\mathcal{X}, r)$ (i.e. de dimension $K$).
+        \end{itemize}
+        Les \textbf{$K$-polyèdres} sont les composantes connexes de ce graphe auxiliaire $\Gamma_K(\mathcal{X}, r)$.
+    \end{block}
+    
+    \begin{exampleblock}{Théorème Central d'Équivalence}
+        Pour tout $r>0$, la partition en $K$-polyèdres coïncide exactement avec les \textbf{amas discrets de forte densité} associés à l'estimateur de densité $K$-NN.
+    \end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Analyse de performance par Percolation Continue}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{Cadre théorique de la percolation continue}
+                \begin{itemize}
+                    \item Permet de modéliser mathématiquement l'apparition d'une composante géante dans un fond de bruit uniforme.
+                    \item \textbf{Vitesse de percolation} $v_K = r_{\min} / r_{\max}$.
+                    \item On quantifie la performance d'un algorithme par sa \textbf{fraction de consistance partielle} (la portion d'un cluster récupérable avant fusion avec le bruit).
+                \end{itemize}
+            \end{block}
+            \begin{block}{Avantage des $K$-polyèdres}
+                La connectivité d'ordre $K$ retarde significativement la percolation du bruit par rapport aux graphes binaires. Elle permet de récupérer une fraction de cluster strictement plus grande que Robust Single-Linkage ou (H)DBSCAN.
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=0.9\textwidth]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}
+                \captionof{figure}{Hiérarchie HGP sur les huiles d'olive italiennes}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fondations & Optimisations Géométriques}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{À la recherche du $K$-MST : les simplexes $K$-séparants}
+    \begin{block}{Le problème combinatoire}
+        Calculer le complexe de Čech complet requiert de manipuler $\binom{n}{K+1}$ simplexes, ce qui est infaisable en pratique.
+        Pour $K=1$, l'Arbre Minimum Couvrant (MST) est un sous-graphe de la triangulation de Delaunay.
+    \end{block}
+    
+    \begin{block}{Définition : Simplexe de Gabriel d'ordre $K$}
+        Un $K$-simplexe $\sigma \subset \mathcal{X}$ est de \textbf{Gabriel} si l'intérieur de sa plus petite boule englobante $B_\sigma$ (la \emph{miniball}) ne contient aucun point extérieur à $\sigma$ :
+        \[ \mathring{B}_\sigma \cap (\mathcal{X} \setminus \sigma) = \varnothing \]
+    \end{block}
+    
+    \begin{exampleblock}{Théorème Central d'Optimisation}
+        Supposons $\mathcal{X}$ en position générale. Tout $K$-simplexe $\sigma$ qui provoque une fusion dans la hiérarchie HGP-Clusterer (dit \textbf{$K$-séparant}) est nécessairement un \textbf{simplexe de Gabriel d'ordre $K$}.
+    \end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{La Mosaïque de Delaunay d'ordre $K$}
+    \begin{block}{Diagramme de Voronoï d'ordre $K$}
+        Pour $Q \subset \mathcal{X}$ de cardinal $K$, la cellule $\operatorname{Vor}_K(Q)$ est la région de l'espace où les points de $Q$ sont les $K$ plus proches voisins dans $\mathcal{X}$ :
+        \[ \operatorname{Vor}_K(Q) = \left\{ y \in \mathbb{R}^p \;\middle|\; \max_{q \in Q} \|y-q\| \le \min_{x \in \mathcal{X} \setminus Q} \|y-x\| \right\} \]
+    \end{block}
+    
+    \begin{block}{La Mosaïque de Delaunay d'ordre $K$ ($\operatorname{Del}_K(\mathcal{X})$)}
+        C'est le complexe dual de Voronoï d'ordre $K$. Deux sommets $Q, Q'$ sont adjacents si $\operatorname{Vor}_K(Q) \cap \operatorname{Vor}_K(Q') \neq \varnothing$.
+    \end{block}
+    
+    \begin{exampleblock}{Théorème : Support Delaunay d'ordre $K$}
+        Tout $K$-simplexe de Gabriel d'ordre $K$ est porté par la mosaïque de Delaunay d'ordre $K$ ($\operatorname{Del}_K(\mathcal{X})$).
+    \end{exampleblock}
+    
+    \begin{block}{Conséquence algorithmique}
+        Le \textbf{$K$-Arbre Minimum Couvrant} ($K$-MST) du graphe de Gabriel d'ordre $K$ contient toutes les fusions de la hiérarchie. Il est calculé uniquement à partir de $\operatorname{Del}_K(\mathcal{X})$, évitant l'explosion combinatoire.
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applications pratiques}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{La Hiérarchie comme Espace de Résolution : Anomalies 3D}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{Injection d'\emph{a priori} géométriques}
+                \begin{itemize}
+                    \item La hiérarchie n'est pas seulement une visualisation, c'est un espace de recherche où l'on peut injecter des contraintes physiques.
+                    \item Au lieu de la fonction standard d'HDBSCAN (excès de masse), on définit une fonction de coût basée sur la géométrie attendue.
+                \end{itemize}
+            \end{block}
+            \begin{block}{Application : Détection d'anomalies (Naval Group)}
+                \begin{itemize}
+                    \item Nuage LiDAR de 2\,000\,000 de points sur un chantier naval.
+                    \item Injection du modèle CAO 3D théorique (en rouge) dans l'arbre d'exploration HGP.
+                    \item Extraction robuste et sans apprentissage (\emph{training-free}) des objets étrangers (en couleur).
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{../Img_presentation_BrunoLevy/Resultat_MarieBenchmark.png}
+                \captionof{figure}{Détection d'anomalies sur benchmark synthétique}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Segmentation d'instance et suivi temporel 4D}
+    \begin{columns}
+        \begin{column}[t]{0.50\textwidth}
+            \begin{block}{Pipeline 4D sans apprentissage}
+                Sur le jeu de données SemanticKITTI, l'objectif est de segmenter et de suivre les objets dynamiques (véhicules, piétons, etc.) au cours du temps.
+            \end{block}
+            
+            \begin{block}{Étape 1 : Segmentation 3D spatiale}
+                \begin{itemize}
+                    \item HGP-Clusterer extrait les clusters potentiels par trame.
+                    \item Filtrage par classe sémantique en pénalisant les volumes aberrants.
+                \end{itemize}
+            \end{block}
+            
+            \begin{block}{Étape 2 : Suivi temporel 4D}
+                \begin{itemize}
+                    \item Association globale entre la trame $t-1$ et la trame $t$.
+                    \item Résolu par un plan de \textbf{Transport Optimal Déséquilibré} couplé à un filtre de Kalman pour l'état cinématique.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.45\textwidth}
+            \begin{center}
+                \includegraphics[width=0.95\textwidth]{../Img_presentation_BrunoLevy/Alpine.png}
+                \captionof{figure}{Baseline 3D (Alpine)}
+                \vspace{0.15cm}
+                \includegraphics[width=0.95\textwidth]{../Img_presentation_BrunoLevy/Resultat_Geo-4D.png}
+                \captionof{figure}{Baseline 4D (Geo-4D)}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Association par Transport Optimal Déséquilibré}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{Pourquoi le Transport Optimal ?}
+                Il permet de capturer le mouvement global et l'advection des instances d'une trame à l'autre de manière globale plutôt que locale.
+            \end{block}
+            \begin{block}{Formulation déséquilibrée (Unbalanced Optimal Transport)}
+                Le nombre de points et le nombre d'instances varient d'une trame à l'autre (occlusions, bruit, entrées/sorties). Le transport optimal classique est donc inadapté. L'UOT autorise des pertes/gains de masse grâce à des pénalités marginales de type Kullback-Leibler.
+            \end{block}
+            \begin{block}{Résolution algorithmique}
+                Régularisation entropique du problème d'UOT $\implies$ formulation convexe résolue à haute performance via l'**algorithme de Sinkhorn** parallélisable.
+            \end{block}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=0.9\textwidth]{../Img_presentation_BrunoLevy/GroundTruth_SemanticKITTI_4D.png}
+                \captionof{figure}{Vérité terrain (projection BEV vs temps)}
+                \vspace{0.15cm}
+                \includegraphics[width=0.9\textwidth]{../Img_presentation_BrunoLevy/Resultat_SemanticKITTI_4D.png}
+                \captionof{figure}{Notre méthode (HGP + UOT)}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Couplage MCMC & Graphes Signés}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Détection de communautés sur graphes signés}
+    \begin{block}{Le modèle GSBM (Geometric Stochastic Block Model)}
+        \begin{itemize}
+            \item Nœuds $X$ générés par un processus de Poisson homogène dans $\mathbb{R}^d$.
+            \item Communautés latentes $\Sigma_i \in \{+1, -1\}$ (cas $K=2$).
+            \item Arêtes signées $e = \{i, j\}$ présentes avec les probabilités $f_{\mathrm{in}}(r_e)$ (si $\Sigma_i = \Sigma_j$) et $f_{\mathrm{out}}(r_e)$ (si $\Sigma_i \neq \Sigma_j$).
+        \end{itemize}
+    \end{block}
+    
+    \begin{block}{Formulation bayésienne et énergie de Gibbs}
+        Sous un prior uniforme, la loi a posteriori des communautés sachant le graphe observé $H$ est une mesure de Gibbs signée :
+        \[ P(\Sigma = \sigma \mid H, X) \propto e^{-U(\sigma)} \]
+        avec l'énergie :
+        \[ U(\sigma) = \sum_{e \in \mathcal{F}} W_e \mathbb{I}\{\sigma_i \neq \sigma_j\} + \sum_{e \in \tilde{\mathcal{F}}} |W_e| \mathbb{I}\{\sigma_i = \sigma_j\} \]
+        où les poids dépendent des distances $r_e$.
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Dynamique de Swendsen-Wang d'ordre supérieur (Triangulaire)}
+    \begin{block}{Le goulot d'étranglement géométrique}
+        Les dynamiques locales (de type Glauber/Metropolis) restent bloquées par de hautes barrières d'énergie. La dynamique globale de Swendsen-Wang (SW) résout cela en gelant des arêtes satisfaites pour former des clusters qui sont inversés simultanément.
+    \end{block}
+    
+    \begin{block}{L'obstruction par Frustration}
+        Dans les graphes signés, la frustration (incompatibilité des contraintes) fait que la dynamique SW standard gèle trop d'arêtes individuellement, bloquant la dynamique.
+    \end{block}
+    
+    \begin{exampleblock}{Dynamique triangulaire d'ordre supérieur}
+        On distribue l'énergie sur des liaisons triangulaires. Le mécanisme de gel conjoint sur les triangles réduit la frustration et maintient l'indépendance des clusters.
+        \begin{itemize}
+            \item On définit un couplage de Markov invariant par posterior resampling (\textbf{Identité de Nishimori}).
+            \item La percolation des composants géants gelés fournit des bornes d'impossibilité théoriques.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Amélioration stricte de la borne de Sankararaman-Baccelli}
+    \begin{columns}
+        \begin{column}[t]{0.55\textwidth}
+            \begin{block}{Seuils critiques sur grille triangulaire homogène}
+                \begin{itemize}
+                    \item \textbf{Dynamique classique d'arêtes} : la percolation critique intervient à :
+                    \[ p_c^{\mathrm{edge}} \approx 0.673 \]
+                    \item \textbf{Dynamique triangulaire d'ordre supérieur} : la percolation critique est retardée à :
+                    \[ p_c^{\Delta} \approx 0.7192 \]
+                \end{itemize}
+            \end{block}
+            
+            \begin{exampleblock}{Théorème : Amélioration de la borne}
+                Puisque $p_c^{\mathrm{edge}} < p_c^{\Delta}$, pour tout $p \in [0.673, 0.7192)$, la dynamique d'arêtes classique percole (la borne de Sankararaman-Baccelli ne peut conclure), tandis que la dynamique triangulaire ne percole pas.
+                Cela prouve rigoureusement que le \textbf{recouvrement faible est impossible} dans ce régime, améliorant strictement la borne théorique d'impossibilité.
+            \end{exampleblock}
+        \end{column}
+        
+        \begin{column}[t]{0.40\textwidth}
+            \begin{center}
+                \includegraphics[width=0.95\textwidth]{../Img_presentation_BrunoLevy/Resultat1_HGP_SemanticKITTI.png}
+                \captionof{figure}{Régime subcritique : aucun recouvrement}
+                \vspace{0.15cm}
+                \includegraphics[width=0.95\textwidth]{../Img_presentation_BrunoLevy/Resultat3_HGP_SemanticKITTI.png}
+                \captionof{figure}{Régime supercritique : recouvrement atteint}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Extension : Filtrage et Imagerie 2D/2.5D}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Traitement d'images : Graphe et Hypergraphe de Frangi}
+    \begin{block}{Le filtre de Frangi classique (1998)}
+        Filtre pixelwise détectant les structures tubulaires par l'analyse des valeurs propres de la matrice Hessienne. Il est sensible au bruit et présente des discontinuités.
+    \end{block}
+    
+    \begin{block}{Graphe de Frangi Multimodal}
+        \begin{itemize}
+            \item On construit un graphe de similarité spatiale où les sommets sont les pixels et les arêtes encodent la continuité locale (alignement des directions propres Hessiennes, intensité et contraste).
+            \item Permet la multimodalité (2.5D : intensité + profondeur / range).
+            \item L'extraction du réseau de fissures se fait par un algorithme de type Single-Linkage.
+        \end{itemize}
+    \end{block}
+    
+    \begin{exampleblock}{Hypergraphe de Frangi (interactions d'ordre supérieur)}
+        En introduisant des hyper-arêtes reliant des triplets de pixels, on intègre une contrainte de courbure. Cette connectivité d'ordre supérieur bloque la percolation du bruit local et extrait des réseaux de fissures complexes et bruités de manière très robuste et stable.
+    \end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\frame{\sectionpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Conclusion et Perspectives}
+    \begin{block}{Contributions majeures de la thèse}
+        \begin{enumerate}
+            \item \textbf{Généralisation d'HGP-Clusterer} : formulation par Čech et $K$-polyèdres, montrant la correspondance mathématique exacte avec la densité $K$-NN.
+            \item \textbf{Support par Mosaïque de Delaunay d'ordre $K$} : identification de la structure géométrique duale de Voronoï contenant tous les simplexes de Gabriel ($K$-separating), assurant une complexité maîtrisée pour le $K$-MST.
+            \item \textbf{Percolation continue} : introduction de la vitesse de percolation comme métrique théorique unifiée pour mesurer les limites des algorithmes de clustering et de détection de communautés.
+            \item \textbf{Applications et Transport Optimal} : tracking 4D LiDAR par UOT entropique résolu par Sinkhorn, et détection d'anomalies guidée par CAO.
+        \end{enumerate}
+    \end{block}
+    
+    \begin{block}{Perspectives futures}
+        \begin{itemize}
+            \item \textbf{Réduction de dimension d'ordre supérieur} : exploiter la structure topologique de la mosaïque de Delaunay d'ordre $K$.
+            \item \textbf{Généralisation de l'axiomatique} : formaliser le clustering hiérarchique avec recouvrements (Carlsson-Mémoli pour $K \ge 2$).
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\merci}
+
+\end{document}
