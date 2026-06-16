@@ -709,7 +709,7 @@
                 \textbf{Nuage et boules de rayon $r$}
                 
                 \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.72]
+                \begin{tikzpicture}[scale=0.52]
                     \def\r{1.2}
                     \pgfmathsetmacro{\h}{\r*sqrt(3)}
                     
@@ -736,21 +736,21 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textcolor{inria-bleu}{\textbf{Arbre hiérarchique}}
+                \textcolor{black}{\textbf{Arbre hiérarchique}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
-                    % Dendrogram branches for A, B, C, D, E, F (all very thick, inria-bleu)
-                    \draw[very thick, inria-bleu] (0.5, 0.3) -- (0.5, 2.0);
-                    \draw[very thick, inria-bleu] (1.5, 0.3) -- (1.5, 2.0);
-                    \draw[very thick, inria-bleu] (2.5, 0.3) -- (2.5, 2.0);
-                    \draw[very thick, inria-bleu] (3.5, 0.3) -- (3.5, 2.0);
-                    \draw[very thick, inria-bleu] (4.5, 0.3) -- (4.5, 2.0);
-                    \draw[very thick, inria-bleu] (5.5, 0.3) -- (5.5, 2.0);
+                    % Dendrogram branches for A, B, C, D, E, F (all very thick, black)
+                    \draw[very thick, black] (0.5, 0.3) -- (0.5, 2.0);
+                    \draw[very thick, black] (1.5, 0.3) -- (1.5, 2.0);
+                    \draw[very thick, black] (2.5, 0.3) -- (2.5, 2.0);
+                    \draw[very thick, black] (3.5, 0.3) -- (3.5, 2.0);
+                    \draw[very thick, black] (4.5, 0.3) -- (4.5, 2.0);
+                    \draw[very thick, black] (5.5, 0.3) -- (5.5, 2.0);
                     
                     % Horizontal bar at y=2.0 (resolution 2r)
-                    \draw[very thick, inria-bleu] (0.5, 2.0) -- (5.5, 2.0);
-                    \draw[very thick, inria-bleu] (3.0, 2.0) -- (3.0, 2.8);
+                    \draw[very thick, black] (0.5, 2.0) -- (5.5, 2.0);
+                    \draw[very thick, black] (3.0, 2.0) -- (3.0, 2.8);
                     
                     % Leaf nodes
                     \node[below] at (0.5, 0.3) {$A$};
@@ -762,8 +762,8 @@
                     
                     % Height axis
                     \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
-                    \draw[dashed, inria-bleu] (-0.1, 2.0) -- (0.5, 2.0);
-                    \node[left, inria-bleu] at (-0.1, 2.0) {$r$};
+                    \draw[dashed, black] (-0.1, 2.0) -- (0.5, 2.0);
+                    \node[left, black] at (-0.1, 2.0) {$r$};
                 \end{tikzpicture}
             \end{center}
         \end{column}
@@ -777,7 +777,7 @@
                 \textbf{Nuage et boules au niveau $r$}
                 
                 \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.72]
+                \begin{tikzpicture}[scale=0.52]
                     \def\r{1.2}
                     \pgfmathsetmacro{\h}{\r*sqrt(3)}
                     \def\rprime{1.25}
@@ -862,7 +862,7 @@
                 \textbf{Triangles et $3$-intersections à $r'$}
                 
                 \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.72]
+                \begin{tikzpicture}[scale=0.52]
                     \def\r{1.2}
                     \pgfmathsetmacro{\h}{\r*sqrt(3)}
                     \pgfmathsetmacro{\rprime}{\r * 2 / sqrt(3)}
@@ -965,7 +965,7 @@
                 \textbf{Connexité globale à $r''$}
                 
                 \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.72]
+                \begin{tikzpicture}[scale=0.52]
                     \def\r{1.2}
                     \pgfmathsetmacro{\h}{\r*sqrt(3)}
                     \pgfmathsetmacro{\rsecond}{\r * sqrt(2 + sqrt(3))}
@@ -1081,6 +1081,105 @@
     \vspace{0.3cm}
     \begin{center}
         \small \textbf{Étape 3 :} Connexité globale à $r''$ par les points de tangence.
+    \end{center}
+\end{frame}
+
+
+
+
+\begin{frame}{Robust SL vs. Vraie hiérarchie $2$-NN : Comparaison}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \textcolor{black}{\textbf{Hiérarchie Robust SL ($K=2$)}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
+                    % Dendrogram branches for A, B, C, D, E, F (very thick, black)
+                    \draw[very thick, black] (0.5, 0.3) -- (0.5, 2.0);
+                    \draw[very thick, black] (1.5, 0.3) -- (1.5, 2.0);
+                    \draw[very thick, black] (2.5, 0.3) -- (2.5, 2.0);
+                    \draw[very thick, black] (3.5, 0.3) -- (3.5, 2.0);
+                    \draw[very thick, black] (4.5, 0.3) -- (4.5, 2.0);
+                    \draw[very thick, black] (5.5, 0.3) -- (5.5, 2.0);
+                    
+                    % Horizontal bar at y=2.0 (resolution 2r)
+                    \draw[very thick, black] (0.5, 2.0) -- (5.5, 2.0);
+                    \draw[very thick, black] (3.0, 2.0) -- (3.0, 2.8);
+                    
+                    % Leaf nodes
+                    \node[below] at (0.5, 0.3) {$A$};
+                    \node[below] at (1.5, 0.3) {$B$};
+                    \node[below] at (2.5, 0.3) {$C$};
+                    \node[below] at (3.5, 0.3) {$D$};
+                    \node[below] at (4.5, 0.3) {$E$};
+                    \node[below] at (5.5, 0.3) {$F$};
+                    
+                    % Height axis
+                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, black] (-0.1, 2.0) -- (0.5, 2.0);
+                    \node[left, black] at (-0.1, 2.0) {$r$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Vraie hiérarchie $2$-NN}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
+                    \def\hr{1.0}
+                    \def\hrprime{1.5}
+                    \def\hrsecond{2.3}
+                    % Dendrogram branches for A, B, C, D, E, F
+                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
+                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
+                        \coordinate (L\i) at (\x, 0.3);
+                        \coordinate (R\i) at (\x+0.5, 0.3);
+                        \coordinate (M\i) at (\x+0.25, \hr);
+                        
+                        \node[below] at (L\i) {\L};
+                        \node[below] at (R\i) {\R};
+                        
+                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
+                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
+                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
+                        
+                        % Vertical extension to hrprime
+                        \draw[very thick, inria-rouge] (M\i) -- (\x+0.25, \hrprime);
+                    }
+                    
+                    % Left triangle ABC merges at hrprime (trunks at 0.25, 1.35, 2.45)
+                    \draw[very thick, inria-rouge] (0.25, \hrprime) -- (2.45, \hrprime);
+                    \draw[very thick, inria-rouge] (1.35, \hrprime) -- (1.35, \hrsecond);
+                    
+                    % Trunk 4 (CD) at 3.55 goes straight up to hrsecond
+                    \draw[very thick, inria-rouge] (3.55, \hrprime) -- (3.55, \hrsecond);
+                    
+                    % Right triangle DEF merges at hrprime (trunks at 4.65, 5.75, 6.85)
+                    \draw[very thick, inria-rouge] (4.65, \hrprime) -- (6.85, \hrprime);
+                    \draw[very thick, inria-rouge] (5.75, \hrprime) -- (5.75, \hrsecond);
+                    
+                    % Horizontal bar at hrsecond (resolution r'')
+                    \draw[very thick, inria-rouge] (1.35, \hrsecond) -- (5.75, \hrsecond);
+                    \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
+                    
+                    % Height axis
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
+                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
+                    \node[left, inria-rouge] at (-0.6, \hrprime) {$r'$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrsecond) -- (1.35, \hrsecond);
+                    \node[left, inria-rouge] at (-0.6, \hrsecond) {$r''$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \vspace{0.3cm}
+    \begin{center}
+        \small \textbf{Bilan :} La vraie hiérarchie $2$-NN isole le pont de liaison $C\text{-}D$, contrairement à Robust SL.
     \end{center}
 \end{frame}
 
@@ -1298,102 +1397,6 @@
             \end{center}
         \end{column}
     \end{columns}
-\end{frame}
-
-\begin{frame}{Robust SL vs. Vraie hiérarchie $2$-NN : Comparaison}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \textcolor{inria-bleu}{\textbf{Hiérarchie Robust SL ($K=2$)}}
-                
-                \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
-                    % Dendrogram branches for A, B, C, D, E, F (very thick, inria-bleu)
-                    \draw[very thick, inria-bleu] (0.5, 0.3) -- (0.5, 2.0);
-                    \draw[very thick, inria-bleu] (1.5, 0.3) -- (1.5, 2.0);
-                    \draw[very thick, inria-bleu] (2.5, 0.3) -- (2.5, 2.0);
-                    \draw[very thick, inria-bleu] (3.5, 0.3) -- (3.5, 2.0);
-                    \draw[very thick, inria-bleu] (4.5, 0.3) -- (4.5, 2.0);
-                    \draw[very thick, inria-bleu] (5.5, 0.3) -- (5.5, 2.0);
-                    
-                    % Horizontal bar at y=2.0 (resolution 2r)
-                    \draw[very thick, inria-bleu] (0.5, 2.0) -- (5.5, 2.0);
-                    \draw[very thick, inria-bleu] (3.0, 2.0) -- (3.0, 2.8);
-                    
-                    % Leaf nodes
-                    \node[below] at (0.5, 0.3) {$A$};
-                    \node[below] at (1.5, 0.3) {$B$};
-                    \node[below] at (2.5, 0.3) {$C$};
-                    \node[below] at (3.5, 0.3) {$D$};
-                    \node[below] at (4.5, 0.3) {$E$};
-                    \node[below] at (5.5, 0.3) {$F$};
-                    
-                    % Height axis
-                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
-                    \draw[dashed, inria-bleu] (-0.1, 2.0) -- (0.5, 2.0);
-                    \node[left, inria-bleu] at (-0.1, 2.0) {$r$};
-                \end{tikzpicture}
-            \end{center}
-        \end{column}
-        
-        \begin{column}{0.48\textwidth}
-            \begin{center}
-                \textcolor{inria-rouge}{\textbf{Vraie hiérarchie $2$-NN}}
-                
-                \vspace{0.4cm}
-                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
-                    \def\hr{1.0}
-                    \def\hrprime{1.5}
-                    \def\hrsecond{2.3}
-                    % Dendrogram branches for A, B, C, D, E, F
-                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
-                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
-                        \coordinate (L\i) at (\x, 0.3);
-                        \coordinate (R\i) at (\x+0.5, 0.3);
-                        \coordinate (M\i) at (\x+0.25, \hr);
-                        
-                        \node[below] at (L\i) {\L};
-                        \node[below] at (R\i) {\R};
-                        
-                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
-                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
-                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
-                        
-                        % Vertical extension to hrprime
-                        \draw[very thick, inria-rouge] (M\i) -- (\x+0.25, \hrprime);
-                    }
-                    
-                    % Left triangle ABC merges at hrprime (trunks at 0.25, 1.35, 2.45)
-                    \draw[very thick, inria-rouge] (0.25, \hrprime) -- (2.45, \hrprime);
-                    \draw[very thick, inria-rouge] (1.35, \hrprime) -- (1.35, \hrsecond);
-                    
-                    % Trunk 4 (CD) at 3.55 goes straight up to hrsecond
-                    \draw[very thick, inria-rouge] (3.55, \hrprime) -- (3.55, \hrsecond);
-                    
-                    % Right triangle DEF merges at hrprime (trunks at 4.65, 5.75, 6.85)
-                    \draw[very thick, inria-rouge] (4.65, \hrprime) -- (6.85, \hrprime);
-                    \draw[very thick, inria-rouge] (5.75, \hrprime) -- (5.75, \hrsecond);
-                    
-                    % Horizontal bar at hrsecond (resolution r'')
-                    \draw[very thick, inria-rouge] (1.35, \hrsecond) -- (5.75, \hrsecond);
-                    \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
-                    
-                    % Height axis
-                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
-                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
-                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
-                    \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
-                    \node[left, inria-rouge] at (-0.6, \hrprime) {$r'$};
-                    \draw[dashed, inria-rouge] (-0.6, \hrsecond) -- (1.35, \hrsecond);
-                    \node[left, inria-rouge] at (-0.6, \hrsecond) {$r''$};
-                \end{tikzpicture}
-            \end{center}
-        \end{column}
-    \end{columns}
-    \vspace{0.3cm}
-    \begin{center}
-        \small \textbf{Bilan :} La vraie hiérarchie $2$-NN isole le pont de liaison $C\text{-}D$, contrairement à Robust SL.
-    \end{center}
 \end{frame}
 
 \section{HDBSCAN \& quelques applications en 3D}
