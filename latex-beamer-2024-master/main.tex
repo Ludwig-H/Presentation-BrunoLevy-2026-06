@@ -118,14 +118,14 @@
                 \textbf{Ensemble de niveau} $\{x \mid f(x) \ge \lambda\}$
                 
                 \vspace{0.3cm}
-                \begin{tikzpicture}[xscale=0.8, yscale=0.8]
+                \begin{tikzpicture}[xscale=0.95, yscale=0.95]
+                    \useasboundingbox (-0.8, -0.4) rectangle (6.2, 4.2);
                     \only<1>{\pgfmathsetmacro{\lambdaval}{2.6}}
                     \only<2>{\pgfmathsetmacro{\lambdaval}{1.75}}
                     \only<3>{\pgfmathsetmacro{\lambdaval}{1.1}}
                     \only<4>{\pgfmathsetmacro{\lambdaval}{0.4}}
                     
-                    % Axes and Box
-                    \draw (0,0) rectangle (6,4);
+                    % Axes
                     \draw[->, >=stealth] (0,0) -- (6,0) node[below=5pt, midway] {$x$};
                     \draw[->, >=stealth] (0,0) -- (0,4) node[left=5pt, midway, rotate=90] {$f(x)$};
                     
@@ -193,8 +193,8 @@
                 \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
                 
                 \vspace{0.3cm}
-                \begin{tikzpicture}[xscale=0.8, yscale=0.8]
-                    \draw (0,0) rectangle (6,4);
+                \begin{tikzpicture}[xscale=0.95, yscale=0.95]
+                    \useasboundingbox (-0.8, -0.4) rectangle (6.2, 4.2);
                     
                     % Tree branches
                     \only<1>{
