@@ -31,6 +31,14 @@
 
 \usetheme{inria}
 
+\setbeamertemplate{footnote}{%
+  \hspace*{0.6cm}%
+  \raisebox{8pt}{%
+    \usebeamerfont{footnote}\usebeamercolor[fg]{footnote}%
+    \insertfootnotemark~\insertfootnotetext%
+  }%
+}
+
 \newcounter{tocsectioncounter}
 \renewcommand{\contentsname}{Plan}
 \setbeamertemplate{section in toc}{%
@@ -55,21 +63,20 @@
 \begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$}
     \begin{center}
         \large
-        \textbf{Modèle de Hartigan} \cite{hartigan81} : \textbf{Amas de forte densité} (\emph{high-density clusters}) \\[4pt]
-        \normalsize $\mathcal{C}$ = Composantes connexes des ensembles de niveau de la densité $\{x \mid f(x) \ge \lambda_0\}$
+        \textbf{Modèle de Hartigan} \cite{hartigan81} : \textbf{Amas de forte densité} (\emph{high-density clusters})
     \end{center}
     
-    \vspace{0.2cm}
+    \vspace{0.4cm}
     
     \begin{center}
         \begin{tikzpicture}[every node/.style={inner sep=0}]
             % Données brutes
-            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label=below:{\small Données brutes $\mathcal{X}$}] 
-                {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
+            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Données brutes $\mathcal{X}$}}] 
+                {\includegraphics[width=0.17\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
                 
             % Données classées
-            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label=below:{\small Amas de forte densité}] 
-                {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
+            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Amas de forte densité}}] 
+                {\includegraphics[width=0.17\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
                 
             % Flèche grasse au milieu
             \draw[-{Latex[length=10pt, width=10pt]}, line width=5pt, color=gray!40] (2.0, 0) -- (4.8, 0);
@@ -78,9 +85,41 @@
             \node (gears) at (3.4, 0.75) {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
             
             % Nom de l'algo en-dessous
-            \node (algo) at (3.4, -0.8) [align=center] {\small \textbf{(H)DBSCAN} \cite{HDBSCAN, HDBSCAN2017}};
+            \node (algo) at (3.4, -0.9) [align=center] {\small \textbf{HDBSCAN}\footnotemark[1] \cite{HDBSCAN, HDBSCAN2017}};
         \end{tikzpicture}
     \end{center}
+    \footnotetext[1]{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
+\end{frame}
+
+\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$}
+    \begin{center}
+        \large
+        \textbf{Modèle de Hartigan} \cite{hartigan81} : \textbf{Amas de forte densité} (\emph{high-density clusters})
+    \end{center}
+    
+    \vspace{0.1cm}
+    
+    \begin{center}
+        \begin{tikzpicture}[every node/.style={inner sep=0}]
+            % Données brutes
+            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label={[label distance=6pt]below:{\small Données brutes $\mathcal{X}$}}] 
+                {\includegraphics[width=0.17\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
+                
+            % Données classées
+            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label={[label distance=6pt]below:{\small Amas de forte densité}}] 
+                {\includegraphics[width=0.17\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
+                
+            % Flèche grasse au milieu
+            \draw[-{Latex[length=10pt, width=10pt]}, line width=5pt, color=gray!40] (2.0, 0) -- (4.8, 0);
+            
+            % Roues dentées au-dessus de la flèche
+            \node (gears) at (3.4, 0.75) {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
+            
+            % Nom de l'algo en-dessous
+            \node (algo) at (3.4, -0.85) [align=center] {\small \textbf{HDBSCAN}\footnotemark[1] \cite{HDBSCAN, HDBSCAN2017}};
+        \end{tikzpicture}
+    \end{center}
+    \footnotetext[1]{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
     
     \vspace{0.1cm}
     
@@ -88,7 +127,7 @@
         \begin{column}{0.48\textwidth}
             \begin{center}
                 \tikz \node [draw=gray!30, line width=1.2pt, inner sep=2pt] 
-                    {\includegraphics[height=1.5cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}};\\[3pt]
+                    {\includegraphics[height=1.1cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}};\\[6pt]
                 \footnotesize \textbf{Données $\mathcal{X} \subset \mathbb{R}^8$} \cite{tourr} (huiles d'olive vs géographie)
             \end{center}
         \end{column}
@@ -96,7 +135,7 @@
         \begin{column}{0.48\textwidth}
             \begin{center}
                 \tikz \node [draw=gray!30, line width=1.2pt, inner sep=2pt] 
-                    {\includegraphics[height=1.5cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}};\\[3pt]
+                    {\includegraphics[height=1.1cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}};\\[6pt]
                 \footnotesize \textbf{Cosmologie 3D} : filaments cosmiques
             \end{center}
         \end{column}
