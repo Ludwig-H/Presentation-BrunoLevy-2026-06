@@ -1484,6 +1484,220 @@
 \section{Quelques exemples en 3D}
 \frame{\sectionpage}
 
+\begin{frame}{Détection d'anomalies sur nuages de points 3D (LiDAR)}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{A priori géométrique CAO} :
+                \begin{itemize}
+                    \item Comparaison de la hiérarchie de clusters (produite par HGP-Clusterer) avec le modèle 3D théorique du navire (\copyright\ \textsc{Naval Group}).
+                \end{itemize}
+                \item \textbf{Exploration de la hiérarchie} :
+                \begin{itemize}
+                    \item Une fonction de coût pénalise les nœuds hybrides contenant à la fois des points conformes et non conformes.
+                \end{itemize}
+                \item \textbf{Résultat} (\emph{Marie Benchmark}) :
+                \begin{itemize}
+                    \item Isolation parfaite des objets étrangers (cubes, tuteurs) accollés à la structure.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{imgs/Resultat_MarieBenchmark.png}
+                
+                \vspace{0.3cm}
+                \scriptsize \textbf{Résultat d'isolation d'anomalies} (modèle conforme en rouge, anomalies en couleurs distinctes).
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Segmentation d'instance sur LiDAR 3D/4D}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{Perspectives industrielles} :
+                \begin{itemize}
+                    \item Collaborations et applications cibles avec Greehill, Valeo et Naval Group.
+                \end{itemize}
+                \item \textbf{Automatisation} :
+                \begin{itemize}
+                    \item Navigation pour véhicules autonomes et robotique mobile.
+                \end{itemize}
+                \item \textbf{Supervision \& Auscultation} :
+                \begin{itemize}
+                    \item Construction de jumeaux numériques urbains ou industriels.
+                    \item Diagnostic de structures et détection précoce d'anomalies.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=0.95\textwidth]{imgs/liDAR_4D_industrials.jpg}
+                
+                \vspace{0.2cm}
+                \scriptsize Scène LiDAR urbaine 3D dense.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Segmentation panoptique LiDAR 3D : État de l'art}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.50\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{Approche standard du domaine} :
+                \begin{itemize}
+                    \item Segmentation sémantique (Deep Learning) suivie d'un clustering spatial (DBSCAN / HDBSCAN).
+                \end{itemize}
+                \item \textbf{Limites majeures} :
+                \begin{itemize}
+                    \item Difficultés accrues du clustering dans les zones de forte densité ou sur les géométries complexes.
+                \end{itemize}
+                \item \textbf{Référence en 3D} :
+                \begin{itemize}
+                    \item \textbf{Alpine} \cite{Sautier2025} (\textsc{Sautier} \emph{et al.}, 2025) :
+                    \item \emph{« Is clustering enough for LiDAR instance segmentation? »}
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.46\textwidth}
+            \begin{center}
+                \includegraphics[height=0.75\textheight]{imgs/Alpine.png}
+                
+                \vspace{0.2cm}
+                \scriptsize Visualisation d'instances détectées par Alpine.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Segmentation panoptique LiDAR 4D : État de l'art}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.50\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{Suivi temporel des objets (Tracking)} :
+                \begin{itemize}
+                    \item Association globale des instances sémantiques au cours du temps.
+                \end{itemize}
+                \item \textbf{Approche standard} :
+                \begin{itemize}
+                    \item Sémantique + Clustering + Association globale par Transport Optimal.
+                \end{itemize}
+                \item \textbf{Référence en 4D} :
+                \begin{itemize}
+                    \item \textbf{Geo-4D} \cite{Oh2025} (\textsc{Oh} \emph{et al.}, 2025) :
+                    \item \emph{« Training-Free Global Geometric Association for 4D LiDAR Panoptic Segmentation »}.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.46\textwidth}
+            \begin{center}
+                \includegraphics[height=0.75\textheight]{imgs/Resultat_Geo-4D.png}
+                
+                \vspace{0.2cm}
+                \scriptsize Tracking temporel d'instances de véhicules dans Geo-4D.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Segmentation d'instance 4D : Intégration d'a priori géométriques}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{14pt}
+                \item \textbf{A priori géométriques faibles} :
+                \begin{itemize}
+                    \item Prise en compte du volume attendu (a priori faible) des objets d'intérêt (véhicules, piétons).
+                \end{itemize}
+                \item \textbf{Sélection dans l'arbre hiérarchique} :
+                \begin{itemize}
+                    \item Notre algorithme identifie les nœuds qui optimisent conjointement la densité spatiale et la contrainte de volume.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=0.48\textwidth]{imgs/kitti_3d_prior_1.jpg}
+                \hfill
+                \includegraphics[width=0.48\textwidth]{imgs/kitti_3d_prior_2.jpg}
+                
+                \vspace{0.3cm}
+                \scriptsize Exemples d'a priori géométriques appliqués aux volumes d'instances.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Suivi temporel d'instance (SemanticKITTI)}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{14pt}
+                \item \textbf{Association temporelle robuste} :
+                \begin{itemize}
+                    \item Suivi continu des instances à travers les frames successives.
+                \end{itemize}
+                \item \textbf{Reconstruction de trajectoires} :
+                \begin{itemize}
+                    \item Minimisation de l'erreur géométrique globale d'une frame à la suivante.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[width=0.95\textwidth]{imgs/kitti_3d_prior_3.png}
+                
+                \vspace{0.2cm}
+                \scriptsize Trajectoires de véhicules estimées au cours du temps.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Résultats de segmentation d'instance 4D}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.35\textwidth}
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{Notre algorithme} :
+                \begin{itemize}
+                    \item Clustering hiérarchique d'ordre supérieur combiné au Transport Optimal non équilibré (\emph{unbalanced OT}).
+                \end{itemize}
+                \item \textbf{Sans entraînement} :
+                \begin{itemize}
+                    \item Résultats robustes s'affranchissant totalement de l'apprentissage profond pour la partie tracking et clustering.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.62\textwidth}
+            \begin{center}
+                \begin{tabular}{cc}
+                    \textbf{Vérité terrain (GT)} & \textbf{Notre algorithme} \\
+                    \includegraphics[width=0.46\textwidth]{imgs/kitti_ground_truth.jpg} &
+                    \includegraphics[width=0.46\textwidth]{imgs/kitti_our_algorithm.jpg}
+                \end{tabular}
+                
+                \vspace{0.2cm}
+                \scriptsize Comparaison visuelle des trajectoires reconstruites sur SemanticKITTI.
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Références}
     \bibliographystyle{plain}
     \bibliography{referencesThesis}
