@@ -759,11 +759,421 @@
                     % Height axis
                     \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
                     \draw[dashed, inria-rouge] (-0.1, 2.0) -- (0.5, 2.0);
-                    \node[left, inria-rouge] at (-0.1, 2.0) {$2r$};
+                    \node[left, inria-rouge] at (-0.1, 2.0) {$r$};
                 \end{tikzpicture}
             \end{center}
         \end{column}
     \end{columns}
+\end{frame}
+
+\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r$}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.52\textwidth}
+            \begin{center}
+                \textbf{Nuage et $2$-intersections au niveau $r$}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.72]
+                    \def\r{1.2}
+                    \pgfmathsetmacro{\h}{\r*sqrt(3)}
+                    \def\rprime{1.25}
+                    
+                    \coordinate (C) at (-\r, 0);
+                    \coordinate (D) at (\r, 0);
+                    \coordinate (A) at (-\r-\h, \r);
+                    \coordinate (B) at (-\r-\h, -\r);
+                    \coordinate (E) at (\r+\h, \r);
+                    \coordinate (F) at (\r+\h, -\r);
+
+                    % 2-intersections fill (light blue)
+                    \begin{scope}
+                        \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
+                            \begin{scope}
+                                \clip (\p) circle (\rprime);
+                                \fill[inria-bleu, opacity=0.3] (\q) circle (\rprime);
+                            \end{scope}
+                        }
+                    \end{scope}
+
+                    % Circles of radius r (transparent, dashed)
+                    \foreach \P in {A,B,C,D,E,F} {
+                        \draw[dashed, gray!60, thick] (\P) circle (\rprime);
+                    }
+                    
+                    % Points
+                    \foreach \P/\pos in {A/left, B/left, C/above left, D/above right, E/right, F/right} {
+                        \fill (\P) circle (2.5pt);
+                        \node[\pos] at (\P) {\small \P};
+                    }
+                    
+                    % Radius arrow
+                    \draw[->, >=latex] (A) -- ++(120:\rprime) node[midway, sloped, above] {$r$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
+                    \def\hr{1.0}
+                    % Dendrogram branches for A, B, C, D, E, F
+                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
+                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
+                        \coordinate (L\i) at (\x, 0.3);
+                        \coordinate (R\i) at (\x+0.5, 0.3);
+                        \coordinate (M\i) at (\x+0.25, \hr);
+                        
+                        \node[below] at (L\i) {\L};
+                        \node[below] at (R\i) {\R};
+                        
+                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
+                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
+                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
+                        
+                        % Dashed trunks going up
+                        \draw[very thick, inria-rouge, dashed] (M\i) -- (\x+0.25, \hr+1.2);
+                    }
+                    
+                    % Height axis
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
+                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \vspace{0.3cm}
+    \begin{center}
+        \small \textbf{Étape 1 :} les 7 segments de longueur $2r$ fusionnent au seuil $r$ pour former les composantes de départ.
+    \end{center}
+\end{frame}
+
+\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r'$}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.52\textwidth}
+            \begin{center}
+                \textbf{Triangles et $3$-intersections à $r' = \frac{2\sqrt{3}}{3}r$}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.72]
+                    \def\r{1.2}
+                    \pgfmathsetmacro{\h}{\r*sqrt(3)}
+                    \pgfmathsetmacro{\rprime}{\r * 2 / sqrt(3)}
+                    
+                    \coordinate (C) at (-\r, 0);
+                    \coordinate (D) at (\r, 0);
+                    \coordinate (A) at (-\r-\h, \r);
+                    \coordinate (B) at (-\r-\h, -\r);
+                    \coordinate (E) at (\r+\h, \r);
+                    \coordinate (F) at (\r+\h, -\r);
+
+                    % 2-intersections fill (light blue)
+                    \begin{scope}
+                        \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
+                            \begin{scope}
+                                \clip (\p) circle (\rprime);
+                                \fill[inria-bleu, opacity=0.3] (\q) circle (\rprime);
+                            \end{scope}
+                        }
+                    \end{scope}
+
+                    % Circles of radius r' (transparent, dashed)
+                    \foreach \P in {A,B,C,D,E,F} {
+                        \draw[dashed, gray!60, thick] (\P) circle (\rprime);
+                    }
+                    
+                    % 3-intersection circumcenters marked in red
+                    \fill[inria-rouge] (barycentric cs:A=1,B=1,C=1) circle (3.5pt);
+                    \fill[inria-rouge] (barycentric cs:D=1,E=1,F=1) circle (3.5pt);
+                    
+                    % Points
+                    \foreach \P/\pos in {A/left, B/left, C/above left, D/above right, E/right, F/right} {
+                        \fill (\P) circle (2.5pt);
+                        \node[\pos] at (\P) {\small \P};
+                    }
+                    
+                    % Radius arrow
+                    \draw[->, >=latex] (A) -- ++(120:\rprime) node[midway, sloped, above] {$r'$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
+                    \def\hr{1.0}
+                    \def\hrprime{1.5}
+                    % Dendrogram branches for A, B, C, D, E, F
+                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
+                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
+                        \coordinate (L\i) at (\x, 0.3);
+                        \coordinate (R\i) at (\x+0.5, 0.3);
+                        \coordinate (M\i) at (\x+0.25, \hr);
+                        
+                        \node[below] at (L\i) {\L};
+                        \node[below] at (R\i) {\R};
+                        
+                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
+                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
+                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
+                        
+                        % Vertical extension to hrprime
+                        \draw[very thick, inria-rouge] (M\i) -- (\x+0.25, \hrprime);
+                    }
+                    
+                    % Left triangle ABC merges at hrprime (trunks at 0.25, 1.35, 2.45)
+                    \draw[very thick, inria-rouge] (0.25, \hrprime) -- (2.45, \hrprime);
+                    \draw[very thick, inria-rouge, dashed] (1.35, \hrprime) -- (1.35, \hrprime+0.8);
+                    
+                    % Trunk 4 (CD) at 3.55 continues straight up as dashed
+                    \draw[very thick, inria-rouge, dashed] (3.55, \hrprime) -- (3.55, \hrprime+0.8);
+                    
+                    % Right triangle DEF merges at hrprime (trunks at 4.65, 5.75, 6.85)
+                    \draw[very thick, inria-rouge] (4.65, \hrprime) -- (6.85, \hrprime);
+                    \draw[very thick, inria-rouge, dashed] (5.75, \hrprime) -- (5.75, \hrprime+0.8);
+                    
+                    % Height axis
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
+                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
+                    \node[left, inria-rouge] at (-0.6, \hrprime) {$r'$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \vspace{0.3cm}
+    \begin{center}
+        \small \textbf{Étape 2 :} les $3$-intersections (en rouge) fusionnent les triangles à $r' = \frac{2\sqrt{3}}{3}r$. Le pont central $CD$ reste isolé.
+    \end{center}
+\end{frame}
+
+\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r''$}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.52\textwidth}
+            \begin{center}
+                \textbf{Connexité globale à $r'' = \frac{AD}{2}$}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.72]
+                    \def\r{1.2}
+                    \pgfmathsetmacro{\h}{\r*sqrt(3)}
+                    \pgfmathsetmacro{\rsecond}{\r * sqrt(2 + sqrt(3))}
+                    
+                    \coordinate (C) at (-\r, 0);
+                    \coordinate (D) at (\r, 0);
+                    \coordinate (A) at (-\r-\h, \r);
+                    \coordinate (B) at (-\r-\h, -\r);
+                    \coordinate (E) at (\r+\h, \r);
+                    \coordinate (F) at (\r+\h, -\r);
+
+                    % 2-intersections fill (light blue)
+                    \begin{scope}
+                        \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
+                            \begin{scope}
+                                \clip (\p) circle (\rsecond);
+                                \fill[inria-bleu, opacity=0.15] (\q) circle (\rsecond);
+                            \end{scope}
+                        }
+                    \end{scope}
+
+                    % 3-intersections fill (color overlay in red)
+                    \begin{scope}
+                        \clip (A) circle (\rsecond);
+                        \clip (B) circle (\rsecond);
+                        \clip (C) circle (\rsecond);
+                        \fill[inria-rouge, opacity=0.25] (-10,-10) rectangle (10,10);
+                    \end{scope}
+                    \begin{scope}
+                        \clip (D) circle (\rsecond);
+                        \clip (E) circle (\rsecond);
+                        \clip (F) circle (\rsecond);
+                        \fill[inria-rouge, opacity=0.25] (-10,-10) rectangle (10,10);
+                    \end{scope}
+
+                    % Circles of radius r'' (transparent, dashed)
+                    \foreach \P in {A,B,C,D,E,F} {
+                        \draw[dashed, gray!60, thick] (\P) circle (\rsecond);
+                    }
+                    
+                    % 4 points of tangency marked in red
+                    \fill[inria-rouge] ($ (A)!0.5!(D) $) circle (3.5pt);
+                    \fill[inria-rouge] ($ (C)!0.5!(E) $) circle (3.5pt);
+                    \fill[inria-rouge] ($ (B)!0.5!(D) $) circle (3.5pt);
+                    \fill[inria-rouge] ($ (C)!0.5!(F) $) circle (3.5pt);
+                    
+                    % Points
+                    \foreach \P/\pos in {A/left, B/left, C/above left, D/above right, E/right, F/right} {
+                        \fill (\P) circle (2.5pt);
+                        \node[\pos] at (\P) {\small \P};
+                    }
+                    
+                    % Radius arrow
+                    \draw[->, >=latex] (A) -- ++(120:\rsecond) node[midway, sloped, above] {$r''$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
+                    \def\hr{1.0}
+                    \def\hrprime{1.5}
+                    \def\hrsecond{2.3}
+                    % Dendrogram branches for A, B, C, D, E, F
+                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
+                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
+                        \coordinate (L\i) at (\x, 0.3);
+                        \coordinate (R\i) at (\x+0.5, 0.3);
+                        \coordinate (M\i) at (\x+0.25, \hr);
+                        
+                        \node[below] at (L\i) {\L};
+                        \node[below] at (R\i) {\R};
+                        
+                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
+                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
+                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
+                        
+                        % Vertical extension to hrprime
+                        \draw[very thick, inria-rouge] (M\i) -- (\x+0.25, \hrprime);
+                    }
+                    
+                    % Left triangle ABC merges at hrprime (trunks at 0.25, 1.35, 2.45)
+                    \draw[very thick, inria-rouge] (0.25, \hrprime) -- (2.45, \hrprime);
+                    \draw[very thick, inria-rouge] (1.35, \hrprime) -- (1.35, \hrsecond);
+                    
+                    % Trunk 4 (CD) at 3.55 goes straight up to hrsecond
+                    \draw[very thick, inria-rouge] (3.55, \hrprime) -- (3.55, \hrsecond);
+                    
+                    % Right triangle DEF merges at hrprime (trunks at 4.65, 5.75, 6.85)
+                    \draw[very thick, inria-rouge] (4.65, \hrprime) -- (6.85, \hrprime);
+                    \draw[very thick, inria-rouge] (5.75, \hrprime) -- (5.75, \hrsecond);
+                    
+                    % Horizontal bar at hrsecond (resolution r'')
+                    \draw[very thick, inria-rouge] (1.35, \hrsecond) -- (5.75, \hrsecond);
+                    \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
+                    
+                    % Height axis
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
+                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
+                    \node[left, inria-rouge] at (-0.6, \hrprime) {$r'$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrsecond) -- (1.35, \hrsecond);
+                    \node[left, inria-rouge] at (-0.6, \hrsecond) {$r''$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \vspace{0.3cm}
+    \begin{center}
+        \small \textbf{Étape 3 :} la connexité globale est atteinte à $r'' = \frac{AD}{2}$ grâce aux points de tangence (en rouge) qui relient les trois blocs.
+    \end{center}
+\end{frame}
+
+\begin{frame}{Robust SL vs. Vraie hiérarchie $2$-NN : Comparaison}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Hiérarchie Robust SL ($K=2$)}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
+                    % Dendrogram branches for A, B, C, D, E, F (very thick, inria-rouge)
+                    \draw[very thick, inria-rouge] (0.5, 0.3) -- (0.5, 2.0);
+                    \draw[very thick, inria-rouge] (1.5, 0.3) -- (1.5, 2.0);
+                    \draw[very thick, inria-rouge] (2.5, 0.3) -- (2.5, 2.0);
+                    \draw[very thick, inria-rouge] (3.5, 0.3) -- (3.5, 2.0);
+                    \draw[very thick, inria-rouge] (4.5, 0.3) -- (4.5, 2.0);
+                    \draw[very thick, inria-rouge] (5.5, 0.3) -- (5.5, 2.0);
+                    
+                    % Horizontal bar at y=2.0 (resolution 2r)
+                    \draw[very thick, inria-rouge] (0.5, 2.0) -- (5.5, 2.0);
+                    \draw[very thick, inria-rouge] (3.0, 2.0) -- (3.0, 2.8);
+                    
+                    % Leaf nodes
+                    \node[below] at (0.5, 0.3) {$A$};
+                    \node[below] at (1.5, 0.3) {$B$};
+                    \node[below] at (2.5, 0.3) {$C$};
+                    \node[below] at (3.5, 0.3) {$D$};
+                    \node[below] at (4.5, 0.3) {$E$};
+                    \node[below] at (5.5, 0.3) {$F$};
+                    
+                    % Height axis
+                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.1, 2.0) -- (0.5, 2.0);
+                    \node[left, inria-rouge] at (-0.1, 2.0) {$r$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Vraie hiérarchie $2$-NN}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
+                    \def\hr{1.0}
+                    \def\hrprime{1.5}
+                    \def\hrsecond{2.3}
+                    % Dendrogram branches for A, B, C, D, E, F
+                    \foreach \L/\R [count=\i] in {A/B, B/C, A/C, C/D, D/E, E/F, D/F} {
+                        \pgfmathsetmacro{\x}{(\i-1)*1.1}
+                        \coordinate (L\i) at (\x, 0.3);
+                        \coordinate (R\i) at (\x+0.5, 0.3);
+                        \coordinate (M\i) at (\x+0.25, \hr);
+                        
+                        \node[below] at (L\i) {\L};
+                        \node[below] at (R\i) {\R};
+                        
+                        \draw[very thick, inria-rouge] (L\i) -- (\x, \hr);
+                        \draw[very thick, inria-rouge] (R\i) -- (\x+0.5, \hr);
+                        \draw[very thick, inria-rouge] (\x, \hr) -- (\x+0.5, \hr);
+                        
+                        % Vertical extension to hrprime
+                        \draw[very thick, inria-rouge] (M\i) -- (\x+0.25, \hrprime);
+                    }
+                    
+                    % Left triangle ABC merges at hrprime (trunks at 0.25, 1.35, 2.45)
+                    \draw[very thick, inria-rouge] (0.25, \hrprime) -- (2.45, \hrprime);
+                    \draw[very thick, inria-rouge] (1.35, \hrprime) -- (1.35, \hrsecond);
+                    
+                    % Trunk 4 (CD) at 3.55 goes straight up to hrsecond
+                    \draw[very thick, inria-rouge] (3.55, \hrprime) -- (3.55, \hrsecond);
+                    
+                    % Right triangle DEF merges at hrprime (trunks at 4.65, 5.75, 6.85)
+                    \draw[very thick, inria-rouge] (4.65, \hrprime) -- (6.85, \hrprime);
+                    \draw[very thick, inria-rouge] (5.75, \hrprime) -- (5.75, \hrsecond);
+                    
+                    % Horizontal bar at hrsecond (resolution r'')
+                    \draw[very thick, inria-rouge] (1.35, \hrsecond) -- (5.75, \hrsecond);
+                    \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
+                    
+                    % Height axis
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
+                    \node[left, inria-rouge] at (-0.6, \hr) {$r$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
+                    \node[left, inria-rouge] at (-0.6, \hrprime) {$r'$};
+                    \draw[dashed, inria-rouge] (-0.6, \hrsecond) -- (1.35, \hrsecond);
+                    \node[left, inria-rouge] at (-0.6, \hrsecond) {$r''$};
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \vspace{0.3cm}
+    \begin{center}
+        \small \textbf{Bilan :} la vraie hiérarchie $2$-NN sépare correctement les deux structures de forte densité ($ABC$ et $DEF$) du pont de liaison $C\text{-}D$, contrairement à Robust SL.
+    \end{center}
 \end{frame}
 
 \section{HDBSCAN \& quelques applications en 3D}
