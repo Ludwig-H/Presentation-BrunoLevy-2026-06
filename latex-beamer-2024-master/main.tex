@@ -52,26 +52,33 @@
 \section{Clustering : des statistiques aux graphes}
 \frame{\sectionpage}
 
-\begin{frame}{Clustering sur données euclidiennes $X \subset \mathbb{R}^d$}
+\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$}
     \begin{center}
-        \small
-        Modèle de Hartigan \cite{hartigan81} : les \textbf{amas de forte densité} (\emph{high-density clusters}) correspondent aux composantes connexes des ensembles de niveau de la densité.
+        \large
+        \textbf{Modèle de Hartigan} \cite{hartigan81} : \textbf{Amas de forte densité} (\emph{high-density clusters}) \\[4pt]
+        \normalsize $\mathcal{C}$ = Composantes connexes des ensembles de niveau de la densité $\{x \mid f(x) \ge \lambda_0\}$
     \end{center}
     
-    \vspace{0.1cm}
+    \vspace{0.2cm}
     
     \begin{center}
-        \begin{tikzpicture}[node distance=0.4cm, every node/.style={inner sep=0}]
-            % Nuage de points brut
-            \node (raw) [label=below:\footnotesize Données brutes $X$] {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
+        \begin{tikzpicture}[every node/.style={inner sep=0}]
+            % Données brutes
+            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label=below:{\small Données brutes $\mathcal{X}$}] 
+                {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
+                
+            % Données classées
+            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label=below:{\small Amas de forte densité}] 
+                {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
+                
+            % Flèche grasse au milieu
+            \draw[-{Latex[length=10pt, width=10pt]}, line width=5pt, color=gray!40] (2.0, 0) -- (4.8, 0);
             
-            % Flèche avec roues dentées au-dessus
-            \node (arrow) [right=of raw, xshift=0.3cm] {\Large $\longrightarrow$};
-            \node (gears) [above=of arrow, yshift=-0.25cm] {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
-            \node (algo) [right=of arrow, xshift=-0.1cm, text width=3cm, align=center] {\footnotesize \textbf{Algorithme (H)DBSCAN}\\[2pt]\tiny \cite{HDBSCAN, HDBSCAN2017}};
+            % Roues dentées au-dessus de la flèche
+            \node (gears) at (3.4, 0.75) {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
             
-            % Nuage coloré par HDBSCAN
-            \node (clustered) [right=of algo, xshift=0.1cm, label=below:\footnotesize Amas de forte densité] {\includegraphics[width=0.20\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
+            % Nom de l'algo en-dessous
+            \node (algo) at (3.4, -0.8) [align=center] {\small \textbf{(H)DBSCAN} \cite{HDBSCAN, HDBSCAN2017}};
         \end{tikzpicture}
     \end{center}
     
@@ -80,15 +87,17 @@
     \begin{columns}[onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[height=1.8cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}\\[3pt]
-                \tiny Classification d'huiles d'olive italiennes \cite{tourr} (vérité terrain géographique)
+                \tikz \node [draw=gray!30, line width=1.2pt, inner sep=2pt] 
+                    {\includegraphics[height=1.5cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}};\\[3pt]
+                \footnotesize \textbf{Données $\mathcal{X} \subset \mathbb{R}^8$} \cite{tourr} (huiles d'olive vs géographie)
             \end{center}
         \end{column}
         
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[height=1.8cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}\\[3pt]
-                \tiny Extraction de filaments cosmiques en 3D (modèle géométrique \cite{penrose2003})
+                \tikz \node [draw=gray!30, line width=1.2pt, inner sep=2pt] 
+                    {\includegraphics[height=1.5cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}};\\[3pt]
+                \footnotesize \textbf{Cosmologie 3D} : filaments cosmiques
             \end{center}
         \end{column}
     \end{columns}
@@ -104,7 +113,7 @@
 \frame{\sectionpage}
 
 \begin{frame}[allowframebreaks]{Références}
-    \bibliographystyle{apalike}
+    \bibliographystyle{plain}
     \bibliography{referencesThesis}
 \end{frame}
 
