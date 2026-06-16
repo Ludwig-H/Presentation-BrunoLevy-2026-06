@@ -698,14 +698,16 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Robust SL / (H)DBSCAN vs. Hiérarchie exacte 2-NN}
+\begin{frame}{Robust SL / (H)DBSCAN ($K=2$)}
     \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
+        \begin{column}{0.52\textwidth}
             \begin{center}
-                \begin{tikzpicture}[scale=0.75]
+                \textbf{Nuage et boules de rayon $r$}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.72]
                     \def\r{1.2}
                     \pgfmathsetmacro{\h}{\r*sqrt(3)}
-                    \pgfmathsetmacro{\rprime}{\r * 2 / sqrt(3)}
                     
                     \coordinate (C) at (-\r, 0);
                     \coordinate (D) at (\r, 0);
@@ -714,65 +716,52 @@
                     \coordinate (E) at (\r+\h, \r);
                     \coordinate (F) at (\r+\h, -\r);
 
-                    % Overlay 1: Robust SL / (H)DBSCAN (K=2) à r_mreach = 2r
-                    \only<1>{
-                        \foreach \P in {A,B,C,D,E,F} {
-                            \fill[inria-bleu, opacity=0.15] (\P) circle (\r);
-                            \draw[dashed, gray!60, thick] (\P) circle (\r);
-                        }
-                        \draw[line width=1.5pt, inria-rouge] (A) -- (B) -- (C) -- cycle;
-                        \draw[line width=1.5pt, inria-rouge] (D) -- (E) -- (F) -- cycle;
-                        \draw[line width=1.5pt, inria-rouge] (C) -- (D);
+                    % Circles of radius r (transparent, dashed)
+                    \foreach \P in {A,B,C,D,E,F} {
+                        \draw[dashed, inria-bleu, thick] (\P) circle (\r);
                     }
-
-                    % Overlay 2: True 2-NN hierarchy (HGP-Clusterer) à r' = 2/\sqrt{3} r
-                    \only<2>{
-                        \foreach \P in {A,B,C,D,E,F} {
-                            \draw[dashed, gray!60, thick] (\P) circle (\rprime);
-                        }
-                        \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
-                            \begin{scope}
-                                \clip (\p) circle (\rprime);
-                                \fill[inria-bleu, opacity=0.3] (\q) circle (\rprime);
-                            \end{scope}
-                        }
-                        \draw[line width=1.5pt, inria-2024-bleu-canard] (A) -- (B) -- (C) -- cycle;
-                        \draw[line width=1.5pt, inria-2024-bleu-canard] (D) -- (E) -- (F) -- cycle;
-                        \draw[line width=1.5pt, inria-2024-gris-bleu, dotted] (C) -- (D);
-                        \fill[inria-rouge] (barycentric cs:A=1,B=1,C=1) circle (3.5pt);
-                        \fill[inria-rouge] (barycentric cs:D=1,E=1,F=1) circle (3.5pt);
-                    }
-
-                    % Draw points on top
+                    
+                    % Points
                     \foreach \P/\pos in {A/left, B/left, C/above left, D/above right, E/right, F/right} {
-                        \fill (\P) circle (2.2pt);
+                        \fill (\P) circle (2.5pt);
                         \node[\pos] at (\P) {\small \P};
                     }
                 \end{tikzpicture}
             \end{center}
         \end{column}
         
-        \begin{column}{0.50\textwidth}
-            \only<1>{
-                \textbf{Robust SL / (H)DBSCAN ($K=2$)} :
-                \begin{itemize}
-                    \setlength{\itemsep}{8pt}
-                    \item Seuil d'atteignabilité mutuelle $d_{\mathrm{mreach}, 2} = 2r$.
-                    \item Tous les points ont au moins $K=2$ voisins à distance $2r$ (leurs cercles de rayon $r$ se touchent).
-                    \item Les $6$ points fusionnent \textbf{simultanément} en un unique composant.
-                    \item Incapacité à séparer les deux triangles du pont de liaison $C\text{-}D$.
-                \end{itemize}
-            }
-            \only<2>{
-                \textbf{La vraie hiérarchie $2$-NN} :
-                \begin{itemize}
-                    \setlength{\itemsep}{6pt}
-                    \item À la résolution $r' = \frac{2\sqrt{3}}{3}r \approx 1.15r$, les boules s'intersectent trois à trois aux centres des triangles (points rouges).
-                    \item Les deux triangles gauche et droit forment chacun un cluster séparé.
-                    \item Le segment central $C\text{-}D$ reste \textbf{isolé} (pas de 3-intersection pour le connecter).
-                    \item Permet de séparer les deux structures de forte densité du pont de bruit.
-                \end{itemize}
-            }
+        \begin{column}{0.44\textwidth}
+            \begin{center}
+                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                
+                \vspace{0.4cm}
+                \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
+                    % Dendrogram branches for A, B, C, D, E, F (all very thick, inria-rouge)
+                    \draw[very thick, inria-rouge] (0.5, 0.3) -- (0.5, 2.0);
+                    \draw[very thick, inria-rouge] (1.5, 0.3) -- (1.5, 2.0);
+                    \draw[very thick, inria-rouge] (2.5, 0.3) -- (2.5, 2.0);
+                    \draw[very thick, inria-rouge] (3.5, 0.3) -- (3.5, 2.0);
+                    \draw[very thick, inria-rouge] (4.5, 0.3) -- (4.5, 2.0);
+                    \draw[very thick, inria-rouge] (5.5, 0.3) -- (5.5, 2.0);
+                    
+                    % Horizontal bar at y=2.0 (resolution 2r)
+                    \draw[very thick, inria-rouge] (0.5, 2.0) -- (5.5, 2.0);
+                    \draw[very thick, inria-rouge] (3.0, 2.0) -- (3.0, 2.8);
+                    
+                    % Leaf nodes
+                    \node[below] at (0.5, 0.3) {$A$};
+                    \node[below] at (1.5, 0.3) {$B$};
+                    \node[below] at (2.5, 0.3) {$C$};
+                    \node[below] at (3.5, 0.3) {$D$};
+                    \node[below] at (4.5, 0.3) {$E$};
+                    \node[below] at (5.5, 0.3) {$F$};
+                    
+                    % Height axis
+                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
+                    \draw[dashed, inria-rouge] (-0.1, 2.0) -- (0.5, 2.0);
+                    \node[left, inria-rouge] at (-0.1, 2.0) {$2r$};
+                \end{tikzpicture}
+            \end{center}
         \end{column}
     \end{columns}
 \end{frame}
