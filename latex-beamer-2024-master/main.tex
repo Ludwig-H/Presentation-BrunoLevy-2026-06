@@ -1309,6 +1309,51 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}{L'analogie du $K$-arbre minimum couvrant}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.54\textwidth}
+            De même que pour $K=1$, la hiérarchie d'ordre supérieur s'appuie sur une structure combinatoire parcimonieuse :
+            
+            \vspace{0.3cm}
+            \begin{itemize}
+                \setlength{\itemsep}{10pt}
+                \item \textbf{Objets de percolation} :
+                \begin{itemize}
+                    \item Ce ne sont plus les points, mais les \textbf{facettes} ($(K-1)$-simplexes) qui fusionnent.
+                \end{itemize}
+                \item \textbf{Simplexes de Gabriel} :
+                \begin{itemize}
+                    \item Les simplexes provoquant les fusions (simplexes séparants) sont de \textbf{Gabriel}.
+                \end{itemize}
+                \item \textbf{Support de calcul} :
+                \begin{itemize}
+                    \item La recherche se restreint aux simplexes de la \textbf{mosaïque de Delaunay d'ordre $K$}.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \begin{center}
+                \textbf{Comparaison $1$-MST vs. $K$-MST}
+                
+                \vspace{0.5cm}
+                \small
+                \renewcommand{\arraystretch}{1.5}
+                \begin{tabular}{lcc}
+                    \toprule
+                    & \textbf{$K = 1$} & \textbf{$K \ge 2$} \\
+                    \midrule
+                    \textbf{Sommets} & Points & $(K-1)$-simplexes \\
+                    \textbf{Fusions} & Arêtes & $K$-simplexes \\
+                    \textbf{Condition} & Gabriel & Gabriel \\
+                    \textbf{Support} & Delaunay & Delaunay d'ordre $K$ \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \section{HDBSCAN \& quelques applications en 3D}
 \frame{\sectionpage}
 
