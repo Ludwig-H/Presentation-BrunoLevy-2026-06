@@ -31,9 +31,34 @@
 
 \usetheme{inria}
 
+\newcounter{tocsectioncounter}
+\renewcommand{\contentsname}{Plan}
+\setbeamertemplate{section in toc}{%
+    \vspace*{2ex}%
+    \setcounter{tocsectioncounter}{\inserttocsectionnumber}%
+    \textcolor{inria-noir}{\textbf{\Roman{tocsectioncounter})~\inserttocsection}}%
+}
+
 \begin{document}
 
 % Page de titre
 \frame{\titlepage}
+
+% Plan
+\begin{frame}{Plan}
+  \tableofcontents
+\end{frame}
+
+\section{Clustering : des statistiques aux graphes}
+\frame{\sectionpage}
+
+\section{HDBSCAN \& quelques applications en 3D}
+\frame{\sectionpage}
+
+\section{Vers des interactions d'ordre supérieur}
+\frame{\sectionpage}
+
+\section{La mosaïque de \textnormal{\textsc{Delaunay}} d'ordre supérieur}
+\frame{\sectionpage}
 
 \end{document}
