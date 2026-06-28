@@ -21,7 +21,7 @@
    pdfkeywords = {Louis Hauseux, AI, research, science, use-cases}
 }
 
-\title[AI for research \& Science]{\large AI for research \& Science\\[6pt] \normalsize \normalfont Three use-cases}
+\title[AI for Research \& Science]{\large AI for Research \& Science\\[6pt] \normalsize \normalfont Three use-cases}
 \subtitle{\small Presentation at the NEO-AMELEAS Workshop}
 \date[1 July 2026]{1 July 2026}
 \author[L. Hauseux]{%
@@ -51,6 +51,10 @@
     \setcounter{tocsectioncounter}{\inserttocsectionnumber}%
     \textcolor{inria-noir}{\textbf{\Roman{tocsectioncounter})~\inserttocsection}}%
 }
+\setbeamertemplate{subsection in toc}{%
+    \vspace*{0.5ex}%
+    \hspace*{2em}\textcolor{inria-rouge}{$\bullet$}~\textcolor{inria-noir}{\inserttocsubsection}%
+}
 
 \begin{document}
 
@@ -62,38 +66,34 @@
   \tableofcontents
 \end{frame}
 
-\section{Clustering: From Statistics to (Hyper)graphs}
+\section{AI for Skeptics}
 \frame{\sectionpage}
 
-\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$}
-    \begin{center}
-        \large
-        \textbf{Hartigan's Model} \cite{hartigan81}: \textbf{High-density clusters}
-    \end{center}
-    
-    \vspace{0.4cm}
-    
-    \begin{center}
-        \begin{tikzpicture}[every node/.style={inner sep=0}]
-            % Données brutes
-            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Raw data $\mathcal{X}$}}] 
-                {\includegraphics[width=0.22\textwidth]{../../Img_presentation_BrunoLevy/Nuage2D.png}};
-                
-            % Données classées
-            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small High-density clusters}}] 
-                {\includegraphics[width=0.22\textwidth]{../../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
-                
-            % Flèche grasse au milieu
-            \draw[-{Latex[length=10pt, width=10pt]}, line width=5pt, color=gray!40] (2.0, 0) -- (4.8, 0);
-            
-            % Roues dentées au-dessus de la flèche
-            \node (gears) at (3.4, 0.75) {\includegraphics[width=0.07\textwidth]{imgs/roues_dentee.jpeg}};
-            
-            % Nom de l'algo en-dessous
-            \node (algo) at (3.4, -0.9) [align=center] {\small \textbf{HDBSCAN}\footnotemark[1] \cite{HDBSCAN, HDBSCAN2017}};
-        \end{tikzpicture}
-    \end{center}
-    \footnotetext[1]{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
+\subsection{Illustrating a Paper with Vectorized Images}
+\begin{frame}{Illustrating a Paper with Vectorized Images}
+    \begin{itemize}
+        \setlength{\itemsep}{12pt}
+        \item 
+    \end{itemize}
+\end{frame}
+
+\subsection{A Case Where AI Saves Time (with Low Investment): Constructing a Counterexample}
+\begin{frame}{A Case Where AI Saves Time: Constructing a Counterexample}
+    \begin{itemize}
+        \setlength{\itemsep}{12pt}
+        \item 
+    \end{itemize}
+\end{frame}
+
+\section{AI: Full Integration for Aficionados}
+\frame{\sectionpage}
+
+\subsection{GitHub + Codespaces + Antigravity (Gemini-CLI, Google)}
+\begin{frame}{GitHub + Codespaces + Antigravity (Gemini-CLI, Google)}
+    \begin{itemize}
+        \setlength{\itemsep}{12pt}
+        \item 
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{}

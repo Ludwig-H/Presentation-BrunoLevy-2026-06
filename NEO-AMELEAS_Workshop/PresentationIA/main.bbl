@@ -1,20 +1,3 @@
-\begin{thebibliography}{1}
-
-\bibitem{HDBSCAN}
-Ricardo J. G.~B. Campello, Davoud Moulavi, and Joerg Sander.
-\newblock Density-based clustering based on hierarchical density estimates.
-\newblock In {\em Advances in Knowledge Discovery and Data Mining}, pages
-  160--172. Springer, 2013.
-
-\bibitem{hartigan81}
-John~A. Hartigan.
-\newblock Consistency of single linkage for high-density clusters.
-\newblock {\em J. of the Am. Stat. Ass.}, 76(374):388--394, 1981.
-
-\bibitem{HDBSCAN2017}
-Leland McInnes and John Healy.
-\newblock Accelerated hierarchical density based clustering.
-\newblock In {\em IEEE International Conference on Data Mining Workshops
-  (ICDMW)}, pages 33--42, 2017.
+\begin{thebibliography}{}
 
 \end{thebibliography}
