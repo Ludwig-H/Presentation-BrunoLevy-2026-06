@@ -15,17 +15,17 @@
 \hypersetup{
    allcolors=rouge_inria,
    pdfauthor   = {Louis Hauseux},
-   pdftitle    = {Des statistiques aux (hyper)graphes. De l'intérêt des interactions d'ordre supérieur pour une bonne structure hiérarchique},
-   pdfsubject  = {Présentation à Zoltan Kato},
+   pdftitle    = {From Statistics to (Hyper)graphs: The Benefit of Higher-Order Interactions for a Good Hierarchical Structure},
+   pdfsubject  = {Presentation at the NEO-AMELEAS Workshop},
    pdfkeywords = {Louis Hauseux, clustering, Delaunay, percolation, optimal transport}
 }
 
-\title[Des statistiques aux (hyper)graphes]{\large Des statistiques aux (hyper)graphes.\\[6pt] \normalsize \normalfont De l'intérêt des interactions d'ordre supérieur pour une bonne structure hiérarchique}
-\subtitle{\small Présentation à Zoltan \href{https://www.inf.u-szeged.hu/~kato/}{\textsc{Kato}} (Université de Szeged)}
-\date[25 juin 2026]{Jeudi 25 juin 2026}
+\title[From statistics to (hyper)graphs]{\large From statistics to (hyper)graphs.\\[6pt] \normalsize \normalfont On the benefit of higher-order interactions for a good hierarchical structure}
+\subtitle{\small Presentation at the NEO-AMELEAS Workshop}
+\date[3 July 2026]{3 July 2026}
 \author[L. Hauseux]{%
-   \small Louis \textsc{Hauseux} (Inria Sophia Antipolis, bourse 3IA--DS4H d'Université Côte d'Azur) \\[3pt]
-   \footnotesize Encadré par \href{https://www-sop.inria.fr/members/Konstantin.Avratchenkov/me.html}{Konstantin \textsc{Avrachenkov}} (\textsc{Neo}) \& \href{https://www-sop.inria.fr/members/Josiane.Zerubia/index-eng.html}{Josiane \textsc{Zerubia}} (\textsc{Ayana})
+   \small Louis \textsc{Hauseux} (Inria Sophia Antipolis, 3IA--DS4H scholarship from Université Côte d'Azur) \\[3pt]
+   \footnotesize Supervised by \href{https://www-sop.inria.fr/members/Konstantin.Avratchenkov/me.html}{Konstantin \textsc{Avrachenkov}} (\textsc{Neo}) \& \href{https://www-sop.inria.fr/members/Josiane.Zerubia/index-eng.html}{Josiane \textsc{Zerubia}} (\textsc{Ayana})
 }
 \institute{Saclay}
 
@@ -44,7 +44,7 @@
 \colorlet{inria-bleu}{inria-2024-bleu-azur}
 
 \newcounter{tocsectioncounter}
-\renewcommand{\contentsname}{Plan}
+\renewcommand{\contentsname}{Outline}
 \setbeamertemplate{section in toc}{%
     \vspace*{2ex}%
     \setcounter{tocsectioncounter}{\inserttocsectionnumber}%
@@ -57,17 +57,17 @@
 \frame{\titlepage}
 
 % Plan
-\begin{frame}{Plan}
+\begin{frame}{Outline}
   \tableofcontents
 \end{frame}
 
-\section{Clustering : des statistiques aux (hyper)graphes}
+\section{Clustering: From Statistics to (Hyper)graphs}
 \frame{\sectionpage}
 
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$}
     \begin{center}
         \large
-        \textbf{Modèle de \textsc{Hartigan}} \cite{hartigan81} : \textbf{Amas de forte densité} (\emph{high-density clusters})
+        \textbf{Hartigan's Model} \cite{hartigan81}: \textbf{High-density clusters}
     \end{center}
     
     \vspace{0.4cm}
@@ -75,11 +75,11 @@
     \begin{center}
         \begin{tikzpicture}[every node/.style={inner sep=0}]
             % Données brutes
-            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Données brutes $\mathcal{X}$}}] 
+            \node (raw) [draw=gray!30, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Raw data $\mathcal{X}$}}] 
                 {\includegraphics[width=0.22\textwidth]{../Img_presentation_BrunoLevy/Nuage2D.png}};
                 
             % Données classées
-            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small Amas de forte densité}}] 
+            \node (clustered) at (6.8, 0) [draw=inria-rouge, line width=1.5pt, inner sep=2pt, label={[label distance=8pt]below:{\small High-density clusters}}] 
                 {\includegraphics[width=0.22\textwidth]{../Img_presentation_BrunoLevy/Nuage2D_HDBSCAN.png}};
                 
             % Flèche grasse au milieu
@@ -95,29 +95,29 @@
     \footnotetext[1]{Hierarchical Density-Based Spatial Clustering of Applications with Noise}
 \end{frame}
 
-\begin{frame}{Quelques exemples}
+\begin{frame}{Some Examples}
     \begin{center}
         \includegraphics[height=4.5cm]{../Img_presentation_BrunoLevy/FilamentsGalaxie.png}
         
         \vspace{0.5cm}
-        \normalsize \textbf{Cosmologie 3D} : filaments cosmiques \cite{BibiMenton}
+        \normalsize \textbf{3D Cosmology}: cosmic filaments \cite{BibiMenton}
     \end{center}
 \end{frame}
 
-\begin{frame}{Quelques exemples}
+\begin{frame}{Some Examples}
     \begin{center}
         \includegraphics[height=4.0cm]{../Img_presentation_BrunoLevy/CondenseTree_OliveOil_HGP.png}
             
         \vspace{0.5cm}
-        \normalsize \textbf{Classification d'huiles d'olive italiennes} \cite{tourr} ($\mathcal{X} \subset \mathbb{R}^8$) : résultat hiérarchique \cite{BibiLyon, BibiAppliedNetworkScience}
+        \normalsize \textbf{Italian olive oil classification} \cite{tourr} ($\mathcal{X} \subset \mathbb{R}^8$): hierarchical result \cite{BibiLyon, BibiAppliedNetworkScience}
     \end{center}
 \end{frame}
 
-\begin{frame}{Modèle de \textsc{Hartigan} : hiérarchie des amas de forte densité}
+\begin{frame}{Hartigan's Model: High-Density Cluster Hierarchy}
     \begin{columns}[onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \textbf{Ensemble de niveau} $\{f \ge \lambda\}$
+                \textbf{Level set} $\{f \ge \lambda\}$
                 
                 \vspace{0.3cm}
                 \begin{tikzpicture}[xscale=0.95, yscale=0.95]
@@ -191,7 +191,7 @@
         
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                \textcolor{inria-rouge}{\textbf{Hierarchical tree}}
                 
                 \vspace{0.3cm}
                 \begin{tikzpicture}[xscale=0.95, yscale=0.95]
@@ -250,13 +250,13 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : estimation}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$: Estimation}
     \vspace{1.0cm}
     \begin{center}
         \begin{tikzpicture}[xscale=1.2, yscale=1.2]
             \useasboundingbox (-1,-3) rectangle (8,2);
             
-            \node (unknown) at (0, 0) [align=center] {\huge $f$ inconnue};
+            \node (unknown) at (0, 0) [align=center] {\huge $f$ unknown};
             
             % Thick gray arrow
             \draw[-{Latex[length=8pt, width=8pt]}, line width=4.5pt, color=gray!30] (1.8, 0) -- (3.6, 0);
@@ -264,18 +264,18 @@
             \node (estimation) at (5.8, 0) [align=center] {\huge \textbf{Estimation} $\widehat{f}$};
             
             \node (expensive) at (5.8, -0.85) [align=center] {
-                \normalsize Méthodes naïves coûteuses\\
-                \small (discrétisation de $\mathbb{R}^d$)
+                \normalsize Expensive naive methods\\
+                \small (discretization of $\mathbb{R}^d$)
             };
             
         \end{tikzpicture}
     \end{center}
 \end{frame}
 
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : estimateur de densité}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$: Density Estimator}
     \begin{center}
         \Large $\widehat{f} \leftarrow \widehat{f}_{K-\text{NN}}$ \\[4pt]
-        \normalsize \textbf{Estimateur} : $K$ plus proches voisins ($K$-NN)
+        \normalsize \textbf{Estimator}: $K$-Nearest Neighbors ($K$-NN)
     \end{center}
     
     \vspace{0.4cm}
@@ -295,17 +295,16 @@
         \begin{column}{0.42\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{8pt}
-                \item \textbf{$n$} : nombre de points de $\mathcal{X}$
-                \item \textbf{$\omega_d$} : volume de la boule unité dans $\mathbb{R}^d$
-                \item \textbf{$r_K(x)$} : distance au $K$-ième plus proche voisin de $x$
-                \item \textbf{$\omega_d r_K(x)^d$} : volume de la boule contenant les $K$ voisins
+                \item \textbf{$n$}: number of points in $\mathcal{X}$
+                \item \textbf{$\omega_d$}: volume of the unit ball in $\mathbb{R}^d$
+                \item \textbf{$r_K(x)$}: distance to the $K$-th nearest neighbor of $x$
+                \item \textbf{$\omega_d r_K(x)^d$}: volume of the ball containing the $K$ neighbors
             \end{itemize}
         \end{column}
     \end{columns}
 \end{frame}
 
-
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : le cas $K=1$}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$: The Case $K=1$}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.58\textwidth}
             \begin{center}
@@ -347,7 +346,7 @@
             \only<1>{
                 \begin{center}
                     \vspace{1.5cm}
-                    {\large Nuage de points de \textsc{Poisson} $\mathcal{X} \subset \mathbb{R}^2$}
+                    {\large Poisson point cloud $\mathcal{X} \subset \mathbb{R}^2$}
                 \end{center}
             }
             \only<2>{
@@ -357,8 +356,8 @@
                     
                     \vspace{0.8cm}
                     
-                    Lignes de niveau de haute densité \\
-                    = \textbf{modèle booléen}
+                    High-density level sets \\
+                    = \textbf{Boolean model}
                 \end{center}
             }
             \only<3>{
@@ -368,11 +367,11 @@
                     
                     \vspace{0.8cm}
                     
-                    Clusters de haute densité \\
-                    = \textbf{Composantes connexes} de $G(\mathcal{X}, r)$
+                    High-density clusters \\
+                    = \textbf{Connected components} of $G(\mathcal{X}, r)$
                     
                     \vspace{0.6cm}
-                    \textbf{Graphe géométrique} \cite{penrose2003}
+                    \textbf{Geometric graph} \cite{penrose2003}
                 \end{center}
             }
             \only<4>{
@@ -381,38 +380,31 @@
                     
                     \vspace{1.0cm}
                     
-                    Clusters de haute densité \\
-                    = \textbf{Composantes connexes} de $G(\mathcal{X}, r)$
+                    High-density clusters \\
+                    = \textbf{Connected components} of $G(\mathcal{X}, r)$
                     
                     \vspace{0.6cm}
-                    \textbf{Graphe géométrique} \cite{penrose2003}
+                    \textbf{Geometric graph} \cite{penrose2003}
                 \end{center}
             }
-            \only<5>{
+                  \only<5>{
                 \begin{center}
                     {\Large\mathversion{bold} $r_1(x) \le r$}
                     
                     \vspace{1.0cm}
                     
-                    Clusters de haute densité \\
-                    = \textbf{Composantes connexes} de $\text{MST}_r(\mathcal{X})$
+                    High-density clusters \\
+                    = \textbf{Connected components} of $\text{MST}_r(\mathcal{X})$
                     
                     \vspace{0.6cm}
-                    \textbf{Arbre couvrant minimum élagué}
+                    \textbf{Pruned Minimum Spanning Tree}
                 \end{center}
             }
         \end{column}
     \end{columns}
 \end{frame}
 
-
-
-
-
-
-
-
-\begin{frame}{L'arbre minimum couvrant et la triangulation de \textnormal{\textsc{Delaunay}}}
+\begin{frame}{The Minimum Spanning Tree and the \textnormal{\textsc{Delaunay}} Triangulation}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.58\textwidth}
             \begin{center}
@@ -442,18 +434,18 @@
         \end{column}
         
         \begin{column}{0.40\textwidth}
-            \textbf{L'arbre minimum couvrant euclidien} est un sous-graphe de la triangulation de \textnormal{\textsc{Delaunay}} \cite{BoissonnatChazalYvinec} :
+            \textbf{The Euclidean Minimum Spanning Tree} is a subgraph of the \textnormal{\textsc{Delaunay}} triangulation \cite{BoissonnatChazalYvinec}:
             \[
                 \mathrm{MST} \ \subseteq \ \text{\textsc{Delaunay}}.
             \]
             
             \vspace{0.8cm}
             
-            Dans le plan $\mathbb{R}^2$ :
+            In the plane $\mathbb{R}^2$:
             \begin{itemize}
                 \setlength{\itemsep}{8pt}
-                \item La triangulation de \textnormal{\textsc{Delaunay}} possède au plus $3n-6$ arêtes (complexité linéaire).
-                \item Elle se calcule en $\mathcal{O}(n \log n)$.
+                \item The \textnormal{\textsc{Delaunay}} triangulation has at most $3n-6$ edges (linear complexity).
+                \item It can be computed in $\mathcal{O}(n \log n)$.
             \end{itemize}
         \end{column}
     \end{columns}
@@ -461,19 +453,19 @@
 
 
 
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : clusters de haute densité}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$: High-Density Clusters}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.60\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item Si \textbf{$\widehat{f} = \widehat{f}_{1-\text{NN}}$} : estimateur de densité par $1$ plus proche voisin.
-                \item Construction de \textbf{l'arbre minimum couvrant} (MST) :
+                \item If \textbf{$\widehat{f} = \widehat{f}_{1-\text{NN}}$}: density estimator by $1$-nearest neighbor.
+                \item Construction of the \textbf{Minimum Spanning Tree} (MST):
                 \begin{itemize}
                     \setlength{\itemsep}{6pt}
-                    \item $\mathcal{O}(n^2)$ dans le pire des cas.
-                    \item Optimisations géométriques : $\mathcal{O}(n \log n)$ dans $\mathbb{R}^2$.
+                    \item $\mathcal{O}(n^2)$ in the worst case.
+                    \item Geometric optimizations: $\mathcal{O}(n \log n)$ in $\mathbb{R}^2$.
                 \end{itemize}
-                \item Algorithmes de clustering :
+                \item Clustering algorithms:
                 \begin{itemize}
                     \item \textbf{Single-Linkage} $\ \longrightarrow\ $ \textbf{HDBSCAN}
                 \end{itemize}
@@ -509,7 +501,7 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Du Single-Linkage au Robust Single-Linkage}
+\begin{frame}{From Single-Linkage to Robust Single-Linkage}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
@@ -557,45 +549,45 @@
             \end{center}
         \end{column}
         \begin{column}{0.48\textwidth}
-            \textbf{Effet de chaînage} :
-            Le Single-Linkage classique ($1$-NN) est très sensible aux bruits qui connectent artificiellement deux amas.
+            \textbf{Chaining effect}:
+            Classic Single-Linkage ($1$-NN) is highly sensitive to noise that artificially connects two clusters.
             
             \vspace{0.4cm}
-            \textbf{Robust Single-Linkage} \cite{RobustSingleLinkage2010} :
+            \textbf{Robust Single-Linkage} \cite{RobustSingleLinkage2010}:
             \begin{itemize}
                 \setlength{\itemsep}{6pt}
-                \item Utilise la \textbf{distance de cœur} $r_K(x)$ (rayon du $K$-NN) comme estimateur de densité locale.
-                \item Remplace la distance géométrique par la \textbf{distance d'atteignabilité mutuelle} $d_{\mathrm{mreach}, K}$.
-                \item Repousse les points isolés dans le bruit en augmentant artificiellement leur distance aux autres points.
+                \item Uses the \textbf{core distance} $r_K(x)$ (radius of the $K$-NN) as a local density estimator.
+                \item Replaces the geometric distance with the \textbf{mutual reachability distance} $d_{\mathrm{mreach}, K}$.
+                \item Pushes isolated noise points away by artificially increasing their distance to other points.
             \end{itemize}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Du Robust Single-Linkage à (H)DBSCAN}
-    \textbf{Limitation du Robust Single-Linkage} :
+\begin{frame}{From Robust Single-Linkage to (H)DBSCAN}
+    \textbf{Limitation of Robust Single-Linkage}:
     \begin{itemize}
         \setlength{\itemsep}{6pt}
-        \item Trop exigeant pour les points situés en périphérie des amas.
-        \item Exclut les points frontières qui ne possèdent pas $K$ voisins, ce qui nuit au rappel des clusters en les rejetant indûment dans le bruit.
+        \item Too restrictive for points located at the periphery of the clusters.
+        \item Excludes border points that do not have $K$ neighbors, which reduces cluster recall by unduly discarding them as noise.
     \end{itemize}
     
     \vspace{0.4cm}
-    \textbf{DBSCAN} \cite{DBSCAN} (Ester \emph{et al.}, 1996) :
+    \textbf{DBSCAN} \cite{DBSCAN} (Ester \emph{et al.}, 1996):
     \begin{itemize}
         \setlength{\itemsep}{6pt}
-        \item Introduit une distinction entre \textbf{points cœurs} ($r_K(x) \le r$) et \textbf{points frontières} (accessibles depuis un cœur, mais sans avoir eux-mêmes $K$ voisins).
-        \item Permet de bien mieux classifier les frontières de clusters, d'où le nom (\emph{Applications with Noise}).
+        \item Introduces a distinction between \textbf{core points} ($r_K(x) \le r$) and \textbf{border points} (reachable from a core, but without having $K$ neighbors themselves).
+        \item Allows much better classification of cluster boundaries, hence the name (\emph{Applications with Noise}).
     \end{itemize}
     
     \vspace{0.4cm}
-    \begin{block}{De DBSCAN à HDBSCAN}
-        DBSCAN requiert un seuil global $r$ unique. 
-        \textbf{HDBSCAN} \cite{HDBSCAN} (Campello \emph{et al.}, 2013) fait varier ce seuil continûment afin de s'affranchir de ce paramètre et de construire une hiérarchie complète.
+    \begin{block}{From DBSCAN to HDBSCAN}
+        DBSCAN requires a single global threshold $r$. 
+        \textbf{HDBSCAN} \cite{HDBSCAN} (Campello \emph{et al.}, 2013) continuously varies this threshold to eliminate this parameter and build a complete hierarchy.
     \end{block}
 \end{frame}
 
-\begin{frame}{De DBSCAN à HDBSCAN : l'excès de masse}
+\begin{frame}{From DBSCAN to HDBSCAN: Excess of Mass}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.62\textwidth}
             \begin{center}
@@ -653,12 +645,12 @@
             \end{center}
         \end{column}
         \begin{column}{0.36\textwidth}
-            \textbf{Excès de masse} \cite{HDBSCAN} :
+            \textbf{Excess of mass} \cite{HDBSCAN}:
             \begin{itemize}
                 \setlength{\itemsep}{3pt}
-                \item Stabilité d'un cluster $C$ à $\lambda$ :
+                \item Stability of a cluster $C$ at $\lambda$:
                 \[ E(C) = \int_C \bigl(f(x) - \lambda\bigr) \, \mathrm{d}x \]
-                \item Correspond aux \textbf{aires colorées}.
+                \item Corresponds to the \textbf{colored areas}.
             \end{itemize}
             
             \vspace{0.1cm}
@@ -678,8 +670,8 @@
                     
                     % Labels
                     \node[above=3pt] at (2.0, 2.25) {\textbf{Parent}};
-                    \node[below=3pt] at (0.8, 0.15) {\textbf{Enfant 1}};
-                    \node[below=3pt] at (3.2, 0.15) {\textbf{Enfant 2}};
+                    \node[below=3pt] at (0.8, 0.15) {\textbf{Child 1}};
+                    \node[below=3pt] at (3.2, 0.15) {\textbf{Child 2}};
                     
                     % Checkmark next to C4
                     \draw[green!60!black, ultra thick] (2.4, 2.1) -- ++(0.1, -0.1) -- ++(0.2, 0.25);
@@ -693,10 +685,10 @@
                     
                     % Inequality box
                     \node[draw=gray!30, fill=gray!5, rounded corners=3pt, inner sep=4pt, align=center, thick] at (2.0, -1.0) {
-                        \textcolor{c4!80!black}{\textbf{Aire Violette}} $>$ \textcolor{c1!80!black}{\textbf{Aire Verte}} $+$ \textcolor{c2!80!black}{\textbf{Aire Rouge}} \\
+                        \textcolor{c4!80!black}{\textbf{Violet Area}} $>$ \textcolor{c1!80!black}{\textbf{Green Area}} $+$ \textcolor{c2!80!black}{\textbf{Red Area}} \\
                         \vspace{0.1cm}
-                        $\Longrightarrow$ On garde \textbf{\textcolor{c4!80!black}{$C_4$}} \\
-                        (vs. scission $C_1$ et $C_2$)
+                        $\Longrightarrow$ Keep \textbf{\textcolor{c4!80!black}{$C_4$}} \\
+                        (vs. splitting into $C_1$ and $C_2$)
                     };
                 \end{tikzpicture}
             \end{center}
@@ -708,7 +700,7 @@
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.52\textwidth}
             \begin{center}
-                \textbf{Nuage et boules de rayon $r$}
+                \textbf{Point cloud and balls of radius $r$}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.52]
@@ -721,7 +713,7 @@
                     \coordinate (B) at (-\r-\h, -\r);
                     \coordinate (E) at (\r+\h, \r);
                     \coordinate (F) at (\r+\h, -\r);
-
+ 
                     % Circles of radius r (transparent, dashed)
                     \foreach \P in {A,B,C,D,E,F} {
                         \draw[dashed, inria-bleu, thick] (\P) circle (\r);
@@ -738,7 +730,7 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textcolor{black}{\textbf{Arbre hiérarchique}}
+                \textcolor{black}{\textbf{Hierarchical tree}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
@@ -763,7 +755,7 @@
                     \node[below] at (5.5, 0.3) {$F$};
                     
                     % Height axis
-                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Threshold $\epsilon$};
                     \draw[dashed, black] (-0.1, 2.0) -- (0.5, 2.0);
                     \node[left, black] at (-0.1, 2.0) {$r$};
                 \end{tikzpicture}
@@ -772,11 +764,11 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r$}
+\begin{frame}{The True $2$-NN Hierarchy: Scale $r$}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.52\textwidth}
             \begin{center}
-                \textbf{Nuage et boules au niveau $r$}
+                \textbf{Point cloud and balls at level $r$}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.52]
@@ -790,7 +782,7 @@
                     \coordinate (B) at (-\r-\h, -\r);
                     \coordinate (E) at (\r+\h, \r);
                     \coordinate (F) at (\r+\h, -\r);
-
+ 
                     % 2-intersections fill (light blue)
                     \begin{scope}
                         \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
@@ -800,7 +792,7 @@
                             \end{scope}
                         }
                     \end{scope}
-
+ 
                     % Circles of radius r (transparent, dashed)
                     \foreach \P in {A,B,C,D,E,F} {
                         \draw[dashed, gray!60, thick] (\P) circle (\rprime);
@@ -820,7 +812,7 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                \textcolor{inria-rouge}{\textbf{Hierarchical tree}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
@@ -844,7 +836,7 @@
                     }
                     
                     % Height axis
-                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Threshold $\epsilon$};
                     \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
                     \node[left, inria-rouge] at (-0.6, \hr) {$r$};
                 \end{tikzpicture}
@@ -853,15 +845,15 @@
     \end{columns}
     \vspace{0.3cm}
     \begin{center}
-        \small \textbf{Étape 1 :} Les 7 segments fusionnent au seuil $r$.
+        \small \textbf{Step 1}: The 7 segments merge at threshold $r$.
     \end{center}
 \end{frame}
 
-\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r'$}
+\begin{frame}{The True $2$-NN Hierarchy: Scale $r'$}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.52\textwidth}
             \begin{center}
-                \textbf{Triangles et $3$-intersections à $r'$}
+                \textbf{Triangles and $3$-intersections at $r'$}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.52]
@@ -875,7 +867,7 @@
                     \coordinate (B) at (-\r-\h, -\r);
                     \coordinate (E) at (\r+\h, \r);
                     \coordinate (F) at (\r+\h, -\r);
-
+ 
                     % 2-intersections fill (light blue)
                     \begin{scope}
                         \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
@@ -885,7 +877,7 @@
                             \end{scope}
                         }
                     \end{scope}
-
+ 
                     % Circles of radius r' (transparent, dashed)
                     \foreach \P in {A,B,C,D,E,F} {
                         \draw[dashed, gray!60, thick] (\P) circle (\rprime);
@@ -909,7 +901,7 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                \textcolor{inria-rouge}{\textbf{Hierarchical tree}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
@@ -945,7 +937,7 @@
                     \draw[very thick, inria-rouge, dashed] (5.75, \hrprime) -- (5.75, \hrprime+0.8);
                     
                     % Height axis
-                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.5) node[above] {Threshold $\epsilon$};
                     \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
                     \node[left, inria-rouge] at (-0.6, \hr) {$r$};
                     \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
@@ -956,15 +948,15 @@
     \end{columns}
     \vspace{0.3cm}
     \begin{center}
-        \small \textbf{Étape 2 :} Fusion des triangles à $r'$ via les $3$-intersections. $CD$ reste isolé.
+        \small \textbf{Step 2}: Merging of triangles at $r'$ via $3$-intersections. $CD$ remains isolated.
     \end{center}
 \end{frame}
 
-\begin{frame}{La vraie hiérarchie $2$-NN : échelle $r''$}
+\begin{frame}{The True $2$-NN Hierarchy: Scale $r''$}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.52\textwidth}
             \begin{center}
-                \textbf{Connexité globale à $r''$}
+                \textbf{Global connectivity at $r''$}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.52]
@@ -978,7 +970,7 @@
                     \coordinate (B) at (-\r-\h, -\r);
                     \coordinate (E) at (\r+\h, \r);
                     \coordinate (F) at (\r+\h, -\r);
-
+ 
                     % 2-intersections fill (light blue)
                     \begin{scope}
                         \foreach \p/\q in {A/B, B/C, C/A, C/D, D/E, E/F, F/D} {
@@ -988,7 +980,7 @@
                             \end{scope}
                         }
                     \end{scope}
-
+ 
                     % 3-intersections fill (color overlay in red)
                     \begin{scope}
                         \clip (A) circle (\rsecond);
@@ -1002,7 +994,7 @@
                         \clip (F) circle (\rsecond);
                         \fill[inria-rouge, opacity=0.25] (-10,-10) rectangle (10,10);
                     \end{scope}
-
+ 
                     % Circles of radius r'' (transparent, dashed)
                     \foreach \P in {A,B,C,D,E,F} {
                         \draw[dashed, gray!60, thick] (\P) circle (\rsecond);
@@ -1028,7 +1020,7 @@
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textcolor{inria-rouge}{\textbf{Arbre hiérarchique}}
+                \textcolor{inria-rouge}{\textbf{Hierarchical tree}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
@@ -1069,7 +1061,7 @@
                     \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
                     
                     % Height axis
-                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Threshold $\epsilon$};
                     \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
                     \node[left, inria-rouge] at (-0.6, \hr) {$r$};
                     \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
@@ -1082,18 +1074,15 @@
     \end{columns}
     \vspace{0.3cm}
     \begin{center}
-        \small \textbf{Étape 3 :} Connexité globale à $r''$ par les points de tangence.
+        \small \textbf{Step 3}: Global connectivity at $r''$ through tangency points.
     \end{center}
 \end{frame}
 
-
-
-
-\begin{frame}{Robust SL vs. Vraie hiérarchie $2$-NN : Comparaison}
+\begin{frame}{Robust SL vs. True $2$-NN Hierarchy: Comparison}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \textcolor{black}{\textbf{Hiérarchie Robust SL ($K=2$)}}
+                \textcolor{black}{\textbf{Robust SL Hierarchy ($K=2$)}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.75, >=latex, font=\scriptsize]
@@ -1118,7 +1107,7 @@
                     \node[below] at (5.5, 0.3) {$F$};
                     
                     % Height axis
-                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (0, 0.2) -- (0, 3.0) node[above] {Threshold $\epsilon$};
                     \draw[dashed, black] (-0.1, 2.0) -- (0.5, 2.0);
                     \node[left, black] at (-0.1, 2.0) {$r$};
                 \end{tikzpicture}
@@ -1127,7 +1116,7 @@
         
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \textcolor{inria-rouge}{\textbf{Vraie hiérarchie $2$-NN}}
+                \textcolor{inria-rouge}{\textbf{True $2$-NN Hierarchy}}
                 
                 \vspace{0.4cm}
                 \begin{tikzpicture}[scale=0.6, >=latex, font=\scriptsize]
@@ -1168,7 +1157,7 @@
                     \draw[very thick, inria-rouge] (3.55, \hrsecond) -- (3.55, \hrsecond+0.4);
                     
                     % Height axis
-                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Seuil $\epsilon$};
+                    \draw[->, thick] (-0.5, 0.2) -- (-0.5, 2.9) node[above] {Threshold $\epsilon$};
                     \draw[dashed, inria-rouge] (-0.6, \hr) -- (0, \hr);
                     \node[left, inria-rouge] at (-0.6, \hr) {$r$};
                     \draw[dashed, inria-rouge] (-0.6, \hrprime) -- (0.25, \hrprime);
@@ -1181,27 +1170,26 @@
     \end{columns}
     \vspace{0.3cm}
     \begin{center}
-        \small \textbf{Bilan :} La vraie hiérarchie $2$-NN isole le pont de liaison $C\text{-}D$, contrairement à Robust SL.
+        \small \textbf{Summary}: The true $2$-NN hierarchy isolates the connection bridge $C\text{-}D$, unlike Robust SL.
     \end{center}
 \end{frame}
 
-
-\begin{frame}{Clustering sur données euclidiennes $\mathcal{X} \subset \mathbb{R}^d$ : clusters de haute densité ($K \ge 2$)}
+\begin{frame}{Clustering on Euclidean Data $\mathcal{X} \subset \mathbb{R}^d$: High-Density Clusters ($K \ge 2$)}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.60\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item Si \textbf{$\widehat{f} = \widehat{f}_{K-\text{NN}}$} ($K \ge 2$) : estimateur de densité par $K$ plus proches voisins.
-                \item Passage aux \textbf{hypergraphes} (complexes géométriques) :
+                \item If \textbf{$\widehat{f} = \widehat{f}_{K-\text{NN}}$} ($K \ge 2$): density estimator by $K$-nearest neighbors.
+                \item Transition to \textbf{hypergraphs} (geometric complexes):
                 \begin{itemize}
                     \setlength{\itemsep}{6pt}
-                    \item Les arêtes et triangles apparaissent aux intersections de boules de rayon $r$.
+                    \item Edges and triangles appear at the intersections of balls of radius $r$.
                 \end{itemize}
-                \item Algorithmes de clustering d'ordre supérieur :
+                \item Higher-order clustering algorithms:
                 \begin{itemize}
                     \setlength{\itemsep}{6pt}
-                    \item Les composantes connexes sont remplacées par les \textbf{$K$-polyèdres}.
-                    \item Pour $K \ge 2$, les clusters (polyèdres) peuvent se recouvrir.
+                    \item Connected components are replaced by \textbf{$K$-polyhedra}.
+                    \item For $K \ge 2$, clusters (polyhedra) can overlap.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1299,8 +1287,6 @@
                     \draw[cech_edge] (3.66,1.24)--(3.51,0.51);
                     \draw[cech_edge] (1.01,5.13)--(1.73,5.45);
                     
-                    
-                    
                     % 5. Redraw Points
                     \foreach \x/\y in {5.16/0.57, 6.02/4.14, 7.04/3.24, 8.31/3.24, 3.02/4.45, 6.51/2.31, 2.89/1.18, 7.71/2.56, 4.33/0.85, 3.58/2.45, 6.66/5.36, 8.24/1.21, 2.15/2.64, 1.65/4.56, 2.56/3.8, 8.16/5.38, 1.69/1.9, 8.85/3.91, 4.7/4.94, 5.71/1.83, 8.39/1.89, 0.52/4.12, 7.16/3.92, 1.47/2.64, 5.23/3.21, 1.16/0.84, 9.42/0.8, 7.39/0.91, 2.41/4.96, 4.37/2.77, 7.91/3.8, 3.65/3.45, 4.4/1.59, 2.86/2.72, 6.55/1.27, 3.27/5.47, 9.39/2.11, 3.66/1.24, 1.01/5.13, 1.04/1.76, 1.73/5.45, 4.64/3.77, 7.27/4.75, 4.09/5.44, 5.94/3.29, 9.13/2.85, 8.85/4.99, 3.51/0.51} {
                         \node[dot] at (\x, \y) {};
@@ -1311,22 +1297,22 @@
     \end{columns}
 \end{frame}
 
-\section{La mosaïque de \textnormal{\textsc{Delaunay}} d'ordre supérieur : l'objet contenant l'information hiérarchique}
+\section{Higher-Order \textnormal{\textsc{Delaunay}} Mosaic: The Object Containing Hierarchical Information}
 \frame{\sectionpage}
 
-\begin{frame}{Le cas $K=1$ : Le graphe de \textsc{Gabriel}}
+\begin{frame}{The Case $K=1$: The \textsc{Gabriel} Graph}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.54\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{10pt}
-                \item \textbf{Définition} :
+                \item \textbf{Definition}:
                 \begin{itemize}
-                    \item Une arête $[A, B]$ est de \textsc{Gabriel} si son \textbf{disque diamétral} ne contient aucun autre point de $\mathcal{X}$.
+                    \item An edge $[A, B]$ is a \textsc{Gabriel} edge if its \textbf{diametral disk} does not contain any other point in $\mathcal{X}$.
                 \end{itemize}
-                \item \textbf{Structure intermédiaire} :
+                \item \textbf{Intermediate structure}:
                 \begin{itemize}
-                    \item Structure clé entre le MST et la triangulation :
-                    \[ \text{MST} \ \subseteq \ \text{Graphe de \textsc{Gabriel}} \ \subseteq \ \text{\textsc{Delaunay}} \]
+                    \item Key structure between the MST and the triangulation:
+                    \[ \text{MST} \ \subseteq \ \text{\textsc{Gabriel} Graph} \ \subseteq \ \text{\textsc{Delaunay}} \]
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1342,7 +1328,7 @@
                         \draw[line width=1.5pt, inria-rouge] (A) -- (B);
                         \fill[black] (A) circle (2pt) node[left] {$A$};
                         \fill[black] (B) circle (2pt) node[right] {$B$};
-                        \node[below, font=\scriptsize] at (0,-1.2) {\textbf{Arête de \textsc{Gabriel}} (vide)};
+                        \node[below, font=\scriptsize] at (0,-1.2) {\textbf{\textsc{Gabriel} edge} (empty)};
                     \end{scope}
                     
                     % Right: Non-Gabriel edge
@@ -1354,8 +1340,8 @@
                         \draw[line width=1.5pt, gray!60, dashed] (A2) -- (C2);
                         \fill[black] (A2) circle (2pt) node[left] {$A$};
                         \fill[black] (C2) circle (2pt) node[right] {$C$};
-                        \fill[inria-rouge] (B2) circle (2.5pt) node[above] {$B$ (intrus)};
-                        \node[below, font=\scriptsize] at (0,-1.2) {\textbf{Non-\textsc{Gabriel}} (non vide)};
+                        \fill[inria-rouge] (B2) circle (2.5pt) node[above] {$B$ (intruder)};
+                        \node[below, font=\scriptsize] at (0,-1.2) {\textbf{Non-\textsc{Gabriel}} (non-empty)};
                     \end{scope}
                 \end{tikzpicture}
             \end{center}
@@ -1363,20 +1349,20 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Passage à l'ordre $K$ : Simplexes séparants}
+\begin{frame}{Generalization to Order $K$: Separating Simplices}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.54\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{10pt}
-                \item \textbf{Simplexe $K$-séparant} :
+                \item \textbf{$K$-separating simplex}:
                 \begin{itemize}
-                    \item C'est un $K$-simplexe qui a une \textbf{influence réelle} (provoque une fusion de clusters) sur la hiérarchie $K$-NN.
-                    \item \textbf{Cas $K=1$} : les simplexes $1$-séparants sont précisément les \textbf{arêtes du MST}.
+                    \item It is a $K$-simplex that has a \textbf{real influence} (causes clusters to merge) on the $K$-NN hierarchy.
+                    \item \textbf{Case $K=1$}: $1$-separating simplices are precisely the \textbf{edges of the MST}.
                 \end{itemize}
-                \item \textbf{Condition de \textsc{Gabriel}} :
+                \item \textbf{\textsc{Gabriel} condition}:
                 \begin{itemize}
-                    \item \textbf{Théorème} : tout simplexe $K$-séparant est nécessairement un \textbf{simplexe de \textsc{Gabriel}} ($\mathring{B}_\sigma \cap (\mathcal{X} \setminus \sigma) = \varnothing$).
-                    \item \textbf{Support de calcul} : la mosaïque de \textbf{\textsc{Delaunay} d'ordre $K$} \cite{osangEdelsbrunner2023algorithm}.
+                    \item \textbf{Theorem}: any $K$-separating simplex is necessarily a \textbf{\textsc{Gabriel} simplex} ($\mathring{B}_\sigma \cap (\mathcal{X} \setminus \sigma) = \varnothing$).
+                    \item \textbf{Computational domain}: the \textbf{higher-order \textsc{Delaunay} mosaic} \cite{osangEdelsbrunner2023algorithm}.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1396,7 +1382,7 @@
                         \fill[black] (S) circle (3pt) node[left] {$x_1$};
                         \fill[black] (T) circle (3pt) node[right] {$x_2$};
                         \fill[black] (U) circle (3pt) node[above] {$x_3$};
-                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{Triangle de \textsc{Gabriel}} (vide)};
+                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{\textsc{Gabriel} triangle} (empty)};
                     \end{scope}
                     
                     % Bottom: Obtuse Non-Gabriel triangle (non-empty miniball with intruder z)
@@ -1412,8 +1398,8 @@
                         \fill[black] (S) circle (3pt) node[left] {$x_1$};
                         \fill[black] (T) circle (3pt) node[right] {$x_2$};
                         \fill[black] (U) circle (3pt) node[above] {$x_3$};
-                        \fill[inria-rouge] (Z) circle (3.5pt) node[below right] {$z$ (intrus)};
-                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{Non-\textsc{Gabriel}} (non vide)};
+                        \fill[inria-rouge] (Z) circle (3.5pt) node[below right] {$z$ (intruder)};
+                        \node[below, font=\scriptsize] at (0,-2.2) {\textbf{Non-\textsc{Gabriel}} (non-empty)};
                     \end{scope}
                 \end{tikzpicture}
             \end{center}
@@ -1421,32 +1407,32 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{L'analogie du $K$-arbre minimum couvrant}
+\begin{frame}{The $K$-Minimum Spanning Tree Analogy}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.54\textwidth}
-            De même que pour $K=1$, la hiérarchie d'ordre supérieur s'appuie sur une structure combinatoire parcimonieuse :
+            Similar to $K=1$, the higher-order hierarchy relies on a sparse combinatorial structure:
             
             \vspace{0.3cm}
             \begin{itemize}
                 \setlength{\itemsep}{10pt}
-                \item \textbf{Objets de percolation} :
+                \item \textbf{Percolation objects}:
                 \begin{itemize}
-                    \item Ce ne sont plus les points, mais les \textbf{facettes} ($(K-1)$-simplexes) qui fusionnent.
+                    \item It is no longer points, but \textbf{facets} ($(K-1)$-simplices) that merge.
                 \end{itemize}
-                \item \textbf{Simplexes de \textsc{Gabriel}} :
+                \item \textbf{\textsc{Gabriel} simplices}:
                 \begin{itemize}
-                    \item Les simplexes provoquant les fusions (simplexes séparants) sont de \textbf{\textsc{Gabriel}}.
+                    \item The simplices causing the merges (separating simplices) are \textbf{\textsc{Gabriel}} simplices.
                 \end{itemize}
-                \item \textbf{Support de calcul} :
+                \item \textbf{Computational domain}:
                 \begin{itemize}
-                    \item La recherche se restreint aux simplexes de la \textbf{mosaïque de \textsc{Delaunay} d'ordre $K$} \cite{osangEdelsbrunner2023algorithm}.
+                    \item The search is restricted to the simplices of the \textbf{higher-order \textsc{Delaunay} mosaic} \cite{osangEdelsbrunner2023algorithm}.
                 \end{itemize}
             \end{itemize}
         \end{column}
         
         \begin{column}{0.44\textwidth}
             \begin{center}
-                \textbf{Comparaison $1$-MST vs. $K$-MST}
+                \textbf{Comparison $1$-MST vs. $K$-MST}
                 
                 \vspace{0.5cm}
                 \small
@@ -1455,10 +1441,10 @@
                     \toprule
                     & \textbf{$K = 1$} & \textbf{$K \ge 2$} \\
                     \midrule
-                    \textbf{Sommets} & Points & $(K-1)$-simplexes \\
-                    \textbf{Fusions} & Arêtes & $K$-simplexes \\
+                    \textbf{Vertices} & Points & $(K-1)$-simplices \\
+                    \textbf{Merges} & Edges & $K$-simplices \\
                     \textbf{Condition} & \textsc{Gabriel} & \textsc{Gabriel} \\
-                    \textbf{Support} & \textsc{Delaunay} & \textsc{Delaunay} d'ordre $K$ \\
+                    \textbf{Domain} & \textsc{Delaunay} & Order-$K$ \textsc{Delaunay} \\
                     \bottomrule
                 \end{tabular}
             \end{center}
@@ -1466,42 +1452,42 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Bilan : Un chaînon manquant pour le \emph{geometry processing}}
+\begin{frame}{Summary: A Missing Link for Geometry Processing}
     \begin{itemize}
         \setlength{\itemsep}{12pt}
-        \item \textbf{Mosaïque de \textsc{Delaunay} d'ordre supérieur} :
+        \item \textbf{Higher-order \textsc{Delaunay} mosaic}:
         \begin{itemize}
-            \item Contient \textbf{l'intégralité} de l'information hiérarchique $K$-NN.
-            \item Représente le support optimal et parcimonieux pour le clustering d'ordre supérieur.
+            \item Contains the \textbf{entirety} of the hierarchical $K$-NN information.
+            \item Represents the optimal and sparse support for higher-order clustering.
         \end{itemize}
         
-        \item \textbf{Absence dans les bibliothèques existantes} :
+        \item \textbf{Absence in existing libraries}:
         \begin{itemize}
-            \item \textbf{Constat} : Il n'existe à ce jour \textbf{aucune bibliothèque} de \emph{geometry processing} (telle que CGAL ou Geogram) n'intégrant cet objet.
-            \item \textbf{Conséquence} : Nécessité de développer des codes \emph{ad-hoc} complexes pour construire et manipuler ces complexes cellulaires.
+            \item \textbf{Observation}: To date, there is \textbf{no geometry processing library} (such as CGAL or Geogram) integrating this object.
+            \item \textbf{Consequence}: Need to develop complex \emph{ad-hoc} code to construct and manipulate these cell complexes.
         \end{itemize}
     \end{itemize}
 \end{frame}
 
-\section{Quelques exemples en 3D}
+\section{A Few Examples in 3D}
 \frame{\sectionpage}
 
-\begin{frame}{Détection d'anomalies sur nuages de points 3D (LiDAR)}
+\begin{frame}{Anomaly Detection on 3D Point Clouds (LiDAR)}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{A priori géométrique CAO} :
+                \item \textbf{Geometric CAD Prior}:
                 \begin{itemize}
-                    \item Comparaison de la hiérarchie de clusters (produite par HGP-Clusterer) avec le modèle 3D théorique du navire (\copyright\ \textsc{Naval Group}).
+                    \item Comparison of the cluster hierarchy (produced by HGP-Clusterer) with the theoretical 3D CAD model of the ship (\copyright\ \textsc{Naval Group}).
                 \end{itemize}
-                \item \textbf{Exploration de la hiérarchie} :
+                \item \textbf{Hierarchy Exploration}:
                 \begin{itemize}
-                    \item Une fonction de coût pénalise les nœuds hybrides contenant à la fois des points conformes et non conformes.
+                    \item A cost function penalizes hybrid nodes containing both compliant and non-compliant points.
                 \end{itemize}
-                \item \textbf{Résultat} (\emph{Marie Benchmark}) :
+                \item \textbf{Result} (\emph{Marie Benchmark}):
                 \begin{itemize}
-                    \item Isolation parfaite des objets étrangers (cubes, tuteurs) accollés à la structure.
+                    \item Perfect isolation of foreign objects (cubes, supports) attached to the structure.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1511,29 +1497,29 @@
                 \includegraphics[width=\textwidth]{imgs/Resultat_MarieBenchmark.png}
                 
                 \vspace{0.3cm}
-                \scriptsize \textbf{Résultat d'isolation d'anomalies} (modèle conforme en rouge, anomalies en couleurs distinctes).
+                \scriptsize \textbf{Anomaly isolation result} (compliant model in red, anomalies in distinct colors).
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Segmentation d'instance sur LiDAR 3D/4D}
+\begin{frame}{Instance Segmentation on 3D/4D LiDAR}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{Perspectives industrielles} :
+                \item \textbf{Industrial Perspectives}:
                 \begin{itemize}
-                    \item Collaborations et applications cibles avec Greehill, Valeo et Naval Group.
+                    \item Collaborations and target applications with Greehill, Valeo, and Naval Group.
                 \end{itemize}
-                \item \textbf{Automatisation} :
+                \item \textbf{Automation}:
                 \begin{itemize}
-                    \item Navigation pour véhicules autonomes et robotique mobile.
+                    \item Navigation for autonomous vehicles and mobile robotics.
                 \end{itemize}
-                \item \textbf{Supervision \& Auscultation} :
+                \item \textbf{Monitoring \& Inspection}:
                 \begin{itemize}
-                    \item Construction de jumeaux numériques urbains ou industriels.
-                    \item Diagnostic de structures et détection précoce d'anomalies.
+                    \item Construction of urban or industrial digital twins.
+                    \item Structural diagnosis and early anomaly detection.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1543,29 +1529,29 @@
                 \includegraphics[width=0.95\textwidth]{imgs/liDAR_4D_industrials.jpg}
                 
                 \vspace{0.2cm}
-                \scriptsize Scène LiDAR urbaine 3D dense.
+                \scriptsize Dense urban 3D LiDAR scene.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Segmentation panoptique LiDAR 3D : État de l'art}
+\begin{frame}{3D LiDAR Panoptic Segmentation: State of the Art}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.50\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{Approche standard du domaine} :
+                \item \textbf{Standard Domain Approach}:
                 \begin{itemize}
-                    \item Segmentation sémantique (Deep Learning) suivie d'un clustering spatial (DBSCAN / HDBSCAN).
+                    \item Semantic segmentation (Deep Learning) followed by spatial clustering (DBSCAN / HDBSCAN).
                 \end{itemize}
-                \item \textbf{Limites majeures} :
+                \item \textbf{Major Limitations}:
                 \begin{itemize}
-                    \item Difficultés accrues du clustering dans les zones de forte densité ou sur les géométries complexes.
+                    \item Increased clustering difficulties in high-density areas or on complex geometries.
                 \end{itemize}
-                \item \textbf{Référence en 3D} :
+                \item \textbf{3D Reference}:
                 \begin{itemize}
-                    \item \textbf{Alpine} \cite{Sautier2025} (\textsc{Sautier} \emph{et al.}, 2025) :
-                    \item \emph{« Is clustering enough for LiDAR instance segmentation? »}
+                    \item \textbf{Alpine} \cite{Sautier2025} (\textsc{Sautier} \emph{et al.}, 2025):
+                    \item \emph{"Is clustering enough for LiDAR instance segmentation?"}
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1575,29 +1561,29 @@
                 \includegraphics[height=0.75\textheight]{imgs/Alpine.png}
                 
                 \vspace{0.2cm}
-                \scriptsize Visualisation d'instances détectées par Alpine.
+                \scriptsize Visualization of instances detected by Alpine.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Segmentation panoptique LiDAR 4D : État de l'art}
+\begin{frame}{4D LiDAR Panoptic Segmentation: State of the Art}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.50\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{Suivi temporel des objets (Tracking)} :
+                \item \textbf{Temporal Tracking of Objects}:
                 \begin{itemize}
-                    \item Association globale des instances sémantiques au cours du temps.
+                    \item Global association of semantic instances over time.
                 \end{itemize}
-                \item \textbf{Approche standard} :
+                \item \textbf{Standard Approach}:
                 \begin{itemize}
-                    \item Sémantique + Clustering + Association globale par Transport Optimal.
+                    \item Semantics + Clustering + Global association by Optimal Transport.
                 \end{itemize}
-                \item \textbf{Référence en 4D} :
+                \item \textbf{4D Reference}:
                 \begin{itemize}
-                    \item \textbf{Geo-4D} \cite{Oh2025} (\textsc{Oh} \emph{et al.}, 2025) :
-                    \item \emph{« Training-Free Global Geometric Association for 4D LiDAR Panoptic Segmentation »}.
+                    \item \textbf{Geo-4D} \cite{Oh2025} (\textsc{Oh} \emph{et al.}, 2025):
+                    \item \emph{"Training-Free Global Geometric Association for 4D LiDAR Panoptic Segmentation"}.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1607,24 +1593,24 @@
                 \includegraphics[height=0.75\textheight]{imgs/Resultat_Geo-4D.png}
                 
                 \vspace{0.2cm}
-                \scriptsize Tracking temporel d'instances de véhicules dans Geo-4D.
+                \scriptsize Temporal tracking of vehicle instances in Geo-4D.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Segmentation d'instance 4D : Intégration d'a priori géométriques}
+\begin{frame}{4D Instance Segmentation: Integrating Geometric Priors}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{14pt}
-                \item \textbf{A priori géométriques faibles} :
+                \item \textbf{Weak Geometric Priors}:
                 \begin{itemize}
-                    \item Prise en compte du volume attendu (a priori faible) des objets d'intérêt (véhicules, piétons).
+                    \item Taking into account the expected volume (weak prior) of the objects of interest (vehicles, pedestrians).
                 \end{itemize}
-                \item \textbf{Sélection dans l'arbre hiérarchique} :
+                \item \textbf{Selection in the Hierarchical Tree}:
                 \begin{itemize}
-                    \item Notre algorithme identifie les nœuds qui optimisent conjointement la densité spatiale et la contrainte de volume.
+                    \item Our algorithm identifies nodes that jointly optimize spatial density and the volume constraint.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1636,24 +1622,24 @@
                 \includegraphics[width=0.48\textwidth]{imgs/kitti_3d_prior_2.jpg}
                 
                 \vspace{0.3cm}
-                \scriptsize Exemples d'a priori géométriques appliqués aux volumes d'instances.
+                \scriptsize Examples of geometric priors applied to instance volumes.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Suivi temporel d'instance (SemanticKITTI)}
+\begin{frame}{Temporal Instance Tracking (SemanticKITTI)}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{14pt}
-                \item \textbf{Association temporelle robuste} :
+                \item \textbf{Robust Temporal Association}:
                 \begin{itemize}
-                    \item Suivi continu des instances à travers les frames successives.
+                    \item Continuous tracking of instances across successive frames.
                 \end{itemize}
-                \item \textbf{Reconstruction de trajectoires} :
+                \item \textbf{Trajectory Reconstruction}:
                 \begin{itemize}
-                    \item Minimisation de l'erreur géométrique globale d'une frame à la suivante.
+                    \item Minimization of the global geometric error from one frame to the next.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1663,24 +1649,24 @@
                 \includegraphics[width=0.95\textwidth]{imgs/kitti_3d_prior_3.png}
                 
                 \vspace{0.2cm}
-                \scriptsize Trajectoires de véhicules estimées au cours du temps.
+                \scriptsize Estimated vehicle trajectories over time.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}{Résultats de segmentation d'instance 4D}
+\begin{frame}{4D Instance Segmentation Results}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.35\textwidth}
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{Notre algorithme} :
+                \item \textbf{Our Algorithm}:
                 \begin{itemize}
-                    \item Clustering hiérarchique d'ordre supérieur combiné au Transport Optimal non équilibré (\emph{unbalanced OT}).
+                    \item Higher-order hierarchical clustering combined with unbalanced Optimal Transport (unbalanced OT).
                 \end{itemize}
-                \item \textbf{Sans entraînement} :
+                \item \textbf{Training-Free}:
                 \begin{itemize}
-                    \item Résultats robustes s'affranchissant totalement de l'apprentissage profond pour la partie tracking et clustering.
+                    \item Robust results completely free of deep learning for the tracking and clustering part.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -1688,19 +1674,19 @@
         \begin{column}{0.62\textwidth}
             \begin{center}
                 \begin{tabular}{cc}
-                    \textbf{Vérité terrain (GT)} & \textbf{Notre algorithme} \\
+                    \textbf{Ground Truth (GT)} & \textbf{Our Algorithm} \\
                     \includegraphics[width=0.46\textwidth]{imgs/kitti_ground_truth.jpg} &
                     \includegraphics[width=0.46\textwidth]{imgs/kitti_our_algorithm.jpg}
                 \end{tabular}
                 
                 \vspace{0.2cm}
-                \scriptsize Comparaison visuelle des trajectoires reconstruites sur SemanticKITTI.
+                \scriptsize Visual comparison of reconstructed trajectories on SemanticKITTI.
             \end{center}
         \end{column}
     \end{columns}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Références}
+\begin{frame}[allowframebreaks]{References}
     \bibliographystyle{plain}
     \bibliography{referencesThesis}
 \end{frame}
