@@ -115,6 +115,48 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}{Example: The Generated TikZ Code}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \textbf{TikZ Code Structure}:
+            \begin{block}{}
+                \texttt{\tiny
+                \textbackslash begin\{tikzpicture\}[scale=0.35] \\
+                \ \ \textbackslash tikzset\{declare function=\{f(x) = ...\}\} \\
+                \ \ \\
+                \ \ \% Draw density curve \\
+                \ \ \textbackslash draw[thick, blue] plot[domain=0:8] ...; \\
+                \ \ \\
+                \ \ \% Draw cluster tree bars \\
+                \ \ \textbackslash draw[very thick, red] (1.87,1.70) -- ...; \\
+                \ \ \\
+                \ \ \% Add labels \\
+                \ \ \textbackslash draw[<-, semithick] (1.87,1.82) -- ...; \\
+                \textbackslash end\{tikzpicture\}
+                }
+            \end{block}
+        \end{column}
+        \begin{column}{0.42\textwidth}
+            \textbf{LaTeX Integration}:
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{Include Package}:
+                \begin{itemize}
+                    \item Add \texttt{\textbackslash usepackage\{tikz\}} in your preamble.
+                \end{itemize}
+                \item \textbf{Direct Placement}:
+                \begin{itemize}
+                    \item Paste the generated code directly in the document body.
+                \end{itemize}
+                \item \textbf{No Assets to Manage}:
+                \begin{itemize}
+                    \item No need for external image files (PNG/PDF).
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \begin{frame}{Example: The Native TikZ Result}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.65\textwidth}
