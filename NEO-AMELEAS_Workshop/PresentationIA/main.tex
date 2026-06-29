@@ -12,6 +12,8 @@
 \usepackage{colortbl}
 \usepackage{tikz}
 \usetikzlibrary{positioning, shapes, arrows.meta, calc}
+\usepackage{fontspec}
+\newfontfamily\looneyfont{Pacifico-Regular.ttf}[Path=theme/]
 
 \hypersetup{
    allcolors=rouge_inria,
@@ -587,16 +589,7 @@
 \begin{frame}[plain]
     \begin{center}
         \vfill
-        \begin{tikzpicture}
-            % Minimalist concentric rings in grayscale
-            \draw[gray!20, line width=1.5pt] (0,0) circle (2.2cm);
-            \draw[gray!40, line width=1.2pt] (0,0) circle (1.7cm);
-            \draw[gray!60, line width=0.9pt] (0,0) circle (1.2cm);
-            \draw[gray!80, line width=0.6pt] (0,0) circle (0.7cm);
-            
-            % The End text masking the center
-            \node[fill=white, inner sep=6pt, font=\Huge\bfseries\sffamily, text=black] at (0,0) {The end!};
-        \end{tikzpicture}
+        {\looneyfont\fontsize{55}{65}\selectfont The end!}
         \vfill
     \end{center}
 \end{frame}
