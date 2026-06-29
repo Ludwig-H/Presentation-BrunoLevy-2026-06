@@ -412,13 +412,13 @@
                     \draw[orange, line width=1.5pt, dashed] (0.5,0.5) -- (2.5,0.5) -- (2.5,1.5) -- (0.5,1.5) -- cycle;
                     \node[draw=none, orange, font=\scriptsize\bfseries] at (1.5, 1.7) {Contour $\gamma$};
                     
-                    % Highlight the crossed edges (boundary edges) as bold
+                    % Highlight the crossed edges (boundary edges) as bold (majority but not all)
                     \draw[very thick, black] (1,0) -- (1,1);
                     \draw[very thick, black] (2,0) -- (2,1);
-                    \draw[very thick, black] (0,1) -- (1,1);
+                    \draw[thin, black] (0,1) -- (1,1);
                     \draw[very thick, black] (3,1) -- (2,1);
                     \draw[very thick, black] (1,2) -- (1,1);
-                    \draw[very thick, black] (2,2) -- (2,1);
+                    \draw[thin, black] (2,2) -- (2,1);
                 \end{tikzpicture}
             \end{center}
         \end{column}
