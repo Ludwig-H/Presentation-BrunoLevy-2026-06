@@ -227,34 +227,120 @@
 
 \subsection{Saving Time: Finding a Counterexample}
 
-\begin{frame}{Case Study: A False Mathematical Intuition}
-    \textbf{The Hypothesis}:
-    For the Geometric Stochastic Block Model on a lattice (such as the triangular or square grid), there is no weak recovery for any noise level $p = p_{\text{in}} = 1 - p_{\text{out}} < 1$.
-    
-    \vspace{0.4cm}
-    \textbf{Why the Intuition Felt Correct}:
-    \begin{itemize}
-        \setlength{\itemsep}{10pt}
-        \item \textbf{Simulation Artifacts}: Simulations on larger and larger graphs showed the overlap vanishing, which was actually due to the growing mixing time of the MCMC cluster dynamics.
-        \item \textbf{Path Parity Argument}: For any $p < 1$, the number of corrupted edges on a path of length $n$ is $\operatorname{Bin}(n, 1-p)$. As $n \to \infty$, the probability of even vs. odd corruptions becomes equal, seemingly washing out all community information.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Case Study: AI Prompt \& Response}
+\begin{frame}{Case Study: GSBM on Lattices}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \includegraphics[height=3.2cm, keepaspectratio]{imgs/Prompt_WeakRecovery.png}
-                \vspace{0.15cm}
-                \includegraphics[height=1.1cm, keepaspectratio]{imgs/ReponseChatGPT5.5Pro_WeakRecovery.png}
+                \begin{tikzpicture}[scale=1.1, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
+                    % Nodes
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (A) at (0,0) {$+$};
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (B) at (2,0) {$+$};
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (C) at (1,1.73) {$+$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (D) at (3,1.73) {$-$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (E) at (2,3.46) {$-$};
+
+                    % Edges
+                    % AB: same community, Y = +1 (ferro, satisfied) -> solid, very thick
+                    \draw[very thick, black] (A) -- (B) node[midway, below, font=\tiny] {$+$};
+                    
+                    % BC: same community, Y = +1 (ferro, satisfied) -> solid, very thick
+                    \draw[very thick, black] (B) -- (C) node[midway, right, font=\tiny] {$+$};
+                    
+                    % AC: same community, Y = -1 (antiferro, frustrated) -> dashed, thin
+                    \draw[thin, dashed, black] (A) -- (C) node[midway, left, font=\tiny] {$-$};
+                    
+                    % CD: different community, Y = -1 (antiferro, satisfied) -> dashed, very thick
+                    \draw[very thick, dashed, black] (C) -- (D) node[midway, below, font=\tiny] {$-$};
+                    
+                    % BD: different community, Y = -1 (antiferro, satisfied) -> dashed, very thick
+                    \draw[very thick, dashed, black] (B) -- (D) node[midway, right, font=\tiny] {$-$};
+                    
+                    % CE: different community, Y = +1 (ferro, frustrated) -> solid, thin
+                    \draw[thin, black] (C) -- (E) node[midway, left, font=\tiny] {$+$};
+                    
+                    % DE: same community, Y = +1 (ferro, satisfied) -> solid, very thick
+                    \draw[very thick, black] (D) -- (E) node[midway, right, font=\tiny] {$+$};
+                \end{tikzpicture}
             \end{center}
         \end{column}
         \begin{column}{0.48\textwidth}
-            \textbf{The AI Interaction}:
+            \textbf{Geometric SBM on Lattices}:
+            \begin{itemize}
+                \setlength{\itemsep}{8pt}
+                \item \textbf{Communities}: Node labels $\Sigma_x \in \{+1, -1\}$ (indicated by blue/red colors).
+                \item \textbf{Observations}: Signs $Y_e \in \{+1, -1\}$.
+                \item \textbf{Graphical Representation}:
+                \begin{itemize}
+                    \item \textbf{Solid lines}: Ferromagnetic ($Y_e = +1$).
+                    \item \textbf{Dashed lines}: Antiferromagnetic ($Y_e = -1$).
+                    \item \textbf{Bold lines}: Satisfied ($Y_e = \Sigma_x\Sigma_y$).
+                    \item \textbf{Thin lines}: Frustrated ($Y_e \neq \Sigma_x\Sigma_y$).
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Case Study: The Long-Path Intuition}
+    \begin{center}
+        \begin{tikzpicture}[scale=1.2, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
+            \node[fill=inria-bleu!30, draw=inria-bleu] (x) at (0,0) {$x (+)$};
+            \node[fill=inria-bleu!20, draw=inria-bleu] (v1) at (1.5,0) {$v_1 (+)$};
+            \node[fill=inria-bleu!20, draw=inria-bleu] (v2) at (3.0,0) {$v_2 (+)$};
+            \node[fill=inria-bleu!20, draw=inria-bleu] (v3) at (4.5,0) {$v_3 (+)$};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (6.0,0) {$y (+)$};
+
+            \draw[very thick, black] (x) -- (v1) node[midway, above, font=\tiny] {$+$};
+            \draw[thin, dashed, black] (v1) -- (v2) node[midway, above, font=\tiny] {$-$};
+            \draw[very thick, black] (v2) -- (v3) node[midway, above, font=\tiny] {$+$};
+            \draw[thin, dashed, black] (v3) -- (y) node[midway, above, font=\tiny] {$-$};
+        \end{tikzpicture}
+    \end{center}
+    \textbf{The Path Parity Argument}:
+    \begin{itemize}
+        \setlength{\itemsep}{6pt}
+        \item Consider two distant nodes $x, y$ both in community $+$.
+        \item For any path of length $n$, each edge is corrupted (antiferromagnetic) with probability $1-p$.
+        \item Parity is conserved: $x$ and $y$ are inferred in the same community only if the path has an \textbf{even} number of antiferromagnetic edges.
+        \item As $n \to \infty$, the probability of an odd number of antiferromagnetic edges:
+        \[ \mathbb{P}(\text{odd}) \longrightarrow \frac{1}{2} \]
+        \item This washes out the community correlation, leading to the false intuition that weak recovery is impossible for any $p < 1$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Prompting the AI}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.58\textwidth}
+            \begin{center}
+                \includegraphics[height=5.2cm, keepaspectratio]{imgs/Prompt_WeakRecovery.png}
+            \end{center}
+        \end{column}
+        \begin{column}{0.38\textwidth}
+            \textbf{The Research Question}:
             \begin{itemize}
                 \setlength{\itemsep}{12pt}
-                \item \textbf{The Goal}: Attempting to prove that the recovery threshold $p_c^{(m)} \to 1$ as the plaquette size $m \to \infty$ (implying no recovery for any $p < 1$).
-                \item \textbf{The AI's Verdict}: The model spent 18 minutes reasoning and pointed out that the goal itself was false: the MAP estimator achieves weak recovery for $p$ close to 1.
+                \item We uploaded our draft manuscript describing a plaquette dynamics.
+                \item We asked the AI to formalize the proof that the threshold $p_c^{(m)} \to 1$ as the plaquette size $m \to \infty$.
+                \item If true, this would prove no recovery is possible for any $p < 1$.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Case Study: ChatGPT's Verdict}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.58\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{imgs/ReponseChatGPT5.5Pro_WeakRecovery.png}
+            \end{center}
+        \end{column}
+        \begin{column}{0.38\textwidth}
+            \textbf{The AI's Answer}:
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item The model spent **18 minutes** reasoning.
+                \item It immediately disproved the theorem: **"on the square lattice, the statement 'no weak recovery for all $p < 1$' is false."**
+                \item Proving $p_c^{(m)} \to 1$ was impossible because the MAP estimator actually achieves recovery.
             \end{itemize}
         \end{column}
     \end{columns}
