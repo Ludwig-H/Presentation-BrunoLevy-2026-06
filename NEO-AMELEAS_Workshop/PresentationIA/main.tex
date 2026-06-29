@@ -376,17 +376,65 @@
 \end{frame}
 
 \begin{frame}{Case Study: Why MAP Works (Peierls Contours)}
-    \textbf{Proof Sketch by Peierls Argument}:
-    \begin{itemize}
-        \setlength{\itemsep}{6pt}
-        \item \textbf{Contours}: Boundaries of incorrect spin decisions form contours $\gamma$ on the dual grid.
-        \item \textbf{MAP Optimality}: Any contour $\gamma$ in the MAP estimator must contain at least 50\% corrupted edges (otherwise, flipping the region inside would improve the MAP score):
-        \[ B(\gamma) \ge \frac{|\gamma|}{2} \]
-        \item \textbf{Chernoff Bound}: The probability of a fixed contour $\gamma$ of length $\ell$ being incorrect is bounded by $(2\sqrt{p(1-p)})^\ell$.
-        \item \textbf{Contour Counting}: The number of contours of length $\ell$ around any node is at most $\ell 3^\ell$. The probability of an incorrect node is bounded by:
-        \[ \sum_{\ell \ge 4} \ell (6\sqrt{p(1-p)})^\ell \xrightarrow[p \to 1]{} 0 \]
-        \item \textbf{Conclusion}: Weak recovery is achieved for $p > p_0$, saving months of trying to prove a false statement.
-    \end{itemize}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.42\textwidth}
+            \begin{center}
+                \begin{tikzpicture}[scale=1.0, every node/.style={circle, draw, minimum size=0.35cm, inner sep=0pt, font=\tiny\bfseries}]
+                    % Grid of nodes
+                    \foreach \x in {0,1,2,3} {
+                        \foreach \y in {0,1,2} {
+                            % Determine if inside error contour (1,1) or (2,1)
+                            \pgfmathsetmacro{\iserr}{0}
+                            \ifnum\x=1 \ifnum\y=1 \gdef\iserr{1}\fi\fi
+                            \ifnum\x=2 \ifnum\y=1 \gdef\iserr{1}\fi\fi
+                            
+                            \ifnum\iserr=1
+                                \node[fill=inria-rouge!30, draw=inria-rouge] (N-\x-\y) at (\x,\y) {$-$};
+                            \else
+                                \node[fill=inria-bleu!30, draw=inria-bleu] (N-\x-\y) at (\x,\y) {$+$};
+                            \fi
+                        }
+                    }
+                    
+                    % Draw grid edges
+                    \foreach \x in {0,1,2,3} {
+                        \foreach \y in {0,1,2} {
+                            \ifnum\x<3
+                                \draw[gray!40, thin] (\x,\y) -- (\x+1,\y);
+                            \fi
+                            \ifnum\y<2
+                                \draw[gray!40, thin] (\x,\y) -- (\x,\y+1);
+                            \fi
+                        }
+                    }
+                    
+                    % Draw the dual contour in orange/red
+                    \draw[orange, line width=1.5pt, dashed] (0.5,0.5) -- (2.5,0.5) -- (2.5,1.5) -- (0.5,1.5) -- cycle;
+                    \node[draw=none, orange, font=\scriptsize\bfseries] at (1.5, 1.7) {Contour $\gamma$};
+                    
+                    % Highlight the crossed edges (boundary edges) as bold
+                    \draw[very thick, black] (1,0) -- (1,1);
+                    \draw[very thick, black] (2,0) -- (2,1);
+                    \draw[very thick, black] (0,1) -- (1,1);
+                    \draw[very thick, black] (3,1) -- (2,1);
+                    \draw[very thick, black] (1,2) -- (1,1);
+                    \draw[very thick, black] (2,2) -- (2,1);
+                \end{tikzpicture}
+            \end{center}
+        \end{column}
+        \begin{column}{0.54\textwidth}
+            \textbf{Peierls Contour Argument}:
+            \begin{itemize}
+                \setlength{\itemsep}{6pt}
+                \item \textbf{Contours}: Boundaries separating correct (blue $+$) and incorrect (red $-$) spin decisions form contours $\gamma$ on the dual grid.
+                \item \textbf{MAP Optimality}: The Maximum A Posteriori (MAP) estimator must have a majority of noisy edges along any contour $\gamma$:
+                \[ B(\gamma) \ge \frac{|\gamma|}{2} \]
+                \item Otherwise, flipping all spins inside the contour would improve the posterior MAP score.
+                \item \textbf{Resolution}: The probability of having a majority-corrupted contour of length $\ell$ converges to 0 as the noise decreases ($p \to 1$).
+                \item This proves that weak recovery is indeed achieved for $p > p_0$.
+            \end{itemize}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \section[AI for Enthusiasts]{AI for Enthusiasts \\[2pt] \quad \normalsize\normalfont Full Integration (GitHub + Codespaces + Antigravity = Gemini-CLI)}
