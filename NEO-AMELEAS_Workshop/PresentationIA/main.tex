@@ -312,24 +312,28 @@
             \node[fill=inria-bleu!30, draw=inria-bleu] (x) at (0,0) {$x (+)$};
             \node[fill=inria-bleu!20, draw=inria-bleu] (v1) at (1.5,0) {$v_1 (+)$};
             \node[fill=inria-bleu!20, draw=inria-bleu] (v2) at (3.0,0) {$v_2 (+)$};
-            \node[fill=inria-bleu!20, draw=inria-bleu] (v3) at (4.5,0) {$v_3 (+)$};
-            \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (6.0,0) {$y (+)$};
+            
+            % Suspension dots as a node without border
+            \node[draw=none, minimum size=0cm, inner sep=0pt] (dots) at (4.3,0) {\large $\dots$};
+            
+            \node[fill=inria-bleu!20, draw=inria-bleu] (vn1) at (5.6,0) {$v_{n-1} (+)$};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (7.1,0) {$y (+)$};
 
             \draw[very thick, black] (x) -- (v1);
             \draw[thin, dashed, black] (v1) -- (v2);
-            \draw[very thick, black] (v2) -- (v3);
-            \draw[thin, dashed, black] (v3) -- (y);
+            \draw[thin, black] (v2) -- (3.7,0);
+            \draw[thin, black] (4.9,0) -- (vn1);
+            \draw[thin, dashed, black] (vn1) -- (y);
         \end{tikzpicture}
     \end{center}
-    \textbf{Why the Intuition Suggested No Recovery}:
+    \textbf{The Correlation Decay Dilemma}:
     \begin{itemize}
-        \setlength{\itemsep}{4pt}
-        \item For two distant nodes $x, y$ (both $+ \in \Sigma$), the product of observed signs along a path of length $n$ must be $+1$ for correct inference.
-        \item This requires an \textbf{even} number of antiferromagnetic edges (each occurring with probability $q = 1-p = 0.25$).
-        \item The probability of having an odd number of antiferromagnetic edges is:
-        \[ \mathbb{P}(\text{odd}) = \frac{1 - (2p-1)^n}{2} = \frac{1 - (0.5)^n}{2} \xrightarrow[n \to \infty]{} \frac{1}{2} \]
-        \item The path correlation vanishes, suggesting no weak recovery is possible for any $p < 1$.
-        \item \emph{Simulation Artifact}: Vanishing overlap on large grids was actually due to the MCMC dynamics' mixing time.
+        \setlength{\itemsep}{6pt}
+        \item For two distant $+$-nodes $x, y$ at distance $n$, we infer them as same-community ($+ +$) only if the path has an \textbf{even} number of antiferromagnetic edges.
+        \item As $n \to \infty$, the probability that the path's sign product matches this true label ($+ +$) washes out:
+        \[ \mathbb{P}(\text{even}) \xrightarrow[n \to \infty]{} \frac{1}{2} \]
+        \item \textbf{The False Conjecture}: Simulations on increasingly larger grids showed the overlap vanishing. This intuition led me to question if weak recovery was truly possible for any noise level $p_c < 1$.
+        \item \emph{The Catch}: The MCMC cluster dynamics simply had an extremely long mixing-time on larger grids, masking the true static phase.
     \end{itemize}
 \end{frame}
 
