@@ -250,31 +250,31 @@
                     \node[fill=inria-rouge!30, draw=inria-rouge] (D2) at (3,5.20) {$-$};
 
                     % Horizontal Edges
-                    \draw[very thick, black] (A1) -- (A2) node[midway, below, font=\tiny] {$+$};
-                    \draw[very thick, dashed, black] (A2) -- (A3) node[midway, below, font=\tiny] {$-$};
-                    \draw[very thick, dashed, black] (B1) -- (B2) node[midway, below, font=\tiny] {$-$};
-                    \draw[very thick, black] (B2) -- (B3) node[midway, below, font=\tiny] {$+$};
-                    \draw[very thick, dashed, black] (C1) -- (C2) node[midway, below, font=\tiny] {$-$};
-                    \draw[very thick, black] (C2) -- (C3) node[midway, below, font=\tiny] {$+$};
-                    \draw[thin, black] (D1) -- (D2) node[midway, below, font=\tiny] {$+$};
+                    \draw[very thick, black] (A1) -- (A2);
+                    \draw[very thick, dashed, black] (A2) -- (A3);
+                    \draw[very thick, dashed, black] (B1) -- (B2);
+                    \draw[very thick, black] (B2) -- (B3);
+                    \draw[very thick, dashed, black] (C1) -- (C2);
+                    \draw[very thick, black] (C2) -- (C3);
+                    \draw[thin, black] (D1) -- (D2);
 
                     % Diagonals Up-Right
-                    \draw[thin, dashed, black] (A1) -- (B1) node[midway, left, font=\tiny] {$-$};
-                    \draw[very thick, dashed, black] (A2) -- (B2) node[midway, left, font=\tiny] {$-$};
-                    \draw[very thick, black] (A3) -- (B3) node[midway, right, font=\tiny] {$+$};
-                    \draw[thin, dashed, black] (B1) -- (C1) node[midway, left, font=\tiny] {$-$};
-                    \draw[thin, dashed, black] (B2) -- (C2) node[midway, right, font=\tiny] {$-$};
-                    \draw[very thick, black] (B3) -- (C3) node[midway, right, font=\tiny] {$+$};
-                    \draw[very thick, black] (C1) -- (D1) node[midway, left, font=\tiny] {$+$};
-                    \draw[very thick, black] (C2) -- (D2) node[midway, right, font=\tiny] {$+$};
+                    \draw[thin, dashed, black] (A1) -- (B1);
+                    \draw[very thick, dashed, black] (A2) -- (B2);
+                    \draw[very thick, black] (A3) -- (B3);
+                    \draw[thin, dashed, black] (B1) -- (C1);
+                    \draw[thin, dashed, black] (B2) -- (C2);
+                    \draw[very thick, black] (B3) -- (C3);
+                    \draw[very thick, black] (C1) -- (D1);
+                    \draw[very thick, black] (C2) -- (D2);
 
                     % Diagonals Up-Left
-                    \draw[very thick, black] (B1) -- (A2) node[midway, right, font=\tiny] {$+$};
-                    \draw[very thick, black] (B2) -- (A3) node[midway, left, font=\tiny] {$+$};
-                    \draw[very thick, dashed, black] (C1) -- (B2) node[midway, left, font=\tiny] {$-$};
-                    \draw[thin, dashed, black] (C2) -- (B3) node[midway, left, font=\tiny] {$-$};
-                    \draw[very thick, dashed, black] (D1) -- (C2) node[midway, left, font=\tiny] {$-$};
-                    \draw[very thick, black] (D2) -- (C3) node[midway, right, font=\tiny] {$+$};
+                    \draw[very thick, black] (B1) -- (A2);
+                    \draw[very thick, black] (B2) -- (A3);
+                    \draw[very thick, dashed, black] (C1) -- (B2);
+                    \draw[thin, dashed, black] (C2) -- (B3);
+                    \draw[very thick, dashed, black] (D1) -- (C2);
+                    \draw[very thick, black] (D2) -- (C3);
                 \end{tikzpicture}
             \end{center}
         \end{column}
@@ -311,10 +311,10 @@
             \node[fill=inria-bleu!20, draw=inria-bleu] (v3) at (4.5,0) {$v_3 (+)$};
             \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (6.0,0) {$y (+)$};
 
-            \draw[very thick, black] (x) -- (v1) node[midway, above, font=\tiny] {$+$};
-            \draw[thin, dashed, black] (v1) -- (v2) node[midway, above, font=\tiny] {$-$};
-            \draw[very thick, black] (v2) -- (v3) node[midway, above, font=\tiny] {$+$};
-            \draw[thin, dashed, black] (v3) -- (y) node[midway, above, font=\tiny] {$-$};
+            \draw[very thick, black] (x) -- (v1);
+            \draw[thin, dashed, black] (v1) -- (v2);
+            \draw[very thick, black] (v2) -- (v3);
+            \draw[thin, dashed, black] (v3) -- (y);
         \end{tikzpicture}
     \end{center}
     \textbf{Why the Intuition Suggested No Recovery}:
