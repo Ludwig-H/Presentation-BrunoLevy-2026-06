@@ -426,11 +426,11 @@
             \textbf{Peierls Contour Argument}:
             \begin{itemize}
                 \setlength{\itemsep}{8pt}
-                \item \textbf{Error Contours}: Boundaries separating correct (blue $+$) and incorrect (red $-$) spins form loops $\gamma$ on the dual grid.
+                \item \textbf{Error Contours}: Boundaries of incorrect spin clusters form closed loops $\gamma$ on the dual grid.
                 \item \textbf{MAP Optimality}: The Maximum\emph{ A Posteriori} (MAP) configuration must have a majority of satisfied edges along any contour $\gamma$:
                 \[ B(\gamma) \ge \frac{|\gamma|}{2} \]
                 Otherwise, flipping the spins inside $\gamma$ would improve the MAP score.
-                \item \textbf{Result}: The probability of having such a contour (implying a majority of noisy edges in the ground truth $\Sigma$) decays exponentially as $p \to 1$, ensuring weak recovery for $p > p_c$ (where $p_c$ is the critical threshold).
+                \item \textbf{Result}: The probability of having such a contour decays exponentially as $p \to 1$, ensuring weak recovery for $p > p_c$ (where $p_c$ is the critical threshold).
             \end{itemize}
         \end{column}
     \end{columns}
