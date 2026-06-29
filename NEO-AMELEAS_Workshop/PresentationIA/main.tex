@@ -223,58 +223,79 @@
             \end{itemize}
         \end{column}
     \end{columns}
-\end{frame}
-
-\subsection{Saving Time: Finding a Counterexample}
+\end{frame}\subsection{Saving Time: Finding a Counterexample}
 
 \begin{frame}{Case Study: GSBM on Lattices}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
             \begin{center}
-                \begin{tikzpicture}[scale=1.1, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
-                    % Nodes
-                    \node[fill=inria-bleu!30, draw=inria-bleu] (A) at (0,0) {$+$};
-                    \node[fill=inria-bleu!30, draw=inria-bleu] (B) at (2,0) {$+$};
-                    \node[fill=inria-bleu!30, draw=inria-bleu] (C) at (1,1.73) {$+$};
-                    \node[fill=inria-rouge!30, draw=inria-rouge] (D) at (3,1.73) {$-$};
-                    \node[fill=inria-rouge!30, draw=inria-rouge] (E) at (2,3.46) {$-$};
+                \begin{tikzpicture}[scale=0.58, every node/.style={circle, draw, minimum size=0.4cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
+                    % Row 0 (Y=0)
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (A1) at (0,0) {$+$};
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (A2) at (2,0) {$+$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (A3) at (4,0) {$-$};
 
-                    % Edges
-                    % AB: same community, Y = +1 (ferro, satisfied) -> solid, very thick
-                    \draw[very thick, black] (A) -- (B) node[midway, below, font=\tiny] {$+$};
-                    
-                    % BC: same community, Y = +1 (ferro, satisfied) -> solid, very thick
-                    \draw[very thick, black] (B) -- (C) node[midway, right, font=\tiny] {$+$};
-                    
-                    % AC: same community, Y = -1 (antiferro, frustrated) -> dashed, thin
-                    \draw[thin, dashed, black] (A) -- (C) node[midway, left, font=\tiny] {$-$};
-                    
-                    % CD: different community, Y = -1 (antiferro, satisfied) -> dashed, very thick
-                    \draw[very thick, dashed, black] (C) -- (D) node[midway, below, font=\tiny] {$-$};
-                    
-                    % BD: different community, Y = -1 (antiferro, satisfied) -> dashed, very thick
-                    \draw[very thick, dashed, black] (B) -- (D) node[midway, right, font=\tiny] {$-$};
-                    
-                    % CE: different community, Y = +1 (ferro, frustrated) -> solid, thin
-                    \draw[thin, black] (C) -- (E) node[midway, left, font=\tiny] {$+$};
-                    
-                    % DE: same community, Y = +1 (ferro, satisfied) -> solid, very thick
-                    \draw[very thick, black] (D) -- (E) node[midway, right, font=\tiny] {$+$};
+                    % Row 1 (Y=1.73)
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (B1) at (1,1.73) {$+$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (B2) at (3,1.73) {$-$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (B3) at (5,1.73) {$-$};
+
+                    % Row 2 (Y=3.46)
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (C1) at (0,3.46) {$+$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (C2) at (2,3.46) {$-$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (C3) at (4,3.46) {$-$};
+
+                    % Row 3 (Y=5.20)
+                    \node[fill=inria-bleu!30, draw=inria-bleu] (D1) at (1,5.20) {$+$};
+                    \node[fill=inria-rouge!30, draw=inria-rouge] (D2) at (3,5.20) {$-$};
+
+                    % Horizontal Edges
+                    \draw[very thick, black] (A1) -- (A2) node[midway, below, font=\tiny] {$+$};
+                    \draw[very thick, dashed, black] (A2) -- (A3) node[midway, below, font=\tiny] {$-$};
+                    \draw[very thick, dashed, black] (B1) -- (B2) node[midway, below, font=\tiny] {$-$};
+                    \draw[very thick, black] (B2) -- (B3) node[midway, below, font=\tiny] {$+$};
+                    \draw[very thick, dashed, black] (C1) -- (C2) node[midway, below, font=\tiny] {$-$};
+                    \draw[very thick, black] (C2) -- (C3) node[midway, below, font=\tiny] {$+$};
+                    \draw[thin, black] (D1) -- (D2) node[midway, below, font=\tiny] {$+$};
+
+                    % Diagonals Up-Right
+                    \draw[thin, dashed, black] (A1) -- (B1) node[midway, left, font=\tiny] {$-$};
+                    \draw[very thick, dashed, black] (A2) -- (B2) node[midway, left, font=\tiny] {$-$};
+                    \draw[very thick, black] (A3) -- (B3) node[midway, right, font=\tiny] {$+$};
+                    \draw[thin, dashed, black] (B1) -- (C1) node[midway, left, font=\tiny] {$-$};
+                    \draw[thin, dashed, black] (B2) -- (C2) node[midway, right, font=\tiny] {$-$};
+                    \draw[very thick, black] (B3) -- (C3) node[midway, right, font=\tiny] {$+$};
+                    \draw[very thick, black] (C1) -- (D1) node[midway, left, font=\tiny] {$+$};
+                    \draw[very thick, black] (C2) -- (D2) node[midway, right, font=\tiny] {$+$};
+
+                    % Diagonals Up-Left
+                    \draw[very thick, black] (B1) -- (A2) node[midway, right, font=\tiny] {$+$};
+                    \draw[very thick, black] (B2) -- (A3) node[midway, left, font=\tiny] {$+$};
+                    \draw[very thick, dashed, black] (C1) -- (B2) node[midway, left, font=\tiny] {$-$};
+                    \draw[thin, dashed, black] (C2) -- (B3) node[midway, left, font=\tiny] {$-$};
+                    \draw[very thick, dashed, black] (D1) -- (C2) node[midway, left, font=\tiny] {$-$};
+                    \draw[very thick, black] (D2) -- (C3) node[midway, right, font=\tiny] {$+$};
                 \end{tikzpicture}
             \end{center}
         \end{column}
         \begin{column}{0.48\textwidth}
-            \textbf{Geometric SBM on Lattices}:
+            \textbf{GSBM on a Triangular Grid}:
             \begin{itemize}
-                \setlength{\itemsep}{8pt}
-                \item \textbf{Communities}: Node labels $\Sigma_x \in \{+1, -1\}$ (indicated by blue/red colors).
-                \item \textbf{Observations}: Signs $Y_e \in \{+1, -1\}$.
-                \item \textbf{Graphical Representation}:
+                \setlength{\itemsep}{6pt}
+                \item \textbf{Ground Truth} $\Sigma_x \in \{+1, -1\}$:
+                \begin{itemize}
+                    \item Node colors represent spins (50\% $+$, 50\% $-$).
+                \end{itemize}
+                \item \textbf{Observed signs} $Y_e \in \{+1, -1\}$:
+                \begin{itemize}
+                    \item $\mathbb{P}(Y_e = \Sigma_x\Sigma_y) = p = 0.75$.
+                \item \textbf{Graphical Code}:
                 \begin{itemize}
                     \item \textbf{Solid lines}: Ferromagnetic ($Y_e = +1$).
                     \item \textbf{Dashed lines}: Antiferromagnetic ($Y_e = -1$).
                     \item \textbf{Bold lines}: Satisfied ($Y_e = \Sigma_x\Sigma_y$).
                     \item \textbf{Thin lines}: Frustrated ($Y_e \neq \Sigma_x\Sigma_y$).
+                \end{itemize}
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -283,7 +304,7 @@
 
 \begin{frame}{Case Study: The Long-Path Intuition}
     \begin{center}
-        \begin{tikzpicture}[scale=1.2, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
+        \begin{tikzpicture}[scale=1.1, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
             \node[fill=inria-bleu!30, draw=inria-bleu] (x) at (0,0) {$x (+)$};
             \node[fill=inria-bleu!20, draw=inria-bleu] (v1) at (1.5,0) {$v_1 (+)$};
             \node[fill=inria-bleu!20, draw=inria-bleu] (v2) at (3.0,0) {$v_2 (+)$};
@@ -296,15 +317,15 @@
             \draw[thin, dashed, black] (v3) -- (y) node[midway, above, font=\tiny] {$-$};
         \end{tikzpicture}
     \end{center}
-    \textbf{The Path Parity Argument}:
+    \textbf{Why the Intuition Suggested No Recovery}:
     \begin{itemize}
-        \setlength{\itemsep}{6pt}
-        \item Consider two distant nodes $x, y$ both in community $+$.
-        \item For any path of length $n$, each edge is corrupted (antiferromagnetic) with probability $1-p$.
-        \item Parity is conserved: $x$ and $y$ are inferred in the same community only if the path has an \textbf{even} number of antiferromagnetic edges.
-        \item As $n \to \infty$, the probability of an odd number of antiferromagnetic edges:
-        \[ \mathbb{P}(\text{odd}) \longrightarrow \frac{1}{2} \]
-        \item This washes out the community correlation, leading to the false intuition that weak recovery is impossible for any $p < 1$.
+        \setlength{\itemsep}{4pt}
+        \item For two distant nodes $x, y$ (both $+ \in \Sigma$), the product of observed signs along a path of length $n$ must be $+1$ for correct inference.
+        \item This requires an \textbf{even} number of antiferromagnetic edges (each occurring with probability $q = 1-p = 0.25$).
+        \item The probability of having an odd number of antiferromagnetic edges is:
+        \[ \mathbb{P}(\text{odd}) = \frac{1 - (2p-1)^n}{2} = \frac{1 - (0.5)^n}{2} \xrightarrow[n \to \infty]{} \frac{1}{2} \]
+        \item The path correlation vanishes, suggesting no weak recovery is possible for any $p < 1$.
+        \item \emph{Simulation Artifact}: Vanishing overlap on large grids was actually due to the MCMC dynamics' mixing time.
     \end{itemize}
 \end{frame}
 
