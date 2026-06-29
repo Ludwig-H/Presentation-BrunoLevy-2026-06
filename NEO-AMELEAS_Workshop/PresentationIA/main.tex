@@ -120,8 +120,8 @@
         \begin{column}{0.55\textwidth}
             \textbf{TikZ Code Structure}:
             \begin{block}{}
-                \texttt{\tiny
-                \textbackslash begin\{tikzpicture\}[scale=0.35] \\
+                \texttt{\scriptsize
+                \textbackslash begin\{tikzpicture\}[scale=0.45] \\
                 \ \ \textbackslash tikzset\{declare function=\{f(x) = ...\}\} \\
                 \ \ \\
                 \ \ \% Draw density curve \\
@@ -161,7 +161,7 @@
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.65\textwidth}
             \begin{center}
-                \begin{tikzpicture}[scale=0.35, >=latex, font=\scriptsize]
+                \begin{tikzpicture}[scale=0.45, >=latex, font=\scriptsize]
                     \tikzset{declare function={f(\x) = 1.8*exp(-pow(\x-1.8, 2)/0.4) + 4.5*exp(-pow(\x-3.5, 2)/0.8) + 2.8*exp(-pow(\x-6.0, 2)/0.6);}}
                     
                     \draw[->, thick] (0,-0.1) -- (0,5.2) node[left] {$f(x)$};
@@ -183,7 +183,7 @@
                     \draw[<-, shorten <=1pt, semithick] (4.899, 0.380) -- ++(-0.4, 0) node[left] {$C_5$};
                 \end{tikzpicture}%
                 \hfill
-                \begin{tikzpicture}[scale=0.35, >=latex, font=\scriptsize]
+                \begin{tikzpicture}[scale=0.45, >=latex, font=\scriptsize]
                     \tikzset{declare function={f(\x) = 1.8*exp(-pow(\x-1.8, 2)/0.4) + 4.5*exp(-pow(\x-3.5, 2)/0.8) + 2.8*exp(-pow(\x-6.0, 2)/0.6);}}
                     \definecolor{c1}{RGB}{142, 198, 155} \definecolor{c2}{RGB}{232, 135, 135} 
                     \definecolor{c3}{RGB}{221, 211, 153} \definecolor{c4}{RGB}{175, 152, 199} \definecolor{c5}{RGB}{152, 210, 228}
