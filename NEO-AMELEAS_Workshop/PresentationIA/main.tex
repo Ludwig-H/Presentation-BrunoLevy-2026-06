@@ -425,13 +425,12 @@
         \begin{column}{0.54\textwidth}
             \textbf{Peierls Contour Argument}:
             \begin{itemize}
-                \setlength{\itemsep}{6pt}
-                \item \textbf{Contours}: Boundaries separating correct (blue $+$) and incorrect (red $-$) spin decisions form contours $\gamma$ on the dual grid.
-                \item \textbf{MAP Optimality}: The Maximum A Posteriori (MAP) estimator must have a majority of noisy edges along any contour $\gamma$:
+                \setlength{\itemsep}{8pt}
+                \item \textbf{Error Contours}: Boundaries separating correct (blue $+$) and incorrect (red $-$) spins form loops $\gamma$ on the dual grid.
+                \item \textbf{MAP Optimality}: The MAP estimator must cross a majority of noisy/frustrated edges on any contour $\gamma$:
                 \[ B(\gamma) \ge \frac{|\gamma|}{2} \]
-                \item Otherwise, flipping all spins inside the contour would improve the posterior MAP score.
-                \item \textbf{Resolution}: The probability of having a majority-corrupted contour of length $\ell$ converges to 0 as the noise decreases ($p \to 1$).
-                \item This proves that weak recovery is indeed achieved for $p > p_0$.
+                Otherwise, flipping the spins inside $\gamma$ would improve the score.
+                \item \textbf{Result}: The probability of having a majority-noisy contour of length $\ell$ decays exponentially as $p \to 1$, ensuring weak recovery.
             \end{itemize}
         \end{column}
     \end{columns}
