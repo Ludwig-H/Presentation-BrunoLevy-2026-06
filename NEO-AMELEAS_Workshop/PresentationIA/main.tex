@@ -225,11 +225,52 @@
     \end{columns}
 \end{frame}
 
-\subsection{Saving Time with AI: Creating a Counterexample}
-\begin{frame}{Saving Time with AI: Creating a Counterexample}
+\subsection{Saving Time: Finding a Counterexample}
+
+\begin{frame}{Case Study: A False Mathematical Intuition}
+    \textbf{The Hypothesis}:
+    For the Geometric Stochastic Block Model on a lattice (such as the triangular or square grid), there is no weak recovery for any noise level $p = p_{\text{in}} = 1 - p_{\text{out}} < 1$.
+    
+    \vspace{0.4cm}
+    \textbf{Why the Intuition Felt Correct}:
     \begin{itemize}
-        \setlength{\itemsep}{12pt}
-        \item 
+        \setlength{\itemsep}{10pt}
+        \item \textbf{Simulation Artifacts}: Simulations on larger and larger graphs showed the overlap vanishing, which was actually due to the growing mixing time of the MCMC cluster dynamics.
+        \item \textbf{Path Parity Argument}: For any $p < 1$, the number of corrupted edges on a path of length $n$ is $\operatorname{Bin}(n, 1-p)$. As $n \to \infty$, the probability of even vs. odd corruptions becomes equal, seemingly washing out all community information.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: AI Prompt \& Response}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \begin{center}
+                \includegraphics[height=3.2cm, keepaspectratio]{imgs/Prompt_WeakRecovery.png}
+                \vspace{0.15cm}
+                \includegraphics[height=1.1cm, keepaspectratio]{imgs/ReponseChatGPT5.5Pro_WeakRecovery.png}
+            \end{center}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \textbf{The AI Interaction}:
+            \begin{itemize}
+                \setlength{\itemsep}{12pt}
+                \item \textbf{The Goal}: Attempting to prove that the recovery threshold $p_c^{(m)} \to 1$ as the plaquette size $m \to \infty$ (implying no recovery for any $p < 1$).
+                \item \textbf{The AI's Verdict}: The model spent 18 minutes reasoning and pointed out that the goal itself was false: the MAP estimator achieves weak recovery for $p$ close to 1.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Case Study: Why MAP Works (Peierls Contours)}
+    \textbf{Proof Sketch by Peierls Argument}:
+    \begin{itemize}
+        \setlength{\itemsep}{6pt}
+        \item \textbf{Contours}: Boundaries of incorrect spin decisions form contours $\gamma$ on the dual grid.
+        \item \textbf{MAP Optimality}: Any contour $\gamma$ in the MAP estimator must contain at least 50\% corrupted edges (otherwise, flipping the region inside would improve the MAP score):
+        \[ B(\gamma) \ge \frac{|\gamma|}{2} \]
+        \item \textbf{Chernoff Bound}: The probability of a fixed contour $\gamma$ of length $\ell$ being incorrect is bounded by $(2\sqrt{p(1-p)})^\ell$.
+        \item \textbf{Contour Counting}: The number of contours of length $\ell$ around any node is at most $\ell 3^\ell$. The probability of an incorrect node is bounded by:
+        \[ \sum_{\ell \ge 4} \ell (6\sqrt{p(1-p)})^\ell \xrightarrow[p \to 1]{} 0 \]
+        \item \textbf{Conclusion}: Weak recovery is achieved for $p > p_0$, saving months of trying to prove a false statement.
     \end{itemize}
 \end{frame}
 
