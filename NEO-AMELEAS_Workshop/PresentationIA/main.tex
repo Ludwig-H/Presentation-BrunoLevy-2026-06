@@ -308,21 +308,21 @@
 
 \begin{frame}{Case Study: The Long-Path Intuition}
     \begin{center}
-        \begin{tikzpicture}[scale=1.1, every node/.style={circle, draw, minimum size=0.45cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
-            \node[fill=inria-bleu!30, draw=inria-bleu] (x) at (0,0) {$x (+)$};
-            \node[fill=inria-bleu!20, draw=inria-bleu] (v1) at (1.5,0) {$v_1 (+)$};
-            \node[fill=inria-bleu!20, draw=inria-bleu] (v2) at (3.0,0) {$v_2 (+)$};
+        \begin{tikzpicture}[scale=0.58, every node/.style={circle, draw, minimum size=0.4cm, inner sep=0.5pt, font=\scriptsize\bfseries}]
+            \node[fill=inria-bleu!30, draw=inria-bleu] (x) at (0,0) {$+$};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (v1) at (2,0) {};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (v2) at (4,0) {};
             
             % Suspension dots as a node without border
-            \node[draw=none, minimum size=0cm, inner sep=0pt] (dots) at (4.3,0) {\large $\dots$};
+            \node[draw=none, minimum size=0cm, inner sep=0pt] (dots) at (5.5,0) {\large $\dots$};
             
-            \node[fill=inria-bleu!20, draw=inria-bleu] (vn1) at (5.6,0) {$v_{n-1} (+)$};
-            \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (7.1,0) {$y (+)$};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (vn1) at (7,0) {};
+            \node[fill=inria-bleu!30, draw=inria-bleu] (y) at (9,0) {$+$};
 
             \draw[very thick, black] (x) -- (v1);
             \draw[thin, dashed, black] (v1) -- (v2);
-            \draw[thin, black] (v2) -- (3.7,0);
-            \draw[thin, black] (4.9,0) -- (vn1);
+            \draw[thin, black] (v2) -- (4.8,0);
+            \draw[thin, black] (6.2,0) -- (vn1);
             \draw[thin, dashed, black] (vn1) -- (y);
         \end{tikzpicture}
     \end{center}

@@ -1,0 +1,269 @@
+% À placer après \include{conclusion.tex} et avant \backmatter, par exemple.
+\appendix
+\chapter{Cartographie des publications}
+
+% rotating est déjà chargé par raccourcis.sty ; à décommenter seulement si nécessaire :
+% \usepackage{rotating}
+
+\begin{sidewaysfigure}[p]
+\centering
+\resizebox{0.98\textheight}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+\providecolor{c1}{RGB}{142,198,155}
+\providecolor{c2}{RGB}{232,135,135}
+\providecolor{c3}{RGB}{221,211,153}
+\providecolor{c4}{RGB}{175,152,199}
+\providecolor{c5}{RGB}{152,210,228}
+
+\colorlet{LHgreen}{c1!88!black}
+\colorlet{LHred}{c2!88!black}
+\colorlet{LHyellow}{c3!88!black}
+\colorlet{LHviolet}{c4!92!black}
+\colorlet{LHblue}{c5!92!black}
+\colorlet{LHteal}{cyan!50!black}
+\colorlet{LHgray}{black!62}
+
+\tikzset{
+  title/.style={
+    font=\Large\bfseries\scshape,
+    text=black!86,
+    align=center
+  },
+  subtitle/.style={
+    font=\small,
+    text=black!62,
+    align=center
+  },
+  partlabel/.style={
+    font=\bfseries\scshape\footnotesize,
+    text=white,
+    rounded corners=1.2mm,
+    inner xsep=2mm,
+    inner ysep=1mm
+  },
+  chap/.style={
+    draw=black!30,
+    fill=black!2,
+    rounded corners=1.8mm,
+    line width=.55pt,
+    text width=8.4cm,
+    minimum height=8mm,
+    inner sep=1.8mm,
+    align=left,
+    font=\scriptsize
+  },
+  paper/.style={
+    draw=black!35,
+    fill=white,
+    rounded corners=2mm,
+    line width=.65pt,
+    text width=9.35cm,
+    minimum height=13mm,
+    inner sep=2mm,
+    align=left,
+    font=\scriptsize
+  },
+  motif/.style={
+    draw=black!25,
+    fill=black!3,
+    rounded corners=1.4mm,
+    text width=3.35cm,
+    inner sep=1.6mm,
+    align=center,
+    font=\scriptsize\bfseries
+  },
+  link/.style={
+    -{Latex[length=1.6mm,width=1.1mm]},
+    line width=.55pt,
+    opacity=.58
+  },
+  softlink/.style={
+    -{Latex[length=1.3mm,width=1mm]},
+    line width=.45pt,
+    opacity=.35,
+    dashed
+  },
+  legend/.style={
+    font=\scriptsize,
+    text=black!70,
+    align=left
+  }
+}
+
+\node[title] at (13.2,16.15)
+  {Cartographie manuscrit $\longleftrightarrow$ publications};
+
+\node[subtitle] at (13.2,15.55)
+  {lecture de gauche à droite : chapitres/sections du manuscrit, fil conducteur,
+  puis articles publiés, soumis ou en rédaction};
+
+\node[font=\bfseries\small, text=black!78, anchor=west] at (0,14.75)
+  {Structure du manuscrit};
+\node[font=\bfseries\small, text=black!78, anchor=west] at (9.7,14.75)
+  {Fil conducteur};
+\node[font=\bfseries\small, text=black!78, anchor=west] at (15.0,14.75)
+  {Articles et travaux associés};
+
+\draw[black!18] (9.1,0.2) -- (9.1,14.45);
+\draw[black!18] (14.4,0.2) -- (14.4,14.45);
+
+% ------------------------
+% Colonne gauche : manuscrit
+% ------------------------
+
+\node[partlabel, fill=LHgray, anchor=west] at (0,14.15)
+  {Introduction générale};
+\node[chap, anchor=west, draw=LHgray, fill=LHgray!5] (c1) at (0,13.45)
+  {\textbf{Ch. 1} \quad problématique : connexité pour $K\geq 2$ ;
+   percolation ; contributions ; organisation.};
+
+\node[partlabel, fill=LHblue, anchor=west] at (0,12.45)
+  {Partie I \quad Du Single-Linkage à ses fondements};
+\node[chap, anchor=west, draw=LHblue, fill=LHblue!6] (c2) at (0,11.72)
+  {\textbf{Ch. 2} \quad trois vues du Single-Linkage :
+   MST ; graphes géométriques ; Hartigan / 1-NN.};
+\node[chap, anchor=west, draw=LHblue, fill=LHblue!6] (c3) at (0,10.86)
+  {\textbf{Ch. 3} \quad point de vue axiomatique ;
+   ultramétriques ; relâchement vers les recouvrements.};
+\node[chap, anchor=west, draw=LHblue, fill=LHblue!6] (c4) at (0,10.00)
+  {\textbf{Ch. 4} \quad limites : effet de chaînage ;
+   RSL ; DBSCAN/HDBSCAN ; paradoxe du choix de $K$.};
+\node[chap, anchor=west, draw=LHblue, fill=LHblue!6] (c5) at (0,9.14)
+  {\textbf{Ch. 5} \quad arbre hiérarchique comme espace de résolution ;
+   a priori ; LiDAR 3D ; SemanticKITTI 4D.};
+
+\node[partlabel, fill=LHgreen, anchor=west] at (0,8.11)
+  {Partie II \quad Généralisation par interactions d'ordre supérieur};
+\node[chap, anchor=west, draw=LHgreen, fill=LHgreen!7] (c6) at (0,7.38)
+  {\textbf{Ch. 6} \quad HGP-Clusterer ; complexe de \v{C}ech ;
+   $K$-polyèdres ; amas discrets $K$-NN.};
+\node[chap, anchor=west, draw=LHgreen, fill=LHgreen!7] (c7) at (0,6.52)
+  {\textbf{Ch. 7} \quad percolation ; fraction récupérable ;
+   vitesse critique ; comparaison RSL/DBSCAN/HGP.};
+\node[chap, anchor=west, draw=LHgreen, fill=LHgreen!7] (c8) at (0,5.66)
+  {\textbf{Ch. 8} \quad simplexes $K$-séparants ;
+   Gabriel ; mosaïque de Delaunay d'ordre $K$.};
+\node[chap, anchor=west, draw=LHgreen, fill=LHgreen!7] (c9) at (0,4.80)
+  {\textbf{Ch. 9} \quad pratique : partition stricte ;
+   optimisation $K=2$ ; Vietoris--Rips ; réduction de dimension.};
+
+\node[partlabel, fill=LHviolet, anchor=west] at (0,3.78)
+  {Partie III \quad Vers des données davantage structurées};
+\node[chap, anchor=west, draw=LHviolet, fill=LHviolet!7] (c10) at (0,3.05)
+  {\textbf{Ch. 10} \quad passage aux graphes signés et aux images ;
+   même duo : ordre supérieur + percolation.};
+\node[chap, anchor=west, draw=LHviolet, fill=LHviolet!7] (c11) at (0,2.19)
+  {\textbf{Ch. 11} \quad cadre bayésien ; communautés ;
+   dynamiques Swendsen--Wang d'ordre supérieur.};
+\node[chap, anchor=west, draw=LHviolet, fill=LHviolet!7] (c12) at (0,1.33)
+  {\textbf{Ch. 12} \quad graphe/hypergraphe de Frangi ;
+   multimodalité ; extraction de réseaux de fissures.};
+
+\node[partlabel, fill=black!72, anchor=west] at (0,0.40)
+  {Conclusion};
+\node[chap, anchor=west, draw=black!55, fill=black!4] (c13) at (0,-0.31)
+  {\textbf{Ch. 13} \quad bilan ; perspectives :
+   recouvrements, consistance, Delaunay d'ordre $K$.};
+
+% ------------------------
+% Colonne centrale : fil conducteur
+% ------------------------
+
+\node[motif, anchor=center, draw=LHblue, fill=LHblue!8] (m1) at (11.75,11.05)
+  {Single-Linkage\\
+   MST $\leftrightarrow$ géométrie $\leftrightarrow$ statistique};
+
+\node[motif, anchor=center, draw=LHgreen, fill=LHgreen!10] (m2) at (11.75,7.00)
+  {Ordre supérieur\\
+   $K$-polyèdres, \v{C}ech, Gabriel};
+
+\node[motif, anchor=center, draw=LHred, fill=LHred!8] (m3) at (11.75,5.20)
+  {Percolation\\
+   mesure de performance};
+
+\node[motif, anchor=center, draw=LHviolet, fill=LHviolet!8] (m4) at (11.75,2.60)
+  {Données structurées\\
+   graphes signés, images};
+
+% ------------------------
+% Colonne droite : articles
+% ------------------------
+
+\node[paper, anchor=west, draw=LHgreen, fill=LHgreen!5] (pHGP) at (15.2,11.70)
+  {\textbf{A. Cœur HGP / clustering densité}\\[1mm]
+   \textit{Journal central :} HGP-Clusterer, interactions d'ordre supérieur,
+   HDC $K$-NN, optimisations géométriques : \cite{BibiAppliedNetworkScience}.\\[-.5mm]
+   \textit{Versions conférence :} hypergraphes pour clustering densité
+   \cite{BibiLyon}; hypergraphes, percolation, clustering hiérarchique
+   \cite{BibiIstambul}; mesure théorique des performances \cite{BibiVenise}.};
+
+\node[paper, anchor=west, draw=LHblue, fill=LHblue!5] (pPrec) at (15.2,8.55)
+  {\textbf{B. Préfigurations / outils}\\[1mm]
+   Complexes simpliciaux et stylométrie \cite{BibiMasterBB};
+   extraction de filaments de galaxies par graphes et percolation \cite{BibiMenton};
+   $K$-centroïdes dans un arbre \cite{BibiExtractionCentroidesColab}.};
+
+\node[paper, anchor=west, draw=LHviolet, fill=LHviolet!5] (pGraph) at (15.2,5.75)
+  {\textbf{C. Graphes signés et communautés}\\[1mm]
+   Dynamiques de clusters Monte-Carlo d'ordre supérieur dans les graphes euclidiens
+   \cite{BibiMonterey}; version journal en rédaction sur le cadre bayésien
+   et les bornes plus fines \cite{BibiInformationInference}.};
+
+\node[paper, anchor=west, draw=LHteal, fill=LHteal!5] (pFrangi) at (15.2,2.45)
+  {\textbf{D. Images, fissures, Frangi généralisé}\\[1mm]
+   Première version Vaches Noires / GRETSI \cite{BibiStrasbourg};
+   version EUSIPCO soumise \cite{BibiPalerme};
+   extension multimodale, GPU et ordre supérieur vers ISPRS \cite{BibiISPRS};
+   déclinaisons EUVIP/EUSIPCO 2026 \cite{BibiLuxembourg,BibiBruges}.};
+
+% ------------------------
+% Flèches : chapitres -> motifs -> articles
+% ------------------------
+
+\draw[softlink, draw=LHblue] (c2.east) .. controls +(1.0,0) and +(-1.1,0.3) .. (m1.west);
+\draw[softlink, draw=LHblue] (c3.east) .. controls +(1.0,0) and +(-1.2,-0.2) .. (m1.west);
+\draw[softlink, draw=LHblue] (c4.east) .. controls +(1.0,0) and +(-1.2,-0.45) .. (m1.west);
+
+\draw[link, draw=LHgreen] (c6.east) .. controls +(1.0,0) and +(-1.0,0.0) .. (m2.west);
+\draw[link, draw=LHred] (c7.east) .. controls +(1.0,0) and +(-1.0,0.2) .. (m3.west);
+\draw[link, draw=LHgreen] (c8.east) .. controls +(1.0,0) and +(-1.0,-0.2) .. (m2.west);
+\draw[link, draw=LHgreen] (c9.east) .. controls +(1.0,0) and +(-1.0,-0.45) .. (m2.west);
+
+\draw[link, draw=LHviolet] (c10.east) .. controls +(1.0,0) and +(-1.1,0.25) .. (m4.west);
+\draw[link, draw=LHviolet] (c11.east) .. controls +(1.0,0) and +(-1.1,0.0) .. (m4.west);
+\draw[link, draw=LHteal] (c12.east) .. controls +(1.0,0) and +(-1.1,-0.2) .. (m4.west);
+
+\draw[link, draw=LHgreen] (m1.east) .. controls +(1.0,0.5) and +(-1.0,0.1) .. (pHGP.west);
+\draw[link, draw=LHgreen] (m2.east) .. controls +(1.0,0.7) and +(-1.0,-0.35) .. (pHGP.west);
+\draw[link, draw=LHred] (m3.east) .. controls +(1.0,1.1) and +(-1.0,-0.75) .. (pHGP.west);
+
+\draw[link, draw=LHblue] (c5.east) .. controls +(2.2,0) and +(-1.0,0.25) .. (pPrec.west);
+\draw[softlink, draw=LHblue] (c1.east) .. controls +(3.2,0.3) and +(-1.4,1.0) .. (pPrec.west);
+
+\draw[link, draw=LHviolet] (m4.east) .. controls +(1.0,0.0) and +(-1.0,0.2) .. (pGraph.west);
+\draw[link, draw=LHteal] (m4.east) .. controls +(1.0,-0.35) and +(-1.0,0.1) .. (pFrangi.west);
+
+% Le rebranchement HGP -> Frangi explicite la réutilisation de la connexité d'ordre supérieur.
+\draw[softlink, draw=LHgreen] (pHGP.south west)
+  .. controls +(-0.8,-0.8) and +(0.9,0.2) .. (c12.east);
+
+% ------------------------
+% Légende
+% ------------------------
+
+\node[legend, anchor=west] at (9.6,0.55)
+  {\begin{tabular}{@{}ll@{}}
+   \tikz\draw[link, draw=LHgreen] (0,0)--(.6,0);
+     & correspondance directe chapitre--article\\
+   \tikz\draw[softlink, draw=LHgray] (0,0)--(.6,0);
+     & reprise de concepts / arrière-plan\\
+   \end{tabular}};
+
+\node[font=\scriptsize\itshape, text=black!50, anchor=east] at (26.3,0.12)
+  {Les couleurs reprennent les tons pastel du manuscrit : c1--c5 et gris des encadrés.};
+
+\end{tikzpicture}%
+}
+\caption[Cartographie manuscrit-publications]{Cartographie des relations entre la structure du manuscrit et les publications associées.}
+\label{fig:annexe_cartographie_articles}
+\end{sidewaysfigure}
