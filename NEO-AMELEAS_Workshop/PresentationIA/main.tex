@@ -260,48 +260,47 @@
                     \draw[very thick, dashed, black] (B1) -- (B2);
                     \draw[very thick, black] (B2) -- (B3);
                     \draw[very thick, dashed, black] (C1) -- (C2);
-                    \draw[very thick, black] (C2) -- (C3);
+                    \draw[thin, dashed, black] (C2) -- (C3);
                     \draw[thin, black] (D1) -- (D2);
 
                     % Diagonals Up-Right
                     \draw[thin, dashed, black] (A1) -- (B1);
                     \draw[very thick, dashed, black] (A2) -- (B2);
                     \draw[very thick, black] (A3) -- (B3);
-                    \draw[thin, dashed, black] (B1) -- (C1);
-                    \draw[thin, dashed, black] (B2) -- (C2);
-                    \draw[very thick, black] (B3) -- (C3);
+                    \draw[very thick, dashed, black] (B1) -- (C2);
+                    \draw[very thick, black] (B2) -- (C3);
                     \draw[very thick, black] (C1) -- (D1);
                     \draw[very thick, black] (C2) -- (D2);
 
                     % Diagonals Up-Left
                     \draw[very thick, black] (B1) -- (A2);
                     \draw[very thick, black] (B2) -- (A3);
-                    \draw[very thick, dashed, black] (C1) -- (B2);
-                    \draw[thin, dashed, black] (C2) -- (B3);
+                    \draw[thin, dashed, black] (C1) -- (B1);
+                    \draw[thin, dashed, black] (C2) -- (B2);
+                    \draw[very thick, black] (C3) -- (B3);
                     \draw[very thick, dashed, black] (D1) -- (C2);
                     \draw[very thick, black] (D2) -- (C3);
                 \end{tikzpicture}
             \end{center}
         \end{column}
         \begin{column}{0.48\textwidth}
-            \textbf{GSBM on a Triangular Grid}:
+            \textbf{Geometric Stochastic Block Model (GSBM)}:
             \begin{itemize}
                 \setlength{\itemsep}{6pt}
                 \item \textbf{Ground Truth} $\Sigma_x \in \{+1, -1\}$:
                 \begin{itemize}
                     \item Node colors represent spins (50\% $+$, 50\% $-$).
                 \end{itemize}
-                \item \textbf{Observed signs} $Y_e \in \{+1, -1\}$:
+                \item \textbf{Observations} $Y_e \in \{+1, -1\}$:
                 \begin{itemize}
-                    \item $\mathbb{P}(Y_e = \Sigma_x\Sigma_y) = p = 0.75$.
+                    \item Satisfied with probability $p = 0.75$.
+                \end{itemize}
                 \item \textbf{Graphical Code}:
                 \begin{itemize}
-                    \item \textbf{Solid lines}: Ferromagnetic ($Y_e = +1$).
-                    \item \textbf{Dashed lines}: Antiferromagnetic ($Y_e = -1$).
-                    \item \textbf{Bold lines}: Satisfied ($Y_e = \Sigma_x\Sigma_y$).
-                    \item \textbf{Thin lines}: Frustrated ($Y_e \neq \Sigma_x\Sigma_y$).
+                    \item Solid: $Y_e = +1$ | Dashed: $Y_e = -1$.
+                    \item Bold: Satisfied | Thin: Frustrated.
                 \end{itemize}
-                \end{itemize}
+                \item \textbf{The Goal}: Recover $\Sigma$ partially (better than random guess) $\implies$ \textbf{Weak Recovery}.
             \end{itemize}
         \end{column}
     \end{columns}
